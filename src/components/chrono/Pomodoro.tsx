@@ -2,7 +2,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { Play, Pause, RotateCcw, Brain, Zap, Target, Plus, Check, X, Settings, BarChart3, UserCircle, Clock, Volume2, Palette, Bell, Share2, ExternalLink, Lock, Info as InfoIcon, MousePointer2 } from 'lucide-react';
+import { Play, Pause, RotateCcw, Brain, Zap, Target, Plus, Check, X, Settings, BarChart3, UserCircle, Clock, Volume2, Palette, Bell, Share2, ExternalLink, Lock, Info as InfoIcon, MousePointer2, Hourglass as HourglassIcon } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Switch } from "@/components/ui/switch";
@@ -49,6 +49,7 @@ export type PomodoroSettings = {
   reminderMode: 'last' | 'first';
   reminderTime: number;
   themeColor: string; 
+  visualMode: 'clock' | 'hourglass';
 };
 
 const DEFAULT_SETTINGS: PomodoroSettings = {
@@ -71,6 +72,7 @@ const DEFAULT_SETTINGS: PomodoroSettings = {
   reminderMode: 'last',
   reminderTime: 0,
   themeColor: '#ba4949', 
+  visualMode: 'clock',
 };
 
 // High-reliability, stable audio assets
@@ -94,6 +96,79 @@ interface PomodoroProps {
   onTimerActiveChange?: (isActive: boolean) => void;
   isExternalSettingsOpen?: boolean;
   onExternalSettingsOpenChange?: (open: boolean) => void;
+}
+
+function HourglassVisual({ timeLeft, totalTime, isActive }: { timeLeft: number; totalTime: number; isActive: boolean }) {
+  const ratio = timeLeft / totalTime;
+  const topSandHeight = 40 * ratio;
+  const bottomSandHeight = 40 * (1 - ratio);
+
+  return (
+    <div className="relative w-48 h-64 flex items-center justify-center animate-in fade-in zoom-in duration-500">
+      <svg viewBox="0 0 100 150" className="w-full h-full drop-shadow-2xl">
+        {/* Hourglass Frame */}
+        <path 
+          d="M20,10 L80,10 L80,20 Q80,75 50,75 Q20,75 20,20 Z" 
+          fill="none" 
+          stroke="white" 
+          strokeWidth="3" 
+          className="opacity-30"
+        />
+        <path 
+          d="M20,140 L80,140 L80,130 Q80,75 50,75 Q20,75 20,130 Z" 
+          fill="none" 
+          stroke="white" 
+          strokeWidth="3" 
+          className="opacity-30"
+        />
+        
+        {/* Top Sand */}
+        <clipPath id="topSandClip">
+          <rect x="0" y={75 - topSandHeight} width="100" height={topSandHeight} />
+        </clipPath>
+        <path 
+          d="M20,10 L80,10 L80,20 Q80,75 50,75 Q20,75 20,20 Z" 
+          fill="white" 
+          clipPath="url(#topSandClip)"
+          className="transition-all duration-1000 ease-linear"
+        />
+
+        {/* Bottom Sand */}
+        <clipPath id="bottomSandClip">
+          <rect x="0" y={140 - bottomSandHeight} width="100" height={bottomSandHeight} />
+        </clipPath>
+        <path 
+          d="M20,140 L80,140 L80,130 Q80,75 50,75 Q20,75 20,130 Z" 
+          fill="white" 
+          clipPath="url(#bottomSandClip)"
+          className="transition-all duration-1000 ease-linear"
+        />
+
+        {/* Sand Stream */}
+        {isActive && timeLeft > 0 && (
+          <line 
+            x1="50" y1="75" x2="50" y2="140" 
+            stroke="white" 
+            strokeWidth="2" 
+            strokeDasharray="4 4" 
+            className="animate-[dash_0.5s_linear_infinite]"
+          />
+        )}
+      </svg>
+      <style jsx>{`
+        @keyframes dash {
+          to {
+            stroke-dashoffset: -8;
+          }
+        }
+      `}</style>
+      <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
+        <span className="text-2xl font-black text-white/80 drop-shadow-md">
+          {Math.floor(timeLeft / 60)}:{(timeLeft % 60).toString().padStart(2, '0')}
+        </span>
+      </div>
+    </div>
+  );
 }
 
 export function Pomodoro({ onModeChange, onSettingsChange, onTimerActiveChange, isExternalSettingsOpen, onExternalSettingsOpenChange }: PomodoroProps) {
@@ -428,11 +503,17 @@ export function Pomodoro({ onModeChange, onSettingsChange, onTimerActiveChange, 
             <button onClick={() => changeMode('long-break')} className={cn("px-3 py-1.5 rounded-md text-xs md:text-sm font-bold transition-all text-white", mode === 'long-break' ? "bg-black/15" : "hover:bg-black/5")}>Long Break</button>
           </div>
 
-          <div className="text-[100px] sm:text-[130px] md:text-[160px] leading-none font-black text-white tabular-nums mb-8 select-none tracking-tight">
-            {formatTime(timeLeft)}
+          <div className="flex flex-col items-center min-h-[160px] md:min-h-[200px] justify-center">
+            {settings.visualMode === 'clock' ? (
+              <div className="text-[100px] sm:text-[130px] md:text-[160px] leading-none font-black text-white tabular-nums select-none tracking-tight animate-in fade-in zoom-in duration-500">
+                {formatTime(timeLeft)}
+              </div>
+            ) : (
+              <HourglassVisual timeLeft={timeLeft} totalTime={totalSeconds} isActive={isActive} />
+            )}
           </div>
 
-          <div className="w-full max-w-xs mb-10 px-4">
+          <div className="w-full max-w-xs mb-10 px-4 mt-6">
              <div className="flex justify-between text-[10px] font-black uppercase tracking-widest text-white/40 mb-2">
                 <span>Progress</span>
                 <span>{Math.round(progressPercent)}%</span>
@@ -444,15 +525,25 @@ export function Pomodoro({ onModeChange, onSettingsChange, onTimerActiveChange, 
              />
           </div>
 
-          <button
-            onClick={toggleTimer}
-            style={{ color: settings.themeColor }}
-            className={cn(
-              "w-56 h-16 bg-white rounded-md text-2xl font-black uppercase tracking-widest transition-all active:translate-y-1 shadow-[0_6px_0_rgb(235,235,235)] active:shadow-none"
-            )}
-          >
-            {isActive ? 'STOP' : 'START'}
-          </button>
+          <div className="flex items-center gap-4">
+            <button
+              onClick={toggleTimer}
+              style={{ color: settings.themeColor }}
+              className={cn(
+                "w-56 h-16 bg-white rounded-md text-2xl font-black uppercase tracking-widest transition-all active:translate-y-1 shadow-[0_6px_0_rgb(235,235,235)] active:shadow-none"
+              )}
+            >
+              {isActive ? 'STOP' : 'START'}
+            </button>
+            
+            <button 
+              onClick={() => updateSettings({...settings, visualMode: settings.visualMode === 'clock' ? 'hourglass' : 'clock'})}
+              className="w-16 h-16 bg-white/20 hover:bg-white/30 rounded-md flex items-center justify-center transition-all shadow-lg text-white"
+              title={`Switch to ${settings.visualMode === 'clock' ? 'Hourglass' : 'Clock'}`}
+            >
+              {settings.visualMode === 'clock' ? <HourglassIcon className="w-8 h-8" /> : <Clock className="w-8 h-8" />}
+            </button>
+          </div>
         </div>
 
         <div className="text-center text-white space-y-4">
@@ -722,6 +813,19 @@ export function Pomodoro({ onModeChange, onSettingsChange, onTimerActiveChange, 
                          </div>
                       </div>
                     </div>
+                  </div>
+
+                  <div className="flex items-center justify-between">
+                    <Label className="text-xs font-bold text-muted-foreground/80">Visual Mode</Label>
+                    <Select value={settings.visualMode} onValueChange={(v: 'clock' | 'hourglass') => updateSettings({...settings, visualMode: v})}>
+                      <SelectTrigger className="w-[140px] bg-muted border-none text-xs font-bold">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="clock">Digital Clock</SelectItem>
+                        <SelectItem value="hourglass">Hourglass</SelectItem>
+                      </SelectContent>
+                    </Select>
                   </div>
 
                   <div className="flex items-center justify-between">
