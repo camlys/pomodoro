@@ -4,7 +4,7 @@ A professional-grade tactical utility for deep work and high-performance product
 
 ## Fresh Publication & Repository Management
 
-To change the GitHub repository associated with this project, follow these steps in your terminal:
+To connect this project to your new GitHub repository, follow these steps in your terminal:
 
 1. **Disconnect from the current repository**:
    ```bash
@@ -13,7 +13,7 @@ To change the GitHub repository associated with this project, follow these steps
 
 2. **Connect to your new repository**:
    ```bash
-   git remote add origin <YOUR_NEW_GITHUB_REPOSITORY_URL>
+   git remote add origin https://github.com/camlys/pomodoro.git
    ```
 
 3. **Push your code to the new destination**:
