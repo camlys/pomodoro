@@ -1,4 +1,3 @@
-
 "use client";
 
 import React, { useState, useEffect, useRef } from 'react';
@@ -12,7 +11,7 @@ import {
   ExternalLink, Workflow, 
   Briefcase, Baby, Microscope, Stethoscope,
   Flag, LayoutGrid, Download,
-  Calculator as CalcIcon, Timer,
+  Timer,
   Clock, Dna, Activity, Scaling, HeartPulse, Sparkles,
   FileType, Github, Twitter, ChevronRight
 } from 'lucide-react';
@@ -380,17 +379,6 @@ export default function DueDateCalculator() {
                  </Link>
                </DropdownMenuItem>
                <DropdownMenuSeparator className="bg-border/10 mx-2" />
-               <DropdownMenuItem asChild className="cursor-pointer focus:bg-primary/10 rounded-lg m-1">
-                 <Link href="/calculator" className="flex items-center gap-3 w-full px-2 py-2">
-                   <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
-                     <CalcIcon className="w-4 h-4 text-primary" />
-                   </div>
-                   <div className="flex flex-col">
-                     <span className="text-[10px] font-black uppercase tracking-widest text-foreground">Calculator</span>
-                     <span className="text-[8px] font-bold text-muted-foreground uppercase">Precision ALU</span>
-                   </div>
-                 </Link>
-               </DropdownMenuItem>
                <DropdownMenuItem asChild className="cursor-pointer focus:bg-accent/10 rounded-lg m-1">
                  <Link href="/due-date-calculator" className="flex items-center gap-3 w-full px-2 py-2">
                    <div className="w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center">
@@ -457,7 +445,7 @@ export default function DueDateCalculator() {
                     <SelectItem value="ivf" className="flex items-center gap-2 text-xs"><Microscope className="w-3.5 h-3.5 inline mr-2" /> IVF Transfer</SelectItem>
                     <SelectItem value="crl" className="flex items-center gap-2 text-xs"><Baby className="w-3.5 h-3.5 inline mr-2" /> Ultrasound (CRL)</SelectItem>
                     <SelectItem value="conception" className="flex items-center gap-2 text-xs"><Zap className="w-3.5 h-3.5 inline mr-2" /> Conception Date</SelectItem>
-                    <SelectItem value="cycle" className="flex items-center gap-2 text-xs"><CalcIcon className="w-3.5 h-3.5 inline mr-2" /> Project Cycles</SelectItem>
+                    <SelectItem value="cycle" className="flex items-center gap-2 text-xs"><Timer className="w-3.5 h-3.5 inline mr-2" /> Project Cycles</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -840,10 +828,6 @@ export default function DueDateCalculator() {
                 <li className="hover:text-primary transition-colors flex items-center gap-2">
                   <ChevronRight className="w-3 h-3 opacity-30" />
                   <Link href="/due-date-calculator">Due Date</Link>
-                </li>
-                <li className="hover:text-primary transition-colors flex items-center gap-2">
-                  <ChevronRight className="w-3 h-3 opacity-30" />
-                  <Link href="/calculator">Precision Calculator</Link>
                 </li>
                 <li className="hover:text-primary transition-colors flex items-center gap-2">
                    <ChevronRight className="w-3 h-3 opacity-30" />

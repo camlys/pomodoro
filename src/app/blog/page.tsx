@@ -1,4 +1,3 @@
-
 "use client";
 
 import React, { useState } from 'react';
@@ -158,7 +157,7 @@ export default function BlogHub() {
         </header>
 
         <section className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* Featured Post - The 9000 Word Pregnancy Masterpiece */}
+          {/* Featured Post */}
           <div className="md:col-span-2 glass border border-border rounded-3xl overflow-hidden group hover:border-primary/30 transition-all">
             <div className="grid md:grid-cols-2">
               <div className="bg-gradient-to-br from-accent/10 to-primary/10 h-64 md:h-full flex items-center justify-center relative">
@@ -235,10 +234,6 @@ export default function BlogHub() {
                 <li className="hover:text-primary transition-colors flex items-center gap-2">
                   <ChevronRight className="w-3 h-3 opacity-30" />
                   <Link href="/due-date-calculator">Due Date</Link>
-                </li>
-                <li className="hover:text-primary transition-colors flex items-center gap-2">
-                  <ChevronRight className="w-3 h-3 opacity-30" />
-                  <Link href="/calculator">Precision Calculator</Link>
                 </li>
                 <li className="hover:text-primary transition-colors flex items-center gap-2">
                    <ChevronRight className="w-3 h-3 opacity-30" />

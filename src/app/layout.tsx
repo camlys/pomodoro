@@ -1,4 +1,3 @@
-
 import type {Metadata, Viewport} from 'next';
 import './globals.css';
 
@@ -16,8 +15,8 @@ export const metadata: Metadata = {
     default: 'Camly | High-Precision Tactical Tools',
     template: '%s | Camly'
   },
-  description: 'A suite of high-precision chronological and mathematical engines. Features professional scientific calculation, clinical due date planning, and Pomodoro focus synchronization.',
-  keywords: ['scientific calculator', 'due date engine', 'pomodoro timer', 'focus engine', 'precision calculator', 'chronological engine', 'tactical planning', 'productivity tools'],
+  description: 'A suite of high-precision chronological and mathematical engines. Features clinical due date planning and Pomodoro focus synchronization.',
+  keywords: ['due date engine', 'pomodoro timer', 'focus engine', 'chronological engine', 'tactical planning', 'productivity tools'],
   authors: [{ name: 'Camly Operations Team' }],
   creator: 'Camly Inc',
   publisher: 'Camly Inc',
@@ -33,7 +32,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'Camly | High-Precision Tactical Tools',
-    description: 'High-precision chronological and mathematical computation engines for professional use.',
+    description: 'High-precision chronological and focus computation engines for professional use.',
     url: 'https://calculator.camly.org',
     siteName: 'Camly',
     locale: 'en_US',

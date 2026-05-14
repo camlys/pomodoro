@@ -1,4 +1,3 @@
-
 "use client";
 
 import React, { useState, useEffect, Suspense } from 'react';
@@ -8,7 +7,7 @@ import { useRouter } from 'next/navigation';
 import { 
   Timer, ExternalLink, Sun, Moon, 
   LayoutGrid, Settings, BarChart3, ArrowLeft,
-  FileType, Calculator as CalcIcon, CalendarDays, ArrowRight,
+  FileType, CalendarDays, ArrowRight,
   Github, Twitter, Globe, ChevronRight
 } from 'lucide-react';
 import { Button } from "@/components/ui/button";
@@ -111,17 +110,6 @@ function FocusPageContent() {
                  </Link>
                </DropdownMenuItem>
                <DropdownMenuSeparator className="bg-border/10 mx-2" />
-               <DropdownMenuItem asChild className="cursor-pointer focus:bg-primary/10 rounded-lg m-1">
-                 <Link href="/calculator" className="flex items-center gap-3 w-full px-2 py-2">
-                   <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
-                     <CalcIcon className="w-4 h-4 text-primary" />
-                   </div>
-                   <div className="flex flex-col">
-                     <span className="text-[10px] font-black uppercase tracking-widest text-foreground">Calculator</span>
-                     <span className="text-[8px] font-bold text-muted-foreground uppercase">Precision ALU</span>
-                   </div>
-                 </Link>
-               </DropdownMenuItem>
                <DropdownMenuItem asChild className="cursor-pointer focus:bg-accent/10 rounded-lg m-1">
                  <Link href="/due-date-calculator" className="flex items-center gap-3 w-full px-2 py-2">
                    <div className="w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center">
@@ -171,14 +159,12 @@ function FocusPageContent() {
                 value="focus"
                 className="w-full" 
                 onValueChange={(v) => {
-                  if (v === 'calculator') router.push('/calculator');
                   if (v === 'due-date') router.push('/due-date-calculator');
                 }}
               >
-                <TabsList className="grid w-full grid-cols-3 mb-6 rounded-xl h-10 bg-white/10">
+                <TabsList className="grid w-full grid-cols-2 mb-6 rounded-xl h-10 bg-white/10">
                   <TabsTrigger value="focus" className="text-[9px] md:text-[10px] font-black uppercase tracking-widest">Focus</TabsTrigger>
-                  <TabsTrigger value="calculator" className="text-[9px] md:text-[10px] font-black uppercase tracking-widest">Calc</TabsTrigger>
-                  <TabsTrigger value="due-date" className="text-[9px] md:text-[10px] font-black uppercase tracking-widest">Due</TabsTrigger>
+                  <TabsTrigger value="due-date" className="text-[9px] md:text-[10px] font-black uppercase tracking-widest">Due Date</TabsTrigger>
                 </TabsList>
               </Tabs>
             </div>
@@ -224,10 +210,6 @@ function FocusPageContent() {
                 <li className="hover:text-white transition-colors flex items-center gap-2">
                   <ChevronRight className="w-3 h-3 opacity-30" />
                   <Link href="/due-date-calculator">Due Date</Link>
-                </li>
-                <li className="hover:text-white transition-colors flex items-center gap-2">
-                  <ChevronRight className="w-3 h-3 opacity-30" />
-                  <Link href="/calculator">Precision Calculator</Link>
                 </li>
                 <li className="hover:text-white transition-colors flex items-center gap-2">
                   <ChevronRight className="w-3 h-3 opacity-30" />
