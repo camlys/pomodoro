@@ -11,7 +11,7 @@ const securitySchema = {
   "@context": "https://schema.org",
   "@type": "WebPage",
   "name": "Camly Security Operations Center",
-  "description": "Comprehensive security architecture and threat mitigation protocols for the Camly High-Precision Focus Engine.",
+  "description": "Comprehensive security architecture and threat mitigation protocols for the Camly High-Precision Pomodoro Timer.",
   "publisher": {
     "@type": "Organization",
     "name": "Camly Operations"

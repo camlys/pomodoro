@@ -11,7 +11,7 @@ const privacySchema = {
   "@context": "https://schema.org",
   "@type": "WebPage",
   "name": "Camly Privacy Protocol",
-  "description": "Comprehensive data privacy and sovereignty protocol for the Camly High-Precision Focus Engine.",
+  "description": "Comprehensive data privacy and sovereignty protocol for the Camly High-Precision Pomodoro Timer.",
   "publisher": {
     "@type": "Organization",
     "name": "Camly Operations"
@@ -53,7 +53,6 @@ export default function PrivacyProtocolPage() {
         </header>
 
         <section className="prose prose-invert prose-primary max-w-none space-y-12 text-muted-foreground text-sm md:text-lg leading-relaxed">
-          {/* Privacy content truncated but remaining consistent with Camly's focus-only utility */}
           <div className="glass p-8 md:p-12 border-primary/20 bg-primary/5 rounded-[40px] mb-16">
             <h2 className="text-2xl md:text-3xl font-black text-primary tracking-tight mt-0 mb-6 flex items-center gap-3">
               <Zap className="w-6 h-6" /> Executive Summary of Sovereignty

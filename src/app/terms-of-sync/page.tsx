@@ -11,7 +11,7 @@ const termsSchema = {
   "@context": "https://schema.org",
   "@type": "WebPage",
   "name": "Camly Terms of Sync",
-  "description": "Comprehensive legal and operational terms for the Camly High-Precision Focus Engine.",
+  "description": "Comprehensive legal and operational terms for the Camly High-Precision Pomodoro Timer.",
   "publisher": {
     "@type": "Organization",
     "name": "Camly Operations"
@@ -48,7 +48,7 @@ export default function TermsOfSyncPage() {
             The Camly <span className="text-primary">Terms of Sync</span>
           </h1>
           <p className="text-lg md:text-2xl text-muted-foreground leading-relaxed italic border-l-4 border-primary/30 pl-6 py-2">
-            "By engaging with the Camly Focus Engine, you enter into a synchronization agreement based on performance and mutual respect for data sovereignty."
+            "By engaging with the Camly Pomodoro Timer, you enter into a synchronization agreement based on performance and mutual respect for data sovereignty."
           </p>
         </header>
 
@@ -58,7 +58,7 @@ export default function TermsOfSyncPage() {
               <Zap className="w-6 h-6" /> Agreement Architecture
             </h2>
             <p className="text-foreground font-medium mb-4">
-              These Terms of Sync ("Agreement") govern your access to and use of the Camly high-precision focus engine and related services.
+              These Terms of Sync ("Agreement") govern your access to and use of the Camly high-precision pomodoro timer and related services.
             </p>
           </div>
 

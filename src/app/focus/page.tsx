@@ -15,7 +15,7 @@ import { InstallPWA } from '@/components/chrono/InstallPWA';
 const focusSchema = {
   "@context": "https://schema.org",
   "@type": "WebApplication",
-  "name": "Pomodoro Focus Engine",
+  "name": "Pomodoro Timer",
   "applicationCategory": "Productivity",
   "operatingSystem": "All",
   "description": "High-precision Pomodoro timer with AI-driven focus mantras and deep integration with the Camly engine.",
@@ -59,14 +59,14 @@ function FocusPageContent() {
         <div className="flex items-center gap-3">
           <Link href="/" className="flex items-center gap-3 group">
             <div className="flex items-center justify-center transition-all group-hover:scale-110">
-              <Image src="/camly.png" alt="Camly Focus" width={40} height={40} priority className="object-contain" />
+              <Image src="/camly.png" alt="Camly" width={40} height={40} priority className="object-contain" />
             </div>
             <div className="flex flex-col">
               <h1 className="text-lg font-black tracking-tighter leading-none font-roboto-slab uppercase text-white">
                 CAMLY
               </h1>
               <span className="text-[7px] font-bold tracking-[0.3em] uppercase mt-1 text-white/60">
-                FOCUS ENGINE
+                POMODORO TIMER
               </span>
             </div>
           </Link>
@@ -108,10 +108,10 @@ function FocusPageContent() {
             <div className="col-span-2 lg:col-span-2 space-y-6">
               <div className="flex items-center gap-3">
                 <div className="flex items-center justify-center transition-all">
-                  <Image src="/camly.png" alt="Camly Focus" width={48} height={48} className="object-contain" />
+                  <Image src="/camly.png" alt="Camly" width={48} height={48} className="object-contain" />
                 </div>
                 <h2 className="text-xl font-black tracking-tighter text-white uppercase font-roboto-slab">
-                  FOCUS ENGINE
+                  POMODORO TIMER
                 </h2>
               </div>
               <p className="text-sm leading-relaxed max-w-xs font-medium text-white/60">
