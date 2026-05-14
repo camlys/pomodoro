@@ -5,13 +5,13 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { 
-  ArrowLeft, Cpu, History, 
-  ShieldCheck, Timer, Zap, 
-  Activity, Binary, Terminal,
-  Atom, Database, Layers, Globe, 
-  Settings, Target, Network, Server,
-  Compass, FlaskConical, BarChart3, ChevronRight, ExternalLink,
-  Twitter
+  ArrowLeft, History, 
+  ShieldCheck, Zap, 
+  Binary, Terminal,
+  Atom, Database, Layers,
+  Settings, Target, Network,
+  Compass, FlaskConical, BarChart3, ExternalLink,
+  Twitter, ChevronRight
 } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -198,7 +198,7 @@ export default function PrecisionCalculator() {
               camly.org <ExternalLink className="w-3 h-3" />
             </Button>
           </Link>
-          <Link href="/focus">
+          <Link href="/">
             <Button variant="ghost" size="sm" className="rounded-full text-[8px] md:text-[10px] font-black uppercase tracking-widest gap-2 h-8 px-2 md:px-3">
               <ArrowLeft className="w-3 h-3" /> <span className="inline">Hub</span>
             </Button>
@@ -509,7 +509,7 @@ export default function PrecisionCalculator() {
                 </li>
                 <li className="hover:text-primary transition-colors flex items-center gap-2">
                    <ChevronRight className="w-3 h-3 opacity-30" />
-                   <Link href="/focus">Pomodoro Focus</Link>
+                   <Link href="/">Pomodoro Focus</Link>
                 </li>
               </ul>
             </div>

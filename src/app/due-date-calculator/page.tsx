@@ -5,7 +5,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { 
-  ArrowLeft, Calendar as CalendarIcon, CalendarDays, Zap, 
+  ArrowLeft, Calendar as CalendarIcon, Zap, 
   ShieldCheck, Milestone, 
   Hourglass, ArrowRight,
   Database, Globe,
@@ -13,7 +13,7 @@ import {
   Briefcase, Baby, Microscope, Stethoscope,
   Flag, Download,
   Timer,
-  Clock, Dna, Activity, Scaling, HeartPulse, Sparkles,
+  Clock, Dna, Scaling, HeartPulse, Sparkles,
   Twitter, ChevronRight
 } from 'lucide-react';
 import { Button } from "@/components/ui/button";
@@ -351,7 +351,7 @@ export default function DueDateCalculator() {
           <Badge variant="outline" className="hidden min-[480px]:flex border-accent/20 text-accent uppercase tracking-widest text-[8px] px-3 h-6 items-center gap-1.5 font-bold">
             <div className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" /> IST SYNCED
           </Badge>
-          <Link href="/focus">
+          <Link href="/">
             <Button variant="ghost" size="sm" className="rounded-full text-[8px] md:text-[10px] font-black uppercase tracking-widest gap-2">
               <ArrowLeft className="w-3 h-3" /> Hub
             </Button>
@@ -774,7 +774,7 @@ export default function DueDateCalculator() {
                 </li>
                 <li className="hover:text-primary transition-colors flex items-center gap-2">
                    <ChevronRight className="w-3 h-3 opacity-30" />
-                   <Link href="/focus">Pomodoro Focus</Link>
+                   <Link href="/">Pomodoro Focus</Link>
                 </li>
               </ul>
             </div>

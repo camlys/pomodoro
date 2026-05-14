@@ -6,9 +6,9 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { 
   ArrowLeft, Search, Plus, Trash2, 
-  FileText, Clock, ShieldCheck, 
-  Terminal, Database, Pin, PinOff,
-  Sparkles, Hash, Loader2, X,
+  FileText, ShieldCheck, 
+  Terminal, Pin, PinOff,
+  Sparkles, Hash, Loader2,
   ChevronRight, Sun, Moon, Palette, Check
 } from 'lucide-react';
 import { Button } from "@/components/ui/button";
@@ -230,7 +230,7 @@ export default function NotesEngine() {
             >
               {theme === 'light' ? <Moon className="w-4 h-4" /> : <Sun className="w-4 h-4" />}
             </Button>
-            <Link href="/focus">
+            <Link href="/">
               <Button variant="ghost" size="sm" className="rounded-full text-[10px] font-black uppercase tracking-widest gap-2 h-8 px-4 border border-transparent hover:border-primary/20 transition-all">
                 <ArrowLeft className="w-3 h-3" /> Back to Timer
               </Button>
@@ -426,7 +426,7 @@ export default function NotesEngine() {
               <ul className="space-y-2 text-xs font-bold text-muted-foreground">
                 <li className="hover:text-primary transition-colors flex items-center gap-2">
                    <ChevronRight className="w-3 h-3 opacity-30" />
-                   <Link href="/focus">Pomodoro Timer</Link>
+                   <Link href="/">Pomodoro Timer</Link>
                 </li>
                 <li className="hover:text-primary transition-colors flex items-center gap-2 font-black text-primary">
                    <ChevronRight className="w-3 h-3 opacity-100" />

@@ -4,7 +4,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Timer, ArrowLeft, User, Clock, ChevronRight, Search, BookOpen, ExternalLink, Twitter, Globe, Zap } from 'lucide-react';
+import { ArrowLeft, Clock, ChevronRight, Search } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
@@ -131,7 +131,7 @@ export default function BlogHub() {
             CAMLY <span className="text-foreground/50 font-normal ml-2">INSIGHTS</span>
           </h1>
         </Link>
-        <Link href="/focus">
+        <Link href="/">
           <Button variant="ghost" size="sm" className="rounded-full text-xs gap-2">
             <ArrowLeft className="w-3 h-3" /> Back to App
           </Button>
@@ -206,7 +206,7 @@ export default function BlogHub() {
               <ul className="space-y-3 text-xs font-bold text-muted-foreground">
                 <li className="hover:text-primary transition-colors flex items-center gap-2">
                    <ChevronRight className="w-3 h-3 opacity-30" />
-                   <Link href="/focus">Focus Mode</Link>
+                   <Link href="/">Pomodoro Mode</Link>
                 </li>
                 <li className="hover:text-primary transition-colors flex items-center gap-2">
                    <ChevronRight className="w-3 h-3 opacity-30" />
