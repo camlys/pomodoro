@@ -4,7 +4,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Timer, ArrowLeft, User, Clock, ChevronRight, Search, BookOpen, ExternalLink, Twitter, Globe } from 'lucide-react';
+import { Timer, ArrowLeft, User, Clock, ChevronRight, Search, BookOpen, ExternalLink, Twitter, Globe, Zap } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
@@ -13,8 +13,35 @@ import { InstallPWA } from '@/components/chrono/InstallPWA';
 
 const BLOG_POSTS = [
   {
+    title: "Neuro-Cognitive Flow Synchronization Masterclass",
+    description: "An exhaustive 11,000-word neuroscientific exploration into flow state synchronization and deep work performance.",
+    date: "September 05, 2024",
+    author: "Flow Research Unit",
+    readTime: "240 min read",
+    slug: "/blog/neuro-cognitive-flow-synchronization-masterclass",
+    category: "Masterclass"
+  },
+  {
+    title: "The Digital Infrastructure Velocity Protocol",
+    description: "A definitive 10,200-word technical protocol for maximizing enterprise infrastructure velocity and asset optimization.",
+    date: "September 10, 2024",
+    author: "Camly Tech Ops",
+    readTime: "210 min read",
+    slug: "/blog/digital-infrastructure-velocity-protocol",
+    category: "Technical Protocol"
+  },
+  {
+    title: "Chronological Sovereignty Enterprise Whitepaper",
+    description: "An exhaustive 10,500-word whitepaper on global time standards, atomic synchronization, and strategic infrastructure.",
+    date: "September 01, 2024",
+    author: "Camly Operations",
+    readTime: "180 min read",
+    slug: "/blog/chronological-sovereignty-enterprise-whitepaper",
+    category: "Enterprise Whitepaper"
+  },
+  {
     title: "Deep Work Velocity and Chronological Flow Synchronization",
-    description: "The definitive 9000-word authoritative guide exploring the science behind deep work, flow states, and high-precision productivity synchronization.",
+    description: "The definitive 9200-word authoritative guide exploring the science behind deep work, flow states, and high-precision productivity synchronization.",
     date: "August 10, 2024",
     author: "Camly Engineering",
     readTime: "120 min read",
@@ -81,25 +108,6 @@ const blogSchema = {
   }))
 };
 
-const breadcrumbSchema = {
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position": 1,
-      "name": "Home",
-      "item": "https://calculator.camly.org"
-    },
-    {
-      "@type": "ListItem",
-      "position": 2,
-      "name": "Knowledge Hub",
-      "item": "https://calculator.camly.org/blog"
-    }
-  ]
-};
-
 export default function BlogHub() {
   const [search, setSearch] = useState('');
 
@@ -113,10 +121,6 @@ export default function BlogHub() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(blogSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
       <nav className="relative z-50 glass border-b border-border h-14 flex items-center px-4 md:px-6 justify-between">
         <Link href="/" className="flex items-center gap-3 group">
@@ -195,10 +199,6 @@ export default function BlogHub() {
                 Defining the standard for high-precision focus synchronization. 
                 Camly Inc's flagship engine for professional and tactical performance.
               </p>
-              <div className="flex gap-5">
-                <Button variant="ghost" size="icon" className="w-9 h-9 rounded-xl hover:bg-accent/10 shadow-sm border border-border/50"><Twitter className="w-4 h-4" /></Button>
-                <Button variant="ghost" size="icon" className="w-9 h-9 rounded-xl hover:bg-accent/10 shadow-sm border border-border/50"><Globe className="w-4 h-4" /></Button>
-              </div>
             </div>
 
             <div className="space-y-6">
@@ -207,6 +207,10 @@ export default function BlogHub() {
                 <li className="hover:text-primary transition-colors flex items-center gap-2">
                    <ChevronRight className="w-3 h-3 opacity-30" />
                    <Link href="/focus">Focus Mode</Link>
+                </li>
+                <li className="hover:text-primary transition-colors flex items-center gap-2">
+                   <ChevronRight className="w-3 h-3 opacity-30" />
+                   <Link href="/notes">Notes Engine</Link>
                 </li>
               </ul>
             </div>

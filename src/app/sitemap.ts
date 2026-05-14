@@ -1,3 +1,4 @@
+
 import { MetadataRoute } from 'next';
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -8,12 +9,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
     'digital-asset-velocity-enterprise-guide',
     'global-time-synchronization-standards',
     'image-and-pdf-resizing-optimization',
-    'ai-revolution-personal-utilities'
+    'ai-revolution-personal-utilities',
+    'chronological-sovereignty-enterprise-whitepaper',
+    'neuro-cognitive-flow-synchronization-masterclass',
+    'digital-infrastructure-velocity-protocol'
   ];
 
   const routes = [
     '',
     '/focus',
+    '/notes',
     '/blog',
     '/privacy-protocol',
     '/terms-of-sync',

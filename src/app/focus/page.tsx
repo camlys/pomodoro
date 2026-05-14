@@ -1,3 +1,4 @@
+
 "use client";
 
 import React, { useState, useEffect, Suspense } from 'react';
@@ -5,7 +6,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { 
   Timer, Settings, BarChart3, 
-  Twitter, Globe, ChevronRight
+  Twitter, Globe, ChevronRight, FileText
 } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Pomodoro, PomodoroSettings } from '@/components/chrono/Pomodoro';
@@ -29,29 +30,6 @@ const focusSchema = {
     "ratingValue": "4.9",
     "ratingCount": "1250"
   }
-};
-
-const faqSchema = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "mainEntity": [
-    {
-      "@type": "Question",
-      "name": "What is the Pomodoro Technique?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "The Pomodoro Technique is a time management method that uses a timer to break work into intervals, traditionally 25 minutes in length, separated by short breaks. Each interval is known as a pomodoro."
-      }
-    },
-    {
-      "@type": "Question",
-      "name": "How does Camly improve focus?",
-      "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Camly uses high-precision timers combined with AI-generated focus mantras to keep users in a state of flow, reducing distractions and maximizing deep work velocity."
-      }
-    }
-  ]
 };
 
 function FocusPageContent() {
@@ -82,10 +60,6 @@ function FocusPageContent() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(focusSchema) }}
       />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-      />
       
       <InstallPWA variant="banner" />
 
@@ -108,9 +82,11 @@ function FocusPageContent() {
 
         <div className="flex items-center gap-2">
            <div className="flex gap-2">
-              <Button variant="ghost" size="sm" className="text-white hover:bg-white/10 text-[10px] font-black uppercase tracking-widest gap-2">
-                <BarChart3 className="w-4 h-4" /> Report
-              </Button>
+              <Link href="/notes">
+                <Button variant="ghost" size="sm" className="text-white hover:bg-white/10 text-[10px] font-black uppercase tracking-widest gap-2">
+                  <FileText className="w-4 h-4" /> Notes
+                </Button>
+              </Link>
               <Button 
                 variant="ghost" 
                 size="sm" 
@@ -152,10 +128,6 @@ function FocusPageContent() {
                 High-precision focus synchronization for deep work and biological rest.
                 Synchronize your workflow with absolute parity.
               </p>
-              <div className="flex gap-5">
-                <Button variant="ghost" size="icon" className="w-9 h-9 rounded-xl hover:bg-white/10 border border-white/20"><Twitter className="w-4 h-4 text-white" /></Button>
-                <Button variant="ghost" size="icon" className="w-9 h-9 rounded-xl hover:bg-white/10 border border-white/20"><Globe className="w-4 h-4 text-white" /></Button>
-              </div>
             </div>
 
             <div className="space-y-6">
@@ -164,6 +136,10 @@ function FocusPageContent() {
                 <li className="hover:text-white transition-colors flex items-center gap-2">
                   <ChevronRight className="w-3 h-3 opacity-30" />
                   <Link href="/focus">Focus Mode</Link>
+                </li>
+                <li className="hover:text-white transition-colors flex items-center gap-2">
+                  <ChevronRight className="w-3 h-3 opacity-30" />
+                  <Link href="/notes">Notes Engine</Link>
                 </li>
               </ul>
             </div>
