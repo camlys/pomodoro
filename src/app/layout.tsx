@@ -12,11 +12,11 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL('https://calculator.camly.org'),
   title: {
-    default: 'Camly | High-Precision Focus Tool',
+    default: 'Camly | High-Precision Pomodoro Timer & Productivity Tool',
     template: '%s | Camly'
   },
-  description: 'High-precision Pomodoro focus synchronization for deep work and professional productivity.',
-  keywords: ['pomodoro timer', 'focus engine', 'productivity tools', 'deep work', 'tactical planning'],
+  description: 'High-precision Pomodoro focus synchronization for deep work, professional productivity, and tactical planning. Experience the enterprise-grade focus engine.',
+  keywords: ['pomodoro timer', 'focus engine', 'productivity tools', 'deep work', 'tactical planning', 'camly pomodoro', 'professional timer'],
   authors: [{ name: 'Camly Operations Team' }],
   creator: 'Camly Inc',
   publisher: 'Camly Inc',
@@ -31,18 +31,27 @@ export const metadata: Metadata = {
     title: 'Camly',
   },
   openGraph: {
-    title: 'Camly | High-Precision Focus Tool',
-    description: 'High-precision focus computation engines for professional use.',
+    title: 'Camly | High-Precision Pomodoro Timer',
+    description: 'High-precision focus computation engines for professional use. Optimize your deep work velocity.',
     url: 'https://calculator.camly.org',
     siteName: 'Camly',
     locale: 'en_US',
     type: 'website',
+    images: [
+      {
+        url: '/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Camly Pomodoro Timer'
+      }
+    ]
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Camly | High-Precision Focus Tool',
-    description: 'Professional-grade focus utility engine with real-time synchronization.',
+    title: 'Camly | High-Precision Pomodoro Timer',
+    description: 'Professional-grade focus utility engine with real-time synchronization. Master your flow.',
     creator: '@camly',
+    images: ['/og-image.png'],
   },
   robots: {
     index: true,
@@ -55,6 +64,9 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
+  alternates: {
+    canonical: 'https://calculator.camly.org',
+  }
 };
 
 const organizationSchema = {
@@ -62,10 +74,11 @@ const organizationSchema = {
   "@type": "Organization",
   "name": "Camly Inc",
   "url": "https://camly.org",
-  "logo": "https://calculator.camly.org/logo.png",
+  "logo": "https://calculator.camly.org/camly.png",
+  "description": "Camly Inc is a leading provider of high-precision productivity and chronological tools designed for enterprise performance.",
   "sameAs": [
     "https://twitter.com/camly",
-    "https://github.com/camly"
+    "https://github.com/camlys/pomodoro"
   ]
 };
 

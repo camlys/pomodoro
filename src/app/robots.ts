@@ -5,8 +5,9 @@ export default function robots(): MetadataRoute.Robots {
     rules: {
       userAgent: '*',
       allow: '/',
-      disallow: ['/_next/', '/api/'],
+      disallow: ['/_next/', '/api/', '/admin/'],
     },
     sitemap: 'https://calculator.camly.org/sitemap.xml',
+    host: 'https://calculator.camly.org',
   };
 }

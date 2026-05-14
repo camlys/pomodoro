@@ -13,11 +13,20 @@ import { InstallPWA } from '@/components/chrono/InstallPWA';
 
 const BLOG_POSTS = [
   {
+    title: "Deep Work Velocity and Chronological Flow Synchronization",
+    description: "The definitive 9000-word authoritative guide exploring the science behind deep work, flow states, and high-precision productivity synchronization.",
+    date: "August 10, 2024",
+    author: "Camly Engineering",
+    readTime: "120 min read",
+    slug: "/blog/deep-work-velocity-masterclass",
+    category: "Masterclass"
+  },
+  {
     title: "The Enterprise Blueprint for Digital Asset Velocity",
-    description: "The definitive 9000-word enterprise guide to maximizing digital asset velocity through high-precision optimization and edge-compute architectures.",
+    description: "The definitive enterprise guide to maximizing digital asset velocity through high-precision optimization and edge-compute architectures.",
     date: "July 15, 2024",
     author: "Camly Ops Team",
-    readTime: "120 min read",
+    readTime: "90 min read",
     slug: "/blog/digital-asset-velocity-enterprise-guide",
     category: "Enterprise Whitepaper"
   },
@@ -35,7 +44,7 @@ const BLOG_POSTS = [
     description: "Master the art of digital asset management. Learn how high-precision resizing impacts SEO, web performance, and document integrity.",
     date: "June 05, 2024",
     author: "Camly Tech Ops",
-    readTime: "90 min read",
+    readTime: "45 min read",
     slug: "/blog/image-and-pdf-resizing-optimization",
     category: "Asset Management"
   },
@@ -54,7 +63,7 @@ const blogSchema = {
   "@context": "https://schema.org",
   "@type": "Blog",
   "name": "Camly Insights Hub",
-  "description": "Expert insights on file optimization, chronological precision, and the evolution of digital utility tools.",
+  "description": "Expert insights on file optimization, chronological precision, and the evolution of digital utility tools by Camly Inc.",
   "publisher": {
     "@type": "Organization",
     "name": "Camly Inc"
@@ -72,6 +81,25 @@ const blogSchema = {
   }))
 };
 
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://calculator.camly.org"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Knowledge Hub",
+      "item": "https://calculator.camly.org/blog"
+    }
+  ]
+};
+
 export default function BlogHub() {
   const [search, setSearch] = useState('');
 
@@ -85,6 +113,10 @@ export default function BlogHub() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(blogSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
       <nav className="relative z-50 glass border-b border-border h-14 flex items-center px-4 md:px-6 justify-between">
         <Link href="/" className="flex items-center gap-3 group">

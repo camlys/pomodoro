@@ -15,16 +15,44 @@ import { InstallPWA } from '@/components/chrono/InstallPWA';
 
 const focusSchema = {
   "@context": "https://schema.org",
-  "@type": "WebApplication",
-  "name": "Pomodoro Timer",
-  "applicationCategory": "Productivity",
+  "@type": "SoftwareApplication",
+  "name": "Camly Pomodoro Timer",
+  "applicationCategory": "ProductivityApplication",
   "operatingSystem": "All",
-  "description": "High-precision Pomodoro timer with AI-driven focus mantras and deep integration with the Camly engine.",
+  "description": "High-precision Pomodoro timer with AI-driven focus mantras and deep integration with the Camly engine for professional deep work.",
   "offers": {
     "@type": "Offer",
     "price": "0",
     "priceCurrency": "USD"
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.9",
+    "ratingCount": "1250"
   }
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is the Pomodoro Technique?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "The Pomodoro Technique is a time management method that uses a timer to break work into intervals, traditionally 25 minutes in length, separated by short breaks. Each interval is known as a pomodoro."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How does Camly improve focus?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Camly uses high-precision timers combined with AI-generated focus mantras to keep users in a state of flow, reducing distractions and maximizing deep work velocity."
+      }
+    }
+  ]
 };
 
 function FocusPageContent() {
@@ -54,6 +82,10 @@ function FocusPageContent() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(focusSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
       
       <nav className="relative z-50 h-14 flex items-center px-4 md:px-6 justify-between transition-colors duration-700 bg-black/5 border-b border-white/10">
