@@ -9,13 +9,18 @@ import {
   FileText, Clock, ShieldCheck, 
   Terminal, Database, Pin, PinOff,
   Sparkles, Hash, Loader2, LayoutGrid, X,
-  ChevronRight, Sun, Moon
+  ChevronRight, Sun, Moon, Palette, Check
 } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 import { 
   collection, 
   addDoc, 
@@ -41,8 +46,19 @@ type Note = {
   category: string;
   tags?: string[];
   isPinned?: boolean;
+  color?: string;
   updatedAt: any;
 };
+
+const COLOR_PALETTE = [
+  { name: 'Default', hex: '' },
+  { name: 'Tactical Red', hex: '#ef4444' },
+  { name: 'Cyber Blue', hex: '#3b82f6' },
+  { name: 'Bio Green', hex: '#22c55e' },
+  { name: 'Ion Purple', hex: '#a855f7' },
+  { name: 'Amber Signal', hex: '#f59e0b' },
+  { name: 'Slate Steel', hex: '#64748b' },
+];
 
 export default function NotesEngine() {
   const [notes, setNotes] = useState<Note[]>([]);
@@ -52,7 +68,6 @@ export default function NotesEngine() {
   const [db, setDb] = useState<any>(null);
   const [theme, setTheme] = useState<'light' | 'dark'>('light');
 
-  // Theme Sync logic
   useEffect(() => {
     const savedTheme = localStorage.getItem('camly_theme') as 'light' | 'dark' | null;
     const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
@@ -108,6 +123,7 @@ export default function NotesEngine() {
       content: '',
       category: 'General',
       isPinned: false,
+      color: '',
       tags: [],
       updatedAt: serverTimestamp()
     };
@@ -191,7 +207,7 @@ export default function NotesEngine() {
               <h1 className="text-lg font-black tracking-tighter leading-none bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent uppercase font-roboto-slab">
                 NOTES ENGINE
               </h1>
-              <span className="text-[7px] font-bold tracking-[0.3em] text-primary/60 uppercase mt-1">Direct Grid Editor v3.1</span>
+              <span className="text-[7px] font-bold tracking-[0.3em] text-primary/60 uppercase mt-1">Direct Grid Editor v3.2</span>
             </div>
           </Link>
         </div>
@@ -271,16 +287,52 @@ export default function NotesEngine() {
                   note.isPinned ? "border-accent/40 bg-accent/5" : "border-primary/20 bg-muted/5",
                   "focus-within:border-primary/60 focus-within:shadow-xl focus-within:bg-background"
                 )}
+                style={{ 
+                  backgroundColor: note.color ? `${note.color}15` : undefined,
+                  borderColor: note.color ? `${note.color}40` : undefined
+                }}
               >
                 <div className="flex justify-between items-start gap-2">
                    <Badge variant="outline" className={cn(
                      "text-[7px] font-black uppercase tracking-widest h-4 px-1.5",
                      note.isPinned ? "bg-accent/10 text-accent border-accent/20" : "bg-primary/5 text-primary border-primary/20"
-                   )}>
+                   )}
+                   style={note.color && !note.isPinned ? { backgroundColor: `${note.color}20`, color: note.color, borderColor: `${note.color}40` } : undefined}
+                   >
                       {note.isPinned ? <Pin className="w-2 h-2 mr-1 fill-accent" /> : <Terminal className="w-2 h-2 mr-1" />}
                       {note.isPinned ? 'Priority' : note.id.slice(0, 6)}
                    </Badge>
                    <div className="flex items-center gap-1 shrink-0">
+                      <Popover>
+                        <PopoverTrigger asChild>
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            className="w-6 h-6 rounded-md text-muted-foreground/30 hover:text-primary transition-all"
+                            title="Calibrate Color"
+                          >
+                            <Palette className="w-3 h-3" />
+                          </Button>
+                        </PopoverTrigger>
+                        <PopoverContent className="w-48 p-2 bg-popover border-border shadow-xl">
+                          <div className="grid grid-cols-4 gap-2">
+                            {COLOR_PALETTE.map((color) => (
+                              <button
+                                key={color.name}
+                                onClick={() => handleUpdateNote(note.id, { color: color.hex })}
+                                className={cn(
+                                  "w-8 h-8 rounded-full border border-border/50 flex items-center justify-center transition-all hover:scale-110",
+                                  color.hex === '' ? "bg-transparent border-dashed" : ""
+                                )}
+                                style={{ backgroundColor: color.hex || undefined }}
+                                title={color.name}
+                              >
+                                {note.color === color.hex && <Check className={cn("w-3 h-3", color.hex === '' ? "text-primary" : "text-white")} />}
+                              </button>
+                            ))}
+                          </div>
+                        </PopoverContent>
+                      </Popover>
                       <Button
                         variant="ghost"
                         size="icon"
@@ -304,7 +356,8 @@ export default function NotesEngine() {
                 </div>
 
                 <div className="space-y-3 flex-grow flex flex-col">
-                   <div className="bg-black/5 dark:bg-white/5 rounded-lg px-2 py-1.5 border border-primary/10 focus-within:border-primary/30 transition-colors">
+                   <div className="bg-black/5 dark:bg-white/5 rounded-lg px-2 py-1.5 border border-primary/10 focus-within:border-primary/30 transition-colors"
+                        style={note.color ? { borderColor: `${note.color}30`, backgroundColor: `${note.color}05` } : undefined}>
                      <Input 
                         value={note.title}
                         onChange={(e) => handleUpdateNote(note.id, { title: e.target.value })}
@@ -312,7 +365,8 @@ export default function NotesEngine() {
                         placeholder="Mission Title"
                      />
                    </div>
-                   <div className="flex-grow flex flex-col bg-black/5 dark:bg-white/5 rounded-xl border border-primary/10 p-3 group-focus-within:border-primary/30 transition-colors">
+                   <div className="flex-grow flex flex-col bg-black/5 dark:bg-white/5 rounded-xl border border-primary/10 p-3 group-focus-within:border-primary/30 transition-colors"
+                        style={note.color ? { borderColor: `${note.color}30`, backgroundColor: `${note.color}05` } : undefined}>
                       <Textarea 
                           value={note.content}
                           onChange={(e) => handleUpdateNote(note.id, { content: e.target.value })}
@@ -329,6 +383,7 @@ export default function NotesEngine() {
                         disabled={synthesizingId === note.id || !note.content.trim()}
                         variant="outline"
                         className="h-7 px-2 bg-primary/5 border-primary/20 text-primary font-black text-[8px] uppercase tracking-widest rounded-md gap-1.5 hover:bg-primary hover:text-white transition-all"
+                        style={note.color ? { borderColor: `${note.color}40`, color: note.color, backgroundColor: `${note.color}10` } : undefined}
                       >
                         {synthesizingId === note.id ? <Loader2 className="w-2.5 h-2.5 animate-spin" /> : <Sparkles className="w-2.5 h-2.5" />}
                         AI Sync
@@ -341,7 +396,7 @@ export default function NotesEngine() {
                       <div className="w-4 h-4 rounded-md bg-muted flex items-center justify-center">
                          <Hash className="w-2 h-2 text-muted-foreground/60" />
                       </div>
-                      <span className="text-[8px] font-black uppercase text-primary/40">Active</span>
+                      <span className="text-[8px] font-black uppercase text-primary/40" style={note.color ? { color: `${note.color}80` } : undefined}>Active</span>
                    </div>
                 </div>
 

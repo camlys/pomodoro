@@ -27,6 +27,10 @@
           "type": "boolean",
           "description": "Whether the note is marked as mission-critical."
         },
+        "color": {
+          "type": "string",
+          "description": "The hex color code for the tactical tint of the log container."
+        },
         "updatedAt": {
           "type": "string",
           "format": "date-time",
