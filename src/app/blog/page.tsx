@@ -12,15 +12,6 @@ import { InstallPWA } from '@/components/chrono/InstallPWA';
 
 const BLOG_POSTS = [
   {
-    title: "The 9000-Word Masterclass on Pregnancy Due Date Calculation",
-    description: "The definitive clinical guide to high-precision maternity chronology, ultrasound dating, and IVF milestone synchronization.",
-    date: "August 15, 2024",
-    author: "Clinical Ops Team",
-    readTime: "180 min read",
-    slug: "/blog/ultimate-pregnancy-due-date-masterclass",
-    category: "Clinical Masterclass"
-  },
-  {
     title: "The Enterprise Blueprint for Digital Asset Velocity",
     description: "The definitive 9000-word enterprise guide to maximizing digital asset velocity through high-precision optimization and edge-compute architectures.",
     date: "July 15, 2024",
@@ -80,25 +71,6 @@ const blogSchema = {
   }))
 };
 
-const breadcrumbSchema = {
-  "@context": "https://schema.org",
-  "@type": "BreadcrumbList",
-  "itemListElement": [
-    {
-      "@type": "ListItem",
-      "position": 1,
-      "name": "Home",
-      "item": "https://calculator.camly.org"
-    },
-    {
-      "@type": "ListItem",
-      "position": 2,
-      "name": "Insights Hub",
-      "item": "https://calculator.camly.org/blog"
-    }
-  ]
-};
-
 export default function BlogHub() {
   const [search, setSearch] = useState('');
 
@@ -113,14 +85,10 @@ export default function BlogHub() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(blogSchema) }}
       />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
-      />
       <nav className="relative z-50 glass border-b border-border h-14 flex items-center px-4 md:px-6 justify-between">
         <Link href="/" className="flex items-center gap-3 group">
           <div className="flex items-center justify-center transition-all group-hover:scale-110">
-            <Image src="/camly.png" alt="Camly Calculator" width={40} height={40} priority className="object-contain" />
+            <Image src="/camly.png" alt="Camly Insights" width={40} height={40} priority className="object-contain" />
           </div>
           <h1 className="text-sm md:text-base font-black tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent">
             CAMLY <span className="text-foreground/50 font-normal ml-2">INSIGHTS</span>
@@ -157,34 +125,7 @@ export default function BlogHub() {
         </header>
 
         <section className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* Featured Post */}
-          <div className="md:col-span-2 glass border border-border rounded-3xl overflow-hidden group hover:border-primary/30 transition-all">
-            <div className="grid md:grid-cols-2">
-              <div className="bg-gradient-to-br from-accent/10 to-primary/10 h-64 md:h-full flex items-center justify-center relative">
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-from)_0%,_transparent_70%)] opacity-30" />
-                <BookOpen className="w-24 h-24 text-accent opacity-20 group-hover:scale-110 transition-transform duration-500" />
-              </div>
-              <div className="p-8 space-y-4 flex flex-col justify-center">
-                <Badge className="w-fit bg-accent text-accent-foreground text-[10px]">9000-WORD CLINICAL MASTERCLASS</Badge>
-                <h2 className="text-3xl font-black leading-tight tracking-tight">The Definitive Guide to Pregnancy Due Date & Biological Logic</h2>
-                <p className="text-muted-foreground text-sm line-clamp-3">
-                  An exhaustive technical analysis of maternity chronology. From Naegele’s Rule to ultrasound CRL precision and IVF embryo transfer dating.
-                </p>
-                <div className="flex items-center gap-4 text-xs text-muted-foreground pt-2">
-                  <span className="flex items-center gap-1.5"><User className="w-3 h-3" /> Clinical Ops Team</span>
-                  <span className="flex items-center gap-1.5"><Clock className="w-3 h-3" /> 180 min read</span>
-                </div>
-                <Link href="/blog/ultimate-pregnancy-due-date-masterclass">
-                  <Button className="w-full md:w-fit mt-4 bg-accent text-accent-foreground font-bold uppercase tracking-widest text-[10px] h-10 px-8">
-                    Access Masterclass
-                  </Button>
-                </Link>
-              </div>
-            </div>
-          </div>
-
-          {/* Regular Posts */}
-          {filteredPosts.slice(1).map((post, i) => (
+          {filteredPosts.map((post, i) => (
             <div key={i} className="glass p-6 rounded-3xl border border-border hover:border-primary/20 transition-all flex flex-col group">
               <div className="space-y-4 flex-grow">
                 <div className="flex justify-between items-start">
@@ -211,15 +152,15 @@ export default function BlogHub() {
             <div className="col-span-2 lg:col-span-2 space-y-6">
               <div className="flex items-center gap-3">
                 <div className="flex items-center justify-center transition-all">
-                  <Image src="/camly.png" alt="Camly Calculator" width={48} height={48} className="object-contain" />
+                  <Image src="/camly.png" alt="Camly" width={48} height={48} className="object-contain" />
                 </div>
                 <h2 className="text-xl font-black tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent uppercase font-roboto-slab">
-                  CALCULATOR
+                  CAMLY
                 </h2>
               </div>
               <p className="text-sm leading-relaxed max-w-xs font-medium text-muted-foreground">
-                Defining the standard for high-precision chronological computation. 
-                Camly Inc's flagship engine for professional and tactical time management.
+                Defining the standard for high-precision focus synchronization. 
+                Camly Inc's flagship engine for professional and tactical performance.
               </p>
               <div className="flex gap-5">
                 <Button variant="ghost" size="icon" className="w-9 h-9 rounded-xl hover:bg-accent/10 shadow-sm border border-border/50"><Github className="w-4 h-4" /></Button>
@@ -232,12 +173,8 @@ export default function BlogHub() {
               <h3 className="text-[11px] font-black uppercase tracking-[0.3em] text-primary">Operations</h3>
               <ul className="space-y-3 text-xs font-bold text-muted-foreground">
                 <li className="hover:text-primary transition-colors flex items-center gap-2">
-                  <ChevronRight className="w-3 h-3 opacity-30" />
-                  <Link href="/due-date-calculator">Due Date</Link>
-                </li>
-                <li className="hover:text-primary transition-colors flex items-center gap-2">
                    <ChevronRight className="w-3 h-3 opacity-30" />
-                   <Link href="/focus">Pomodoro Focus</Link>
+                   <Link href="/focus">Focus Mode</Link>
                 </li>
               </ul>
             </div>
@@ -248,9 +185,6 @@ export default function BlogHub() {
                 <li className="hover:text-primary transition-colors flex items-center gap-2">
                   <ChevronRight className="w-3 h-3 opacity-30" />
                   <Link href="/blog">Knowledge Hub</Link>
-                </li>
-                <li className="hover:text-primary cursor-pointer transition-colors flex items-center gap-2">
-                   <ChevronRight className="w-3 h-3 opacity-30" /> Fun Facts API
                 </li>
               </ul>
             </div>

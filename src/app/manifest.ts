@@ -2,9 +2,9 @@ import { MetadataRoute } from 'next';
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: 'Camly | High-Precision Tactical Tools',
+    name: 'Camly | High-Precision Focus Tool',
     short_name: 'Camly',
-    description: 'Clinical due date engine and high-precision Pomodoro focus tool.',
+    description: 'High-precision Pomodoro focus tool for deep work and professional productivity.',
     start_url: '/',
     display: 'standalone',
     background_color: '#ffffff',

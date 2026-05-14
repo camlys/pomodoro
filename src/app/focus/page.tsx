@@ -5,15 +5,11 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { 
-  Timer, ExternalLink, Sun, Moon, 
-  LayoutGrid, Settings, BarChart3, ArrowLeft,
-  FileType, CalendarDays, ArrowRight,
-  Github, Twitter, Globe, ChevronRight
+  Timer, ExternalLink, LayoutGrid, Settings, BarChart3, 
+  FileType, Github, Twitter, Globe, ChevronRight
 } from 'lucide-react';
 import { Button } from "@/components/ui/button";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Pomodoro, TimerMode, PomodoroSettings } from '@/components/chrono/Pomodoro';
-import { cn } from '@/lib/utils';
+import { Pomodoro, PomodoroSettings } from '@/components/chrono/Pomodoro';
 import { 
   DropdownMenu,
   DropdownMenuContent,
@@ -30,7 +26,7 @@ const focusSchema = {
   "name": "Pomodoro Focus Engine",
   "applicationCategory": "Productivity",
   "operatingSystem": "All",
-  "description": "High-precision Pomodoro timer with AI-driven focus mantras and deep integration with the ChronoFlow engine.",
+  "description": "High-precision Pomodoro timer with AI-driven focus mantras and deep integration with the Camly engine.",
   "offers": {
     "@type": "Offer",
     "price": "0",
@@ -39,7 +35,6 @@ const focusSchema = {
 };
 
 function FocusPageContent() {
-  const router = useRouter();
   const [theme, setTheme] = useState<'light' | 'dark'>('light');
   const [pomodoroSettings, setPomodoroSettings] = useState<PomodoroSettings | null>(null);
   const [isTimerActive, setIsTimerActive] = useState(false);
@@ -72,14 +67,14 @@ function FocusPageContent() {
         <div className="flex items-center gap-3">
           <Link href="/" className="flex items-center gap-3 group">
             <div className="flex items-center justify-center transition-all group-hover:scale-110">
-              <Image src="/camly.png" alt="Camly Calculator" width={40} height={40} priority className="object-contain" />
+              <Image src="/camly.png" alt="Camly Focus" width={40} height={40} priority className="object-contain" />
             </div>
             <div className="flex flex-col">
               <h1 className="text-lg font-black tracking-tighter leading-none font-roboto-slab uppercase text-white">
-                CALCULATOR
+                CAMLY
               </h1>
               <span className="text-[7px] font-bold tracking-[0.3em] uppercase mt-1 text-white/60">
-                CAMLY.ORG
+                FOCUS ENGINE
               </span>
             </div>
           </Link>
@@ -110,17 +105,6 @@ function FocusPageContent() {
                  </Link>
                </DropdownMenuItem>
                <DropdownMenuSeparator className="bg-border/10 mx-2" />
-               <DropdownMenuItem asChild className="cursor-pointer focus:bg-accent/10 rounded-lg m-1">
-                 <Link href="/due-date-calculator" className="flex items-center gap-3 w-full px-2 py-2">
-                   <div className="w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center">
-                     <CalendarDays className="w-4 h-4 text-accent" />
-                   </div>
-                   <div className="flex flex-col">
-                     <span className="text-[10px] font-black uppercase tracking-widest text-foreground">Due Date</span>
-                     <span className="text-[8px] font-bold text-muted-foreground uppercase">Tactical Planning</span>
-                   </div>
-                 </Link>
-               </DropdownMenuItem>
                <DropdownMenuItem asChild className="cursor-pointer focus:bg-primary/10 rounded-lg m-1">
                  <Link href="/focus" className="flex items-center gap-3 w-full px-2 py-2">
                    <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
@@ -151,26 +135,9 @@ function FocusPageContent() {
         </div>
       </nav>
 
-      <main className="flex-grow container max-w-6xl mx-auto px-4 py-6 md:py-12">
-        <div className="flex flex-col items-center gap-10">
-          <aside className="w-full shrink-0 space-y-4 max-w-[480px]">
-            <div className="glass-card !p-6 shadow-none border-none transition-all duration-700 bg-transparent">
-              <Tabs 
-                value="focus"
-                className="w-full" 
-                onValueChange={(v) => {
-                  if (v === 'due-date') router.push('/due-date-calculator');
-                }}
-              >
-                <TabsList className="grid w-full grid-cols-2 mb-6 rounded-xl h-10 bg-white/10">
-                  <TabsTrigger value="focus" className="text-[9px] md:text-[10px] font-black uppercase tracking-widest">Focus</TabsTrigger>
-                  <TabsTrigger value="due-date" className="text-[9px] md:text-[10px] font-black uppercase tracking-widest">Due Date</TabsTrigger>
-                </TabsList>
-              </Tabs>
-            </div>
-          </aside>
-
-          <div className="flex-grow w-full min-0">
+      <main className="flex-grow container max-w-6xl mx-auto px-4 py-12 md:py-24">
+        <div className="flex flex-col items-center">
+          <div className="w-full">
             <Pomodoro 
               onSettingsChange={setSettingsChange => setPomodoroSettings(setSettingsChange)}
               onTimerActiveChange={setIsTimerActive}
@@ -187,7 +154,7 @@ function FocusPageContent() {
             <div className="col-span-2 lg:col-span-2 space-y-6">
               <div className="flex items-center gap-3">
                 <div className="flex items-center justify-center transition-all">
-                  <Image src="/camly.png" alt="Camly Calculator" width={48} height={48} className="object-contain" />
+                  <Image src="/camly.png" alt="Camly Focus" width={48} height={48} className="object-contain" />
                 </div>
                 <h2 className="text-xl font-black tracking-tighter text-white uppercase font-roboto-slab">
                   FOCUS ENGINE
@@ -209,10 +176,6 @@ function FocusPageContent() {
               <ul className="space-y-3 text-xs font-bold text-white/40">
                 <li className="hover:text-white transition-colors flex items-center gap-2">
                   <ChevronRight className="w-3 h-3 opacity-30" />
-                  <Link href="/due-date-calculator">Due Date</Link>
-                </li>
-                <li className="hover:text-white transition-colors flex items-center gap-2">
-                  <ChevronRight className="w-3 h-3 opacity-30" />
                   <Link href="/focus">Focus Mode</Link>
                 </li>
               </ul>
@@ -224,9 +187,6 @@ function FocusPageContent() {
                 <li className="hover:text-white transition-colors flex items-center gap-2">
                   <ChevronRight className="w-3 h-3 opacity-30" />
                   <Link href="/blog">Knowledge Hub</Link>
-                </li>
-                <li className="hover:text-white cursor-pointer transition-colors flex items-center gap-2">
-                   <ChevronRight className="w-3 h-3 opacity-30" /> Fun Facts API
                 </li>
               </ul>
             </div>

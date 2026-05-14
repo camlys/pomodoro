@@ -12,11 +12,11 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL('https://calculator.camly.org'),
   title: {
-    default: 'Camly | High-Precision Tactical Tools',
+    default: 'Camly | High-Precision Focus Tool',
     template: '%s | Camly'
   },
-  description: 'A suite of high-precision chronological and mathematical engines. Features clinical due date planning and Pomodoro focus synchronization.',
-  keywords: ['due date engine', 'pomodoro timer', 'focus engine', 'chronological engine', 'tactical planning', 'productivity tools'],
+  description: 'High-precision Pomodoro focus synchronization for deep work and professional productivity.',
+  keywords: ['pomodoro timer', 'focus engine', 'productivity tools', 'deep work', 'tactical planning'],
   authors: [{ name: 'Camly Operations Team' }],
   creator: 'Camly Inc',
   publisher: 'Camly Inc',
@@ -31,8 +31,8 @@ export const metadata: Metadata = {
     title: 'Camly',
   },
   openGraph: {
-    title: 'Camly | High-Precision Tactical Tools',
-    description: 'High-precision chronological and focus computation engines for professional use.',
+    title: 'Camly | High-Precision Focus Tool',
+    description: 'High-precision focus computation engines for professional use.',
     url: 'https://calculator.camly.org',
     siteName: 'Camly',
     locale: 'en_US',
@@ -40,8 +40,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Camly | High-Precision Tactical Tools',
-    description: 'Professional-grade utility engines with real-time synchronization.',
+    title: 'Camly | High-Precision Focus Tool',
+    description: 'Professional-grade focus utility engine with real-time synchronization.',
     creator: '@camly',
   },
   robots: {
