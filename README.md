@@ -1,5 +1,31 @@
-# Firebase Studio
+# Camly | High-Precision Pomodoro Timer
 
-This is a NextJS starter in Firebase Studio.
+A professional-grade tactical utility for deep work and high-performance productivity.
 
-To get started, take a look at src/app/page.tsx.
+## Fresh Publication & Repository Management
+
+To change the GitHub repository associated with this project, follow these steps in your terminal:
+
+1. **Disconnect from the current repository**:
+   ```bash
+   git remote remove origin
+   ```
+
+2. **Connect to your new repository**:
+   ```bash
+   git remote add origin <YOUR_NEW_GITHUB_REPOSITORY_URL>
+   ```
+
+3. **Push your code to the new destination**:
+   ```bash
+   git push -u origin main
+   ```
+
+## Development
+
+Run the development server:
+```bash
+npm run dev
+```
+
+Open [http://localhost:9002](http://localhost:9002) with your browser to see the result.
