@@ -9,7 +9,7 @@ import {
   FileText, Clock, ShieldCheck, 
   Terminal, Database, Pin, PinOff,
   Sparkles, Hash, Loader2, LayoutGrid, X,
-  ChevronRight
+  ChevronRight, Sun, Moon
 } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -50,6 +50,31 @@ export default function NotesEngine() {
   const [isSaving, setIsSaving] = useState(false);
   const [synthesizingId, setSynthesizingId] = useState<string | null>(null);
   const [db, setDb] = useState<any>(null);
+  const [theme, setTheme] = useState<'light' | 'dark'>('light');
+
+  // Theme Sync logic
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('camly_theme') as 'light' | 'dark' | null;
+    const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    const initialTheme = savedTheme || systemTheme;
+    setTheme(initialTheme);
+    if (initialTheme === 'dark') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, []);
+
+  const toggleTheme = () => {
+    const newTheme = theme === 'light' ? 'dark' : 'light';
+    setTheme(newTheme);
+    localStorage.setItem('camly_theme', newTheme);
+    if (newTheme === 'dark') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  };
 
   useEffect(() => {
     const { firestore } = initializeFirebase();
@@ -155,7 +180,7 @@ export default function NotesEngine() {
   }, [notes, search]);
 
   return (
-    <div className="min-h-screen bg-background text-foreground flex flex-col selection:bg-primary/30">
+    <div className="min-h-screen bg-background text-foreground flex flex-col selection:bg-primary/30 transition-colors duration-300">
       <nav className="relative z-50 glass border-b border-border h-14 flex items-center px-4 md:px-6 justify-between">
         <div className="flex items-center gap-3">
           <Link href="/" className="flex items-center gap-3 group">
@@ -179,11 +204,22 @@ export default function NotesEngine() {
                 </span>
              </div>
           </div>
-          <Link href="/focus">
-            <Button variant="ghost" size="sm" className="rounded-full text-[10px] font-black uppercase tracking-widest gap-2 h-8 px-4 border border-transparent hover:border-primary/20 transition-all">
-              <ArrowLeft className="w-3 h-3" /> Back to Timer
+          <div className="flex items-center gap-2 border-l border-border pl-4">
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={toggleTheme}
+              className="w-8 h-8 rounded-full text-muted-foreground hover:text-primary transition-colors"
+              title={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
+            >
+              {theme === 'light' ? <Moon className="w-4 h-4" /> : <Sun className="w-4 h-4" />}
             </Button>
-          </Link>
+            <Link href="/focus">
+              <Button variant="ghost" size="sm" className="rounded-full text-[10px] font-black uppercase tracking-widest gap-2 h-8 px-4 border border-transparent hover:border-primary/20 transition-all">
+                <ArrowLeft className="w-3 h-3" /> Back to Timer
+              </Button>
+            </Link>
+          </div>
         </div>
       </nav>
 
