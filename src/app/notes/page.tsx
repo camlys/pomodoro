@@ -10,7 +10,7 @@ import {
   Terminal, Database, Globe, ChevronRight,
   ExternalLink, Twitter, Pin, PinOff,
   Sparkles, ListChecks, Hash, Info,
-  BarChart3, Loader2, Save
+  BarChart3, Loader2, Save, X, LayoutGrid, Maximize2
 } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -178,7 +178,7 @@ export default function NotesEngine() {
               <h1 className="text-lg font-black tracking-tighter leading-none bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent uppercase font-roboto-slab">
                 NOTES ENGINE
               </h1>
-              <span className="text-[7px] font-bold tracking-[0.3em] text-primary/60 uppercase mt-1">v2.4.0 Authority</span>
+              <span className="text-[7px] font-bold tracking-[0.3em] text-primary/60 uppercase mt-1">v2.5.0 Authority</span>
             </div>
           </Link>
         </div>
@@ -199,14 +199,24 @@ export default function NotesEngine() {
         </div>
       </nav>
 
-      <main className="flex-grow container max-w-[1600px] mx-auto px-4 py-6 flex flex-col md:flex-row gap-6">
-        {/* Sidebar */}
-        <div className="w-full md:w-80 flex flex-col gap-4">
-          <div className="glass-card !p-4 space-y-4">
-            <div className="relative">
+      <main className="flex-grow container max-w-[1600px] mx-auto px-4 py-8 flex flex-col gap-8">
+        
+        {/* Top Control Bar */}
+        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="space-y-1">
+             <h2 className="text-2xl md:text-3xl font-black tracking-tighter flex items-center gap-3">
+               <LayoutGrid className="w-6 h-6 text-primary" /> Intelligence Dashboard
+             </h2>
+             <p className="text-xs text-muted-foreground font-medium uppercase tracking-widest">
+               Managing {notes.length} mission-critical tactical logs
+             </p>
+          </div>
+          
+          <div className="flex items-center gap-3 w-full md:w-auto">
+            <div className="relative flex-grow md:w-80">
               <Search className="absolute left-3 top-2.5 w-4 h-4 text-muted-foreground" />
               <Input 
-                placeholder="Search intelligence..." 
+                placeholder="Search logs..." 
                 className="pl-10 h-10 bg-muted/50 border-border rounded-xl focus:ring-2 focus:ring-primary/20 font-medium"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
@@ -214,74 +224,31 @@ export default function NotesEngine() {
             </div>
             <Button 
               onClick={handleCreateNote}
-              className="w-full h-11 bg-primary text-white font-black text-xs uppercase tracking-widest rounded-xl shadow-lg gap-2 hover:scale-[1.02] transition-all"
+              className="h-10 bg-primary text-white font-black text-xs uppercase tracking-widest rounded-xl shadow-lg gap-2 hover:scale-[1.05] transition-all px-6"
             >
               <Plus className="w-4 h-4" /> New Objective
             </Button>
           </div>
-
-          <div className="flex-grow glass-card !p-2 overflow-y-auto space-y-1 max-h-[500px] md:max-h-none custom-scrollbar">
-             {filteredNotes.length === 0 && (
-               <div className="p-12 text-center opacity-20">
-                  <FileText className="w-8 h-8 mx-auto mb-2" />
-                  <p className="text-[10px] font-black uppercase tracking-widest">No Active Logs</p>
-               </div>
-             )}
-             {filteredNotes.map((note) => (
-               <button
-                 key={note.id}
-                 onClick={() => setSelectedNoteId(note.id)}
-                 className={cn(
-                   "w-full text-left p-4 rounded-2xl transition-all group border border-transparent flex flex-col gap-1.5",
-                   selectedNoteId === note.id 
-                    ? "bg-primary/10 border-primary/20 shadow-sm" 
-                    : "hover:bg-muted/50"
-                 )}
-               >
-                 <div className="flex justify-between items-start">
-                   <div className="flex items-center gap-2 max-w-[80%]">
-                      {note.isPinned && <Pin className="w-3 h-3 text-accent shrink-0 fill-accent" />}
-                      <h3 className={cn("text-sm font-black truncate", selectedNoteId === note.id ? "text-primary" : "text-foreground")}>
-                        {note.title || 'Untitled Log'}
-                      </h3>
-                   </div>
-                   <span className="text-[8px] font-bold text-muted-foreground/50 shrink-0">
-                      {note.updatedAt ? format(note.updatedAt.toDate(), 'HH:mm') : '--:--'}
-                   </span>
-                 </div>
-                 <p className="text-[10px] text-muted-foreground line-clamp-1 opacity-60 font-medium">
-                    {note.content || 'Empty tactical summary...'}
-                 </p>
-                 {note.tags && note.tags.length > 0 && (
-                   <div className="flex gap-1 overflow-hidden mt-1">
-                      {note.tags.slice(0, 2).map(tag => (
-                        <span key={tag} className="text-[7px] font-black uppercase tracking-tighter text-primary/40 bg-primary/5 px-1.5 py-0.5 rounded-sm">#{tag}</span>
-                      ))}
-                   </div>
-                 )}
-               </button>
-             ))}
-          </div>
         </div>
 
-        {/* Editor */}
-        <div className="flex-grow flex flex-col gap-4 min-h-[600px]">
-          {selectedNote ? (
-            <div className="flex-grow glass-card !p-6 md:!p-10 flex flex-col gap-6 animate-in fade-in slide-in-from-right-4 duration-500 relative">
+        {/* Dynamic View: Grid or Editor */}
+        <div className="flex-grow">
+          {selectedNoteId ? (
+            <div className="flex-grow glass-card !p-6 md:!p-10 flex flex-col gap-6 animate-in zoom-in-95 duration-300 relative border-primary/20">
                
                <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
                   <div className="space-y-1 flex-grow w-full md:w-auto">
                     <div className="flex items-center gap-3 mb-2">
                        <Badge variant="outline" className="text-[8px] font-black uppercase tracking-widest border-primary/20 text-primary bg-primary/5 h-5">
-                          <Terminal className="w-3 h-3 mr-1.5" /> ID: {selectedNote.id.slice(0, 8)}
+                          <Terminal className="w-3 h-3 mr-1.5" /> ID: {selectedNote?.id.slice(0, 8)}
                        </Badge>
                        <span className="text-[9px] text-muted-foreground/60 font-bold uppercase flex items-center gap-1.5">
-                          <Clock className="w-3 h-3" /> Updated {selectedNote.updatedAt ? format(selectedNote.updatedAt.toDate(), 'MMM dd, HH:mm') : 'just now'}
+                          <Clock className="w-3 h-3" /> Updated {selectedNote?.updatedAt ? format(selectedNote.updatedAt.toDate(), 'MMM dd, HH:mm') : 'just now'}
                        </span>
                     </div>
                     <Input 
-                      value={selectedNote.title}
-                      onChange={(e) => handleUpdateNote(selectedNote.id, { title: e.target.value })}
+                      value={selectedNote?.title}
+                      onChange={(e) => selectedNote && handleUpdateNote(selectedNote.id, { title: e.target.value })}
                       className="text-3xl md:text-5xl font-black tracking-tighter bg-transparent border-none p-0 h-auto focus:ring-0 placeholder:text-muted-foreground/20 leading-none"
                       placeholder="Mission Title"
                     />
@@ -291,19 +258,19 @@ export default function NotesEngine() {
                     <Button
                       variant="outline"
                       size="sm"
-                      onClick={() => handleUpdateNote(selectedNote.id, { isPinned: !selectedNote.isPinned })}
+                      onClick={() => selectedNote && handleUpdateNote(selectedNote.id, { isPinned: !selectedNote.isPinned })}
                       className={cn(
                         "h-10 px-4 rounded-xl font-black text-[10px] uppercase tracking-widest gap-2 transition-all",
-                        selectedNote.isPinned ? "bg-accent/10 border-accent/30 text-accent" : "text-muted-foreground hover:bg-muted"
+                        selectedNote?.isPinned ? "bg-accent/10 border-accent/30 text-accent" : "text-muted-foreground hover:bg-muted"
                       )}
                     >
-                      {selectedNote.isPinned ? <Pin className="w-3.5 h-3.5 fill-accent" /> : <PinOff className="w-3.5 h-3.5" />}
-                      {selectedNote.isPinned ? 'Pinned' : 'Pin Log'}
+                      {selectedNote?.isPinned ? <Pin className="w-3.5 h-3.5 fill-accent" /> : <PinOff className="w-3.5 h-3.5" />}
+                      {selectedNote?.isPinned ? 'Pinned' : 'Pin Log'}
                     </Button>
 
                     <Button 
                       onClick={handleSynthesize}
-                      disabled={isSynthesizing || !selectedNote.content.trim()}
+                      disabled={isSynthesizing || !selectedNote?.content.trim()}
                       className="h-10 px-4 bg-gradient-to-r from-primary to-accent text-white font-black text-[10px] uppercase tracking-widest rounded-xl shadow-lg gap-2 hover:scale-[1.02] transition-all disabled:opacity-50"
                     >
                       {isSynthesizing ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Sparkles className="w-3.5 h-3.5" />}
@@ -313,20 +280,29 @@ export default function NotesEngine() {
                     <Button 
                       variant="ghost" 
                       size="icon" 
-                      onClick={() => handleDeleteNote(selectedNote.id)}
+                      onClick={() => selectedNoteId && handleDeleteNote(selectedNoteId)}
                       className="w-10 h-10 rounded-xl text-muted-foreground hover:text-destructive hover:bg-destructive/10 border border-transparent hover:border-destructive/20"
                     >
                       <Trash2 className="w-4 h-4" />
+                    </Button>
+
+                    <Button 
+                      variant="ghost" 
+                      size="icon" 
+                      onClick={() => setSelectedNoteId(null)}
+                      className="w-10 h-10 rounded-xl bg-muted/50 hover:bg-muted"
+                    >
+                      <X className="w-4 h-4" />
                     </Button>
                   </div>
                </div>
 
                <Separator className="bg-border/30" />
 
-               <div className="flex-grow flex flex-col min-h-0">
+               <div className="flex-grow flex flex-col min-h-[400px]">
                   <Textarea 
-                    value={selectedNote.content}
-                    onChange={(e) => handleUpdateNote(selectedNote.id, { content: e.target.value })}
+                    value={selectedNote?.content}
+                    onChange={(e) => selectedNote && handleUpdateNote(selectedNote.id, { content: e.target.value })}
                     className="flex-grow bg-transparent border-none p-0 text-lg md:text-xl font-medium leading-relaxed resize-none focus:ring-0 placeholder:text-muted-foreground/10 custom-scrollbar"
                     placeholder="Capture tactical data and mission parameters here..."
                   />
@@ -349,7 +325,7 @@ export default function NotesEngine() {
                         </div>
                         <div className="space-y-0.5">
                            <span className="text-[8px] font-black uppercase tracking-widest text-muted-foreground/60 block">Tactical Directives</span>
-                           <p className="text-[10px] font-bold text-foreground uppercase">{selectedNote.tags?.length || 0} Registered Tags</p>
+                           <p className="text-[10px] font-bold text-foreground uppercase">{selectedNote?.tags?.length || 0} Registered Tags</p>
                         </div>
                      </div>
                   </div>
@@ -373,12 +349,66 @@ export default function NotesEngine() {
                )}
             </div>
           ) : (
-            <div className="flex-grow glass-card !p-12 border-dashed border-border/30 flex flex-col items-center justify-center text-center opacity-30">
-               <div className="w-24 h-24 rounded-[3rem] bg-muted flex items-center justify-center mb-8 animate-pulse">
-                  <FileText className="w-12 h-12 text-muted-foreground" />
-               </div>
-               <h3 className="text-3xl font-black tracking-tighter mb-4">Select Tactical Log</h3>
-               <p className="text-sm font-medium max-w-[280px] leading-relaxed uppercase tracking-widest opacity-60">Initiate new mission coordinates or audit existing intelligence data.</p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+              {filteredNotes.length === 0 ? (
+                <div className="col-span-full h-[400px] glass-card !p-12 border-dashed border-border/30 flex flex-col items-center justify-center text-center opacity-30">
+                   <div className="w-24 h-24 rounded-[3rem] bg-muted flex items-center justify-center mb-8 animate-pulse">
+                      <FileText className="w-12 h-12 text-muted-foreground" />
+                   </div>
+                   <h3 className="text-3xl font-black tracking-tighter mb-4">No Tactical Logs Found</h3>
+                   <p className="text-sm font-medium max-w-[280px] leading-relaxed uppercase tracking-widest opacity-60">Initiate new mission coordinates to begin your intelligence capture.</p>
+                </div>
+              ) : (
+                filteredNotes.map((note) => (
+                  <div 
+                    key={note.id}
+                    onClick={() => setSelectedNoteId(note.id)}
+                    className="group relative glass rounded-[2.5rem] border border-border p-8 flex flex-col gap-4 cursor-pointer hover:border-primary/40 hover:translate-y-[-4px] transition-all h-[320px]"
+                  >
+                    <div className="flex justify-between items-start">
+                       <Badge variant="outline" className={cn(
+                         "text-[8px] font-black uppercase tracking-widest h-5",
+                         note.isPinned ? "bg-accent/10 text-accent border-accent/20" : "bg-primary/5 text-primary border-primary/20"
+                       )}>
+                          {note.isPinned ? <Pin className="w-2.5 h-2.5 mr-1 fill-accent" /> : <Terminal className="w-2.5 h-2.5 mr-1" />}
+                          {note.isPinned ? 'Priority' : note.id.slice(0, 8)}
+                       </Badge>
+                       <span className="text-[9px] font-bold text-muted-foreground/40 uppercase">
+                          {note.updatedAt ? format(note.updatedAt.toDate(), 'dd MMM') : '--'}
+                       </span>
+                    </div>
+
+                    <div className="space-y-2 flex-grow overflow-hidden">
+                       <h3 className="text-xl font-black tracking-tight leading-tight group-hover:text-primary transition-colors line-clamp-2">
+                         {note.title || 'Untitled Objective'}
+                       </h3>
+                       <p className="text-xs text-muted-foreground/60 leading-relaxed line-clamp-5 font-medium">
+                         {note.content || 'Awaiting mission intelligence data...'}
+                       </p>
+                    </div>
+
+                    <div className="flex items-center justify-between pt-4 border-t border-border/10 mt-auto">
+                       <div className="flex gap-1 overflow-hidden">
+                          {(note.tags || []).slice(0, 2).map(tag => (
+                            <span key={tag} className="text-[7px] font-black uppercase text-primary/40">#{tag}</span>
+                          ))}
+                          {(!note.tags || note.tags.length === 0) && (
+                            <span className="text-[7px] font-black uppercase text-muted-foreground/20 italic">No Tags</span>
+                          )}
+                       </div>
+                       <div className="opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-2">
+                          <Button variant="ghost" size="icon" className="w-8 h-8 rounded-lg" onClick={(e) => {
+                             e.stopPropagation();
+                             handleDeleteNote(note.id);
+                          }}>
+                             <Trash2 className="w-3.5 h-3.5 text-muted-foreground/40 hover:text-destructive" />
+                          </Button>
+                          <Maximize2 className="w-4 h-4 text-primary" />
+                       </div>
+                    </div>
+                  </div>
+                ))
+              )}
             </div>
           )}
         </div>
