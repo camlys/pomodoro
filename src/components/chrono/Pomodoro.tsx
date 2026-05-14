@@ -75,7 +75,6 @@ const DEFAULT_SETTINGS: PomodoroSettings = {
   visualMode: 'clock',
 };
 
-// High-reliability, stable audio assets
 const ALARM_SOUNDS: Record<string, string> = {
   kitchen: 'https://actions.google.com/sounds/v1/alarms/mechanical_clock_ring.ogg',
   bell: 'https://actions.google.com/sounds/v1/alarms/alarm_clock.ogg',
@@ -104,10 +103,9 @@ function HourglassVisual({ timeLeft, totalTime, isActive }: { timeLeft: number; 
   const bottomSandHeight = 40 * (1 - ratio);
 
   return (
-    <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12 animate-in fade-in zoom-in duration-500">
-      <div className="relative w-40 h-56 md:w-48 md:h-64 flex items-center justify-center">
+    <div className="flex flex-row items-center justify-center gap-4 sm:gap-8 md:gap-12 animate-in fade-in zoom-in duration-500 w-full px-2">
+      <div className="relative w-28 h-40 sm:w-40 sm:h-56 md:w-48 md:h-64 flex items-center justify-center shrink-0">
         <svg viewBox="0 0 100 150" className="w-full h-full drop-shadow-2xl">
-          {/* Hourglass Frame */}
           <path 
             d="M20,10 L80,10 L80,20 Q80,75 50,75 Q20,75 20,20 Z" 
             fill="none" 
@@ -123,7 +121,6 @@ function HourglassVisual({ timeLeft, totalTime, isActive }: { timeLeft: number; 
             className="opacity-30"
           />
           
-          {/* Top Sand */}
           <clipPath id="topSandClip">
             <rect x="0" y={75 - topSandHeight} width="100" height={topSandHeight} />
           </clipPath>
@@ -134,7 +131,6 @@ function HourglassVisual({ timeLeft, totalTime, isActive }: { timeLeft: number; 
             className="transition-all duration-1000 ease-linear"
           />
 
-          {/* Bottom Sand */}
           <clipPath id="bottomSandClip">
             <rect x="0" y={140 - bottomSandHeight} width="100" height={bottomSandHeight} />
           </clipPath>
@@ -145,7 +141,6 @@ function HourglassVisual({ timeLeft, totalTime, isActive }: { timeLeft: number; 
             className="transition-all duration-1000 ease-linear"
           />
 
-          {/* Sand Stream */}
           {isActive && timeLeft > 0 && (
             <line 
               x1="50" y1="75" x2="50" y2="140" 
@@ -157,8 +152,8 @@ function HourglassVisual({ timeLeft, totalTime, isActive }: { timeLeft: number; 
           )}
         </svg>
       </div>
-      <div className="flex flex-col items-center md:items-start justify-center min-w-[200px]">
-        <span className="text-8xl sm:text-9xl md:text-9xl font-black text-white drop-shadow-2xl tabular-nums tracking-tighter">
+      <div className="flex flex-col items-start justify-center">
+        <span className="text-8xl sm:text-9xl md:text-[10rem] font-black text-white drop-shadow-2xl tabular-nums tracking-tighter">
           {Math.floor(timeLeft / 60)}:{(timeLeft % 60).toString().padStart(2, '0')}
         </span>
       </div>
@@ -188,13 +183,11 @@ export function Pomodoro({ onModeChange, onSettingsChange, onTimerActiveChange, 
   const timerRef = useRef<NodeJS.Timeout | null>(null);
   const pomodoroCountRef = useRef(0);
   
-  // Audio Instances
   const alarmAudioRef = useRef<HTMLAudioElement | null>(null);
   const focusAudioRef = useRef<HTMLAudioElement | null>(null);
   const clickAudioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
-    // Initialize Audio Objects
     clickAudioRef.current = new Audio(CLICK_SOUND_URL);
     alarmAudioRef.current = new Audio(ALARM_SOUNDS.kitchen);
     focusAudioRef.current = new Audio();
@@ -282,11 +275,9 @@ export function Pomodoro({ onModeChange, onSettingsChange, onTimerActiveChange, 
       audio.volume = settings.alarmVolume / 100;
       audio.play().catch((err) => console.warn("Click play blocked:", err));
     } catch (e) {
-      // Ignore click failures
     }
   }, [settings.clickSoundEnabled, settings.alarmVolume]);
 
-  // Handle Focus Sound
   useEffect(() => {
     const manageFocusAudio = async () => {
       if (!focusAudioRef.current) return;
@@ -377,7 +368,6 @@ export function Pomodoro({ onModeChange, onSettingsChange, onTimerActiveChange, 
   const toggleTimer = () => {
     playClickSound();
     
-    // Prime Audio for Alarm (Unlocks the audio buffer for later non-gesture play)
     if (!isActive && alarmAudioRef.current) {
       const audio = alarmAudioRef.current;
       audio.play().then(() => {
