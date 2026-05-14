@@ -166,7 +166,7 @@ export default function NotesEngine() {
               <h1 className="text-lg font-black tracking-tighter leading-none bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent uppercase font-roboto-slab">
                 NOTES ENGINE
               </h1>
-              <span className="text-[7px] font-bold tracking-[0.3em] text-primary/60 uppercase mt-1">Direct Grid Editor v3.0</span>
+              <span className="text-[7px] font-bold tracking-[0.3em] text-primary/60 uppercase mt-1">Direct Grid Editor v3.1</span>
             </div>
           </Link>
         </div>
@@ -187,37 +187,37 @@ export default function NotesEngine() {
         </div>
       </nav>
 
-      <main className="flex-grow container max-w-[1800px] mx-auto px-4 py-8 flex flex-col gap-8">
+      <main className="flex-grow container max-w-[1800px] mx-auto px-4 py-8 flex flex-col gap-6">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           <div className="space-y-1">
-             <h2 className="text-2xl md:text-3xl font-black tracking-tighter flex items-center gap-3">
-               <LayoutGrid className="w-6 h-6 text-primary" /> Intelligence Dashboard
+             <h2 className="text-xl md:text-2xl font-black tracking-tighter flex items-center gap-3">
+               <LayoutGrid className="w-5 h-5 text-primary" /> Intelligence Dashboard
              </h2>
-             <p className="text-xs text-muted-foreground font-medium uppercase tracking-widest">
+             <p className="text-[10px] text-muted-foreground font-medium uppercase tracking-widest">
                Real-time editing across {notes.length} tactical logs
              </p>
           </div>
           
           <div className="flex items-center gap-3 w-full md:w-auto">
-            <div className="relative flex-grow md:w-80">
-              <Search className="absolute left-3 top-2.5 w-4 h-4 text-muted-foreground" />
+            <div className="relative flex-grow md:w-64">
+              <Search className="absolute left-3 top-2.5 w-3.5 h-3.5 text-muted-foreground" />
               <Input 
                 placeholder="Search logs..." 
-                className="pl-10 h-10 bg-muted/50 border-border rounded-xl focus:ring-2 focus:ring-primary/20 font-medium"
+                className="pl-10 h-9 bg-muted/50 border-border rounded-lg text-xs font-medium"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
               />
             </div>
             <Button 
               onClick={handleCreateNote}
-              className="h-10 bg-primary text-white font-black text-xs uppercase tracking-widest rounded-xl shadow-lg gap-2 hover:scale-[1.05] transition-all px-6"
+              className="h-9 bg-primary text-white font-black text-[10px] uppercase tracking-widest rounded-lg shadow-lg gap-2 hover:scale-[1.05] transition-all px-4"
             >
-              <Plus className="w-4 h-4" /> New Objective
+              <Plus className="w-3.5 h-3.5" /> New Objective
             </Button>
           </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4 md:gap-6">
           {filteredNotes.length === 0 ? (
             <div className="col-span-full h-[400px] glass-card !p-12 border-dashed border-border/40 flex flex-col items-center justify-center text-center opacity-30">
                <div className="w-24 h-24 rounded-[3rem] bg-muted flex items-center justify-center mb-8 animate-pulse">
@@ -231,86 +231,87 @@ export default function NotesEngine() {
               <div 
                 key={note.id}
                 className={cn(
-                  "group relative glass rounded-[2.5rem] p-6 md:p-8 flex flex-col gap-4 border-2 transition-all h-[420px] shadow-lg",
+                  "group relative glass rounded-2xl p-4 md:p-5 flex flex-col gap-3 border-2 transition-all h-[320px] shadow-md",
                   note.isPinned ? "border-accent/40 bg-accent/5" : "border-primary/20 bg-muted/5",
-                  "focus-within:border-primary/60 focus-within:shadow-2xl focus-within:bg-background"
+                  "focus-within:border-primary/60 focus-within:shadow-xl focus-within:bg-background"
                 )}
               >
-                <div className="flex justify-between items-start gap-4">
+                <div className="flex justify-between items-start gap-2">
                    <Badge variant="outline" className={cn(
-                     "text-[8px] font-black uppercase tracking-widest h-5 px-2",
+                     "text-[7px] font-black uppercase tracking-widest h-4 px-1.5",
                      note.isPinned ? "bg-accent/10 text-accent border-accent/20" : "bg-primary/5 text-primary border-primary/20"
                    )}>
-                      {note.isPinned ? <Pin className="w-2.5 h-2.5 mr-1 fill-accent" /> : <Terminal className="w-2.5 h-2.5 mr-1" />}
-                      {note.isPinned ? 'Priority' : note.id.slice(0, 8)}
+                      {note.isPinned ? <Pin className="w-2 h-2 mr-1 fill-accent" /> : <Terminal className="w-2 h-2 mr-1" />}
+                      {note.isPinned ? 'Priority' : note.id.slice(0, 6)}
                    </Badge>
-                   <div className="flex items-center gap-1.5 shrink-0">
+                   <div className="flex items-center gap-1 shrink-0">
                       <Button
                         variant="ghost"
                         size="icon"
                         onClick={() => handleUpdateNote(note.id, { isPinned: !note.isPinned })}
                         className={cn(
-                          "w-8 h-8 rounded-lg transition-all",
-                          note.isPinned ? "text-accent" : "text-muted-foreground/40 hover:text-primary"
+                          "w-6 h-6 rounded-md transition-all",
+                          note.isPinned ? "text-accent" : "text-muted-foreground/30 hover:text-primary"
                         )}
                       >
-                        {note.isPinned ? <Pin className="w-3.5 h-3.5 fill-accent" /> : <PinOff className="w-3.5 h-3.5" />}
+                        {note.isPinned ? <Pin className="w-3 h-3 fill-accent" /> : <PinOff className="w-3 h-3" />}
                       </Button>
                       <Button 
                         variant="ghost" 
                         size="icon" 
                         onClick={() => handleDeleteNote(note.id)}
-                        className="w-8 h-8 rounded-lg text-muted-foreground/40 hover:text-destructive hover:bg-destructive/10"
+                        className="w-6 h-6 rounded-md text-muted-foreground/30 hover:text-destructive hover:bg-destructive/10"
                       >
-                        <Trash2 className="w-3.5 h-3.5" />
+                        <Trash2 className="w-3 h-3" />
                       </Button>
                    </div>
                 </div>
 
-                <div className="space-y-3 flex-grow flex flex-col">
+                <div className="space-y-2 flex-grow flex flex-col">
                    <Input 
                       value={note.title}
                       onChange={(e) => handleUpdateNote(note.id, { title: e.target.value })}
-                      className="text-xl font-black tracking-tight bg-transparent border-none p-0 h-auto focus:ring-0 placeholder:text-muted-foreground/20 leading-tight"
+                      className="text-sm font-black tracking-tight bg-transparent border-none p-0 h-auto focus:ring-0 placeholder:text-muted-foreground/20 leading-tight"
                       placeholder="Mission Title"
                    />
-                   <Separator className="bg-border/20" />
-                   <Textarea 
-                      value={note.content}
-                      onChange={(e) => handleUpdateNote(note.id, { content: e.target.value })}
-                      className="flex-grow bg-transparent border-none p-0 text-sm font-medium leading-relaxed resize-none focus:ring-0 placeholder:text-muted-foreground/10 custom-scrollbar"
-                      placeholder="Capture tactical data here..."
-                   />
+                   <div className="flex-grow flex flex-col bg-black/5 dark:bg-white/5 rounded-xl border border-primary/10 p-3 group-focus-within:border-primary/30 transition-colors">
+                      <Textarea 
+                          value={note.content}
+                          onChange={(e) => handleUpdateNote(note.id, { content: e.target.value })}
+                          className="flex-grow bg-transparent border-none p-0 text-[11px] font-medium leading-relaxed resize-none focus:ring-0 placeholder:text-muted-foreground/10 custom-scrollbar"
+                          placeholder="Capture tactical data..."
+                      />
+                   </div>
                 </div>
 
-                <div className="flex items-center justify-between pt-4 border-t border-border/10 mt-auto">
-                   <div className="flex items-center gap-3">
+                <div className="flex items-center justify-between pt-3 border-t border-border/10 mt-auto">
+                   <div className="flex items-center gap-2">
                       <Button 
                         onClick={() => handleSynthesize(note.id, note.content)}
                         disabled={synthesizingId === note.id || !note.content.trim()}
                         variant="outline"
-                        className="h-8 px-3 bg-primary/5 border-primary/20 text-primary font-black text-[9px] uppercase tracking-widest rounded-lg gap-2 hover:bg-primary hover:text-white transition-all"
+                        className="h-7 px-2 bg-primary/5 border-primary/20 text-primary font-black text-[8px] uppercase tracking-widest rounded-md gap-1.5 hover:bg-primary hover:text-white transition-all"
                       >
-                        {synthesizingId === note.id ? <Loader2 className="w-3 h-3 animate-spin" /> : <Sparkles className="w-3 h-3" />}
+                        {synthesizingId === note.id ? <Loader2 className="w-2.5 h-2.5 animate-spin" /> : <Sparkles className="w-2.5 h-2.5" />}
                         AI Sync
                       </Button>
-                      <span className="text-[8px] text-muted-foreground/40 font-bold uppercase tabular-nums">
-                        {note.updatedAt ? format(note.updatedAt.toDate(), 'dd MMM, HH:mm') : '--'}
+                      <span className="text-[7px] text-muted-foreground/30 font-bold uppercase tabular-nums">
+                        {note.updatedAt ? format(note.updatedAt.toDate(), 'HH:mm') : '--'}
                       </span>
                    </div>
-                   <div className="flex items-center gap-2">
-                      <div className="w-6 h-6 rounded-md bg-muted flex items-center justify-center">
-                         <Hash className="w-3 h-3 text-muted-foreground/60" />
+                   <div className="flex items-center gap-1.5">
+                      <div className="w-4 h-4 rounded-md bg-muted flex items-center justify-center">
+                         <Hash className="w-2 h-2 text-muted-foreground/60" />
                       </div>
-                      <span className="text-[10px] font-black uppercase text-primary/40">Active</span>
+                      <span className="text-[8px] font-black uppercase text-primary/40">Active</span>
                    </div>
                 </div>
 
                 {synthesizingId === note.id && (
-                  <div className="absolute inset-0 bg-background/60 backdrop-blur-[2px] z-10 flex items-center justify-center rounded-[2.5rem] animate-in fade-in duration-300">
-                     <div className="flex flex-col items-center gap-3">
-                        <Sparkles className="w-8 h-8 text-primary animate-pulse" />
-                        <span className="text-[10px] font-black uppercase tracking-widest text-primary">Synthesizing...</span>
+                  <div className="absolute inset-0 bg-background/60 backdrop-blur-[2px] z-10 flex items-center justify-center rounded-2xl animate-in fade-in duration-300">
+                     <div className="flex flex-col items-center gap-2">
+                        <Sparkles className="w-6 h-6 text-primary animate-pulse" />
+                        <span className="text-[8px] font-black uppercase tracking-widest text-primary">Synthesizing...</span>
                      </div>
                   </div>
                 )}
@@ -320,25 +321,25 @@ export default function NotesEngine() {
         </div>
       </main>
 
-      <footer className="relative mt-auto pt-24 pb-12 px-6 transition-colors duration-700 border-t glass border-border/40">
+      <footer className="relative mt-auto pt-16 pb-8 px-6 transition-colors duration-700 border-t glass border-border/40">
         <div className="container max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-5 gap-12 mb-20">
-            <div className="col-span-1 md:col-span-2 lg:col-span-2 space-y-6">
+          <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-5 gap-8 mb-12">
+            <div className="col-span-1 md:col-span-2 lg:col-span-2 space-y-4">
               <div className="flex items-center gap-3">
-                <Image src="/camly.png" alt="Camly" width={48} height={48} className="object-contain" />
-                <h2 className="text-xl font-black tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent uppercase font-roboto-slab">
+                <Image src="/camly.png" alt="Camly" width={32} height={32} className="object-contain" />
+                <h2 className="text-lg font-black tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-primary to-accent uppercase font-roboto-slab">
                   CAMLY
                 </h2>
               </div>
-              <p className="text-sm leading-relaxed max-w-xs font-medium text-muted-foreground">
+              <p className="text-xs leading-relaxed max-w-xs font-medium text-muted-foreground">
                 Defining the standard for high-precision documentation. 
                 Camly Inc's flagship engine for tactical insight capture and AI synthesis.
               </p>
             </div>
 
-            <div className="space-y-6">
-              <h3 className="text-[11px] font-black uppercase tracking-[0.3em] text-primary">Operations</h3>
-              <ul className="space-y-3 text-xs font-bold text-muted-foreground">
+            <div className="space-y-4">
+              <h3 className="text-[10px] font-black uppercase tracking-[0.3em] text-primary">Operations</h3>
+              <ul className="space-y-2 text-xs font-bold text-muted-foreground">
                 <li className="hover:text-primary transition-colors flex items-center gap-2">
                    <ChevronRight className="w-3 h-3 opacity-30" />
                    <Link href="/focus">Pomodoro Timer</Link>
@@ -350,27 +351,27 @@ export default function NotesEngine() {
               </ul>
             </div>
 
-            <div className="space-y-6">
-              <h3 className="text-[11px] font-black uppercase tracking-[0.3em] text-primary">Architecture</h3>
-              <div className="space-y-4">
-                <div className="flex items-center gap-2.5 text-[10px] font-black tracking-widest text-accent">
-                  <div className="w-2 h-2 rounded-full animate-pulse bg-accent" />
+            <div className="space-y-4">
+              <h3 className="text-[10px] font-black uppercase tracking-[0.3em] text-primary">Architecture</h3>
+              <div className="space-y-3">
+                <div className="flex items-center gap-2 text-[9px] font-black tracking-widest text-accent">
+                  <div className="w-1.5 h-1.5 rounded-full animate-pulse bg-accent" />
                   CAMLY-SYNC-01: ONLINE
                 </div>
-                <div className="flex items-center gap-2 text-[10px] font-bold text-primary">
-                  <ShieldCheck className="w-3.5 h-3.5" /> High-Parity Security Active
+                <div className="flex items-center gap-2 text-[9px] font-bold text-primary">
+                  <ShieldCheck className="w-3 h-3" /> High-Parity Security Active
                 </div>
               </div>
             </div>
           </div>
-          <Separator className="mb-10 bg-border/40" />
-          <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-            <p className="text-[10px] uppercase tracking-[0.5em] font-black text-muted-foreground/40">
+          <Separator className="mb-8 bg-border/40" />
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+            <p className="text-[8px] uppercase tracking-[0.5em] font-black text-muted-foreground/40">
               © 2024 Camly Inc • Defining High-Precision Velocity
             </p>
-            <div className="flex gap-8">
-              <Link href="/privacy-protocol" className="text-[10px] uppercase tracking-[0.2em] transition-colors font-black text-muted-foreground/40 hover:text-primary">Privacy Protocol</Link>
-              <Link href="/terms-of-sync" className="text-[10px] uppercase tracking-[0.2em] transition-colors font-black text-muted-foreground/40 hover:text-primary">Terms of Sync</Link>
+            <div className="flex gap-6">
+              <Link href="/privacy-protocol" className="text-[8px] uppercase tracking-[0.2em] transition-colors font-black text-muted-foreground/40 hover:text-primary">Privacy Protocol</Link>
+              <Link href="/terms-of-sync" className="text-[8px] uppercase tracking-[0.2em] transition-colors font-black text-muted-foreground/40 hover:text-primary">Terms of Sync</Link>
             </div>
           </div>
         </div>
