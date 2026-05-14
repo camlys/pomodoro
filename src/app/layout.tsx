@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     default: 'Camly | High-Precision Pomodoro Timer & Productivity Tool',
     template: '%s | Camly'
   },
-  description: 'High-precision Pomodoro focus synchronization for deep work, professional productivity, and tactical planning. Experience the enterprise-grade focus engine.',
+  description: 'High-precision Pomodoro Timer for deep work, professional productivity, and tactical planning. Experience the enterprise-grade focus engine.',
   keywords: ['pomodoro timer', 'focus engine', 'productivity tools', 'deep work', 'tactical planning', 'camly pomodoro', 'professional timer'],
   authors: [{ name: 'Camly Operations Team' }],
   creator: 'Camly Inc',
@@ -32,7 +32,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'Camly | High-Precision Pomodoro Timer',
-    description: 'High-precision focus computation engines for professional use. Optimize your deep work velocity.',
+    description: 'High-precision Pomodoro Timer for professional use. Optimize your deep work velocity.',
     url: 'https://calculator.camly.org',
     siteName: 'Camly',
     locale: 'en_US',
@@ -49,7 +49,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Camly | High-Precision Pomodoro Timer',
-    description: 'Professional-grade focus utility engine with real-time synchronization. Master your flow.',
+    description: 'Professional-grade Pomodoro Timer with real-time synchronization. Master your flow.',
     creator: '@camly',
     images: ['/og-image.png'],
   },

@@ -1,12 +1,10 @@
-
 "use client";
 
 import React, { useState, useEffect, Suspense } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { 
-  Timer, Settings, BarChart3, 
-  Twitter, Globe, ChevronRight, FileText
+  Timer, Settings, FileText, ChevronRight
 } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Pomodoro, PomodoroSettings } from '@/components/chrono/Pomodoro';
@@ -19,7 +17,7 @@ const focusSchema = {
   "name": "Camly Pomodoro Timer",
   "applicationCategory": "ProductivityApplication",
   "operatingSystem": "All",
-  "description": "High-precision Pomodoro timer with AI-driven focus mantras and deep integration with the Camly engine for professional deep work.",
+  "description": "High-precision Pomodoro Timer with AI-driven focus mantras and deep integration with the Camly engine for professional deep work.",
   "offers": {
     "@type": "Offer",
     "price": "0",
@@ -135,7 +133,7 @@ function FocusPageContent() {
               <ul className="space-y-3 text-xs font-bold text-white/40">
                 <li className="hover:text-white transition-colors flex items-center gap-2">
                   <ChevronRight className="w-3 h-3 opacity-30" />
-                  <Link href="/focus">Focus Mode</Link>
+                  <Link href="/focus">Pomodoro Timer</Link>
                 </li>
                 <li className="hover:text-white transition-colors flex items-center gap-2">
                   <ChevronRight className="w-3 h-3 opacity-30" />

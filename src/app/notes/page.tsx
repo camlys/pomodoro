@@ -1,14 +1,13 @@
-
 "use client";
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { 
-  ArrowLeft, Search, Plus, Save, Trash2, 
-  FileText, Clock, ShieldCheck, Zap, 
+  ArrowLeft, Search, Plus, Trash2, 
+  FileText, Clock, ShieldCheck, 
   Terminal, Database, Globe, ChevronRight,
-  ExternalLink, Twitter, Bookmark
+  ExternalLink, Twitter
 } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -302,7 +301,7 @@ export default function NotesEngine() {
               <ul className="space-y-3 text-xs font-bold text-muted-foreground">
                 <li className="hover:text-primary transition-colors flex items-center gap-2">
                    <ChevronRight className="w-3 h-3 opacity-30" />
-                   <Link href="/focus">Focus Mode</Link>
+                   <Link href="/focus">Pomodoro Timer</Link>
                 </li>
                 <li className="hover:text-primary transition-colors flex items-center gap-2">
                    <ChevronRight className="w-3 h-3 opacity-30" />
