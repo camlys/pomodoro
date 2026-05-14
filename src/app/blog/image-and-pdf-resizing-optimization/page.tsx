@@ -16,7 +16,7 @@ import { Separator } from "@/components/ui/separator";
 const articleSchema = {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
-  "headline": "The Ultimate 8000-Word Guide to Image and PDF Resizing Optimization",
+  "headline": "The Ultimate Guide to Image and PDF Resizing Optimization",
   "image": "https://picsum.photos/seed/resizer-1/1200/630",
   "author": {
     "@type": "Organization",
@@ -32,7 +32,6 @@ const articleSchema = {
     }
   },
   "datePublished": "2024-06-05",
-  "wordCount": "8000",
   "description": "The definitive technical guide on image and PDF resizing science, SEO benefits, and enterprise optimization strategies."
 };
 
@@ -66,7 +65,6 @@ export default function ResizerArticle() {
           <div className="flex justify-center md:justify-start gap-2">
             <Badge className="bg-primary/10 text-primary border-primary/20">Digital Architecture</Badge>
             <Badge variant="outline">Enterprise Whitepaper</Badge>
-            <Badge variant="secondary">8000 Words</Badge>
           </div>
           <h1 className="text-4xl md:text-8xl font-black tracking-tighter leading-[0.9] md:leading-[0.8]">
             The Master <span className="text-primary">Resizing</span> & <span className="text-accent">Optimization</span> Protocol

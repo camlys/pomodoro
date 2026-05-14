@@ -30,7 +30,7 @@ const BLOG_POSTS = [
     category: "Chronology"
   },
   {
-    title: "The Ultimate 8000-Word Guide to Image and PDF Resizing",
+    title: "The Ultimate Guide to Image and PDF Resizing",
     description: "Master the art of digital asset management. Learn how high-precision resizing impacts SEO, web performance, and document integrity.",
     date: "June 05, 2024",
     author: "Camly Tech Ops",
