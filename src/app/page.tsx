@@ -14,9 +14,7 @@ export default function HomeRedirect() {
 
   return (
     <div className="min-h-screen bg-background flex items-center justify-center">
-      <div className="text-[10px] font-black uppercase tracking-[0.5em] opacity-20 animate-pulse">
-        Initializing Camly Engine...
-      </div>
+      {/* Loading text removed for a clean start */}
     </div>
   );
 }

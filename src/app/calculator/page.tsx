@@ -1,3 +1,4 @@
+
 "use client";
 
 import React, { useState, useEffect } from 'react';
@@ -10,7 +11,7 @@ import {
   Atom, Database, Layers, Globe, 
   Settings, Target, Network, Server,
   Compass, FlaskConical, BarChart3, ChevronRight, ExternalLink,
-  Github, Twitter
+  Twitter
 } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -490,7 +491,6 @@ export default function PrecisionCalculator() {
                 Camly Inc's flagship engine for professional and tactical time management.
               </p>
               <div className="flex gap-5">
-                <Button variant="ghost" size="icon" className="w-9 h-9 rounded-xl hover:bg-accent/10 shadow-sm border border-border/50"><Github className="w-4 h-4" /></Button>
                 <Button variant="ghost" size="icon" className="w-9 h-9 rounded-xl hover:bg-accent/10 shadow-sm border border-border/50"><Twitter className="w-4 h-4" /></Button>
                 <Button variant="ghost" size="icon" className="w-9 h-9 rounded-xl hover:bg-accent/10 shadow-sm border border-border/50"><Globe className="w-4 h-4" /></Button>
               </div>

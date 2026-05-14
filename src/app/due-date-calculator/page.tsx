@@ -1,3 +1,4 @@
+
 "use client";
 
 import React, { useState, useEffect, useRef } from 'react';
@@ -13,7 +14,7 @@ import {
   Flag, Download,
   Timer,
   Clock, Dna, Activity, Scaling, HeartPulse, Sparkles,
-  Github, Twitter, ChevronRight
+  Twitter, ChevronRight
 } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -759,7 +760,6 @@ export default function DueDateCalculator() {
                 Camly Inc's flagship engine for professional and tactical time management.
               </p>
               <div className="flex gap-5">
-                <Button variant="ghost" size="icon" className="w-9 h-9 rounded-xl hover:bg-accent/10 shadow-sm border border-border/50"><Github className="w-4 h-4" /></Button>
                 <Button variant="ghost" size="icon" className="w-9 h-9 rounded-xl hover:bg-accent/10 shadow-sm border border-border/50"><Twitter className="w-4 h-4" /></Button>
                 <Button variant="ghost" size="icon" className="w-9 h-9 rounded-xl hover:bg-accent/10 shadow-sm border border-border/50"><Globe className="w-4 h-4" /></Button>
               </div>

@@ -1,3 +1,4 @@
+
 "use client";
 
 import React, { useState, useEffect, Suspense } from 'react';
@@ -5,7 +6,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { 
   Timer, Settings, BarChart3, 
-  Github, Twitter, Globe, ChevronRight
+  Twitter, Globe, ChevronRight
 } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Pomodoro, PomodoroSettings } from '@/components/chrono/Pomodoro';
@@ -119,7 +120,6 @@ function FocusPageContent() {
                 Synchronize your workflow with absolute parity.
               </p>
               <div className="flex gap-5">
-                <Button variant="ghost" size="icon" className="w-9 h-9 rounded-xl hover:bg-white/10 border border-white/20"><Github className="w-4 h-4 text-white" /></Button>
                 <Button variant="ghost" size="icon" className="w-9 h-9 rounded-xl hover:bg-white/10 border border-white/20"><Twitter className="w-4 h-4 text-white" /></Button>
                 <Button variant="ghost" size="icon" className="w-9 h-9 rounded-xl hover:bg-white/10 border border-white/20"><Globe className="w-4 h-4 text-white" /></Button>
               </div>
@@ -176,7 +176,7 @@ function FocusPageContent() {
 
 export default function FocusPage() {
   return (
-    <Suspense fallback={<div className="min-h-screen bg-[#ba4949] flex items-center justify-center text-[10px] font-black uppercase tracking-widest text-white/20">Initializing Focus Engine...</div>}>
+    <Suspense fallback={<div className="min-h-screen bg-[#ba4949] flex items-center justify-center"></div>}>
       <FocusPageContent />
     </Suspense>
   );
