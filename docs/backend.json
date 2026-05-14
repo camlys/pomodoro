@@ -1,0 +1,48 @@
+
+{
+  "entities": {
+    "Note": {
+      "title": "Note",
+      "description": "A tactical log entry for capturing deep-work insights.",
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "The mission title for the log."
+        },
+        "content": {
+          "type": "string",
+          "description": "The core intelligence data captured in the log."
+        },
+        "category": {
+          "type": "string",
+          "description": "The broad classification of the log entry."
+        },
+        "tags": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Tactical tags for granular organization."
+        },
+        "isPinned": {
+          "type": "boolean",
+          "description": "Whether the note is marked as mission-critical."
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of the last coordinate synchronization."
+        }
+      },
+      "required": ["title", "content", "updatedAt"]
+    }
+  },
+  "auth": {
+    "providers": ["google.com"]
+  },
+  "firestore": {
+    "/notes/{noteId}": {
+      "schema": "#/backend/entities/Note",
+      "description": "Collection of tactical logs and intelligence data."
+    }
+  }
+}
