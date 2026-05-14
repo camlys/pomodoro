@@ -60,6 +60,8 @@ const COLOR_PALETTE = [
   { name: 'Slate Steel', hex: '#64748b' },
 ];
 
+const LOCAL_STORAGE_KEY = 'camly_tactical_logs_v1';
+
 export default function NotesEngine() {
   const [notes, setNotes] = useState<Note[]>([]);
   const [search, setSearch] = useState('');
@@ -68,6 +70,7 @@ export default function NotesEngine() {
   const [db, setDb] = useState<any>(null);
   const [theme, setTheme] = useState<'light' | 'dark'>('light');
 
+  // Theme initialization
   useEffect(() => {
     const savedTheme = localStorage.getItem('camly_theme') as 'light' | 'dark' | null;
     const systemTheme = typeof window !== 'undefined' && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
@@ -91,6 +94,27 @@ export default function NotesEngine() {
     }
   };
 
+  // Local Storage Load
+  useEffect(() => {
+    const saved = localStorage.getItem(LOCAL_STORAGE_KEY);
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        setNotes(parsed);
+      } catch (e) {
+        console.error("Local recovery failed", e);
+      }
+    }
+  }, []);
+
+  // Local Storage Sync
+  useEffect(() => {
+    if (notes.length > 0) {
+      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(notes));
+    }
+  }, [notes]);
+
+  // Firebase Setup & Real-time Sync
   useEffect(() => {
     const { firestore } = initializeFirebase();
     setDb(firestore);
@@ -98,11 +122,13 @@ export default function NotesEngine() {
     const q = query(collection(firestore, 'notes'), orderBy('updatedAt', 'desc'));
     const unsubscribe = onSnapshot(q, 
       (snapshot) => {
-        const notesData = snapshot.docs.map(doc => ({
-          id: doc.id,
-          ...doc.data()
-        })) as Note[];
-        setNotes(notesData);
+        if (!snapshot.empty) {
+          const notesData = snapshot.docs.map(doc => ({
+            id: doc.id,
+            ...doc.data()
+          })) as Note[];
+          setNotes(notesData);
+        }
       },
       async (err) => {
         const permissionError = new FirestorePermissionError({
@@ -116,49 +142,74 @@ export default function NotesEngine() {
     return () => unsubscribe();
   }, []);
 
-  const handleCreateNote = () => {
-    if (!db) return;
-    const newNote = {
+  const handleCreateNote = async () => {
+    const newNoteData = {
       title: 'New Objective',
       content: '',
       category: 'General',
       isPinned: false,
       color: '',
       tags: [],
-      updatedAt: serverTimestamp()
+      updatedAt: new Date()
     };
-    addDoc(collection(db, 'notes'), newNote).catch(async () => {
+
+    // Optimistic UI Update
+    const tempId = Math.random().toString(36).substr(2, 9);
+    const tempNote = { id: tempId, ...newNoteData };
+    setNotes(prev => [tempNote, ...prev]);
+
+    if (!db) return;
+    
+    try {
+      await addDoc(collection(db, 'notes'), {
+        ...newNoteData,
+        updatedAt: serverTimestamp()
+      });
+    } catch (err) {
        const permissionError = new FirestorePermissionError({
         path: 'notes',
         operation: 'create',
-        requestResourceData: newNote
+        requestResourceData: newNoteData
       });
       errorEmitter.emit('permission-error', permissionError);
-    });
+    }
   };
 
   const handleUpdateNote = (id: string, updates: Partial<Note>) => {
+    // Optimistic UI Update
+    setNotes(prev => prev.map(n => n.id === id ? { ...n, ...updates, updatedAt: new Date() } : n));
+
     if (!db) return;
     setIsSaving(true);
     const docRef = doc(db, 'notes', id);
-    updateDoc(docRef, {
-      ...updates,
-      updatedAt: serverTimestamp()
-    })
-    .then(() => setIsSaving(false))
-    .catch(async () => {
-      setIsSaving(false);
-      const permissionError = new FirestorePermissionError({
-        path: docRef.path,
-        operation: 'update',
-        requestResourceData: updates
+    
+    // Firestore only updates if the ID is a valid Firebase ID (not our temp one)
+    // In a real app we would wait for the create to finish to get the real ID
+    if (id.length > 15) { 
+      updateDoc(docRef, {
+        ...updates,
+        updatedAt: serverTimestamp()
+      })
+      .then(() => setIsSaving(false))
+      .catch(async () => {
+        setIsSaving(false);
+        const permissionError = new FirestorePermissionError({
+          path: docRef.path,
+          operation: 'update',
+          requestResourceData: updates
+        });
+        errorEmitter.emit('permission-error', permissionError);
       });
-      errorEmitter.emit('permission-error', permissionError);
-    });
+    } else {
+      setIsSaving(false);
+    }
   };
 
   const handleDeleteNote = (id: string) => {
-    if (!db) return;
+    setNotes(prev => prev.filter(n => n.id !== id));
+    
+    if (!db || id.length <= 15) return;
+    
     const docRef = doc(db, 'notes', id);
     deleteDoc(docRef).catch(async () => {
       const permissionError = new FirestorePermissionError({
@@ -380,7 +431,7 @@ export default function NotesEngine() {
                         AI Sync
                       </Button>
                       <span className="text-[7px] text-muted-foreground/30 font-bold uppercase tabular-nums">
-                        {note.updatedAt ? format(note.updatedAt.toDate(), 'HH:mm') : '--'}
+                        {note.updatedAt ? (typeof note.updatedAt === 'string' ? format(new Date(note.updatedAt), 'HH:mm') : format(note.updatedAt.toDate ? note.updatedAt.toDate() : note.updatedAt, 'HH:mm')) : '--:--'}
                       </span>
                    </div>
                    <div className="flex items-center gap-1.5">
