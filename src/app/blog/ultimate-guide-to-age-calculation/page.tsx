@@ -14,11 +14,11 @@ const articleSchema = {
   "image": "https://picsum.photos/seed/chrono-guide/1200/630",
   "author": {
     "@type": "Organization",
-    "name": "ChronoFlow Editorial"
+    "name": "Camly Editorial"
   },
   "publisher": {
     "@type": "Organization",
-    "name": "ChronoFlow",
+    "name": "Camly",
     "logo": {
       "@type": "ImageObject",
       "url": "https://calculator.camly.org/logo.png"
@@ -72,14 +72,14 @@ export default function UltimateGuideArticle() {
           <div className="pt-8">
             <Link href="/">
               <Button className="w-full h-14 bg-primary text-primary-foreground font-black text-sm uppercase tracking-widest rounded-2xl neon-glow">
-                Launch the ChronoFlow Engine
+                Launch the Camly Engine
               </Button>
             </Link>
           </div>
         </section>
 
         <footer className="mt-24 pt-12 border-t border-white/10">
-          <p className="text-sm font-bold">ChronoFlow Editorial Team</p>
+          <p className="text-sm font-bold">Camly Editorial Team</p>
         </footer>
       </article>
     </div>

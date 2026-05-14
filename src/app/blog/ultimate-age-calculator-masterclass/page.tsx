@@ -14,11 +14,11 @@ const articleSchema = {
   "image": "https://picsum.photos/seed/age-masterclass/1200/630",
   "author": {
     "@type": "Organization",
-    "name": "Chronos Engineering Group"
+    "name": "Camly Engineering Group"
   },
   "publisher": {
     "@type": "Organization",
-    "name": "ChronoFlow",
+    "name": "Camly",
     "logo": {
       "@type": "ImageObject",
       "url": "https://calculator.camly.org/logo.png"
@@ -73,7 +73,7 @@ export default function AgeCalculatorMasterclass() {
                 <BookOpen className="w-8 h-8" />
               </div>
               <div className="text-[12px] uppercase font-black tracking-[0.2em] text-left">
-                <div className="text-foreground">Chronos Engineering</div>
+                <div className="text-foreground">Camly Engineering</div>
                 <div className="text-muted-foreground">Temporal Intelligence Division</div>
               </div>
             </div>
@@ -113,8 +113,8 @@ export default function AgeCalculatorMasterclass() {
           <div className="flex flex-col md:flex-row justify-between items-center gap-16">
             <div className="space-y-4 text-center md:text-left">
               <p className="text-[14px] font-black uppercase tracking-[0.5em] text-primary">Chief Technical Architect</p>
-              <p className="text-3xl font-black">Chronos Engineering Group</p>
-              <p className="text-base text-muted-foreground">© 2024 Camly Inc • chronoflow.app</p>
+              <p className="text-3xl font-black">Camly Engineering Group</p>
+              <p className="text-base text-muted-foreground">© 2024 Camly Inc • camly.org</p>
             </div>
           </div>
         </footer>

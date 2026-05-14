@@ -18,7 +18,7 @@ const articleSchema = {
   },
   "publisher": {
     "@type": "Organization",
-    "name": "ChronoFlow",
+    "name": "Camly",
     "logo": {
       "@type": "ImageObject",
       "url": "https://calculator.camly.org/logo.png"
@@ -86,7 +86,7 @@ export default function AIRevolutionArticle() {
             For decades, personal utilities—calculators, calendars, unit converters—have been static. You provide an input, and the machine provides a deterministic output based on rigid arithmetic. While functional, these tools lacked <strong>context</strong> and <strong>empathy</strong>. 
           </p>
           <p>
-            Enter the era of Generative AI. We are witnessing a fundamental shift where the interface is no longer a passive recipient of data, but an active participant in the user's journey. At <strong>ChronoFlow</strong>, we utilize Genkit to bridge this gap, transforming a simple age calculation into a narrative experience.
+            Enter the era of Generative AI. We are witnessing a fundamental shift where the interface is no longer a passive recipient of data, but an active participant in the user's journey. At <strong>Camly</strong>, we utilize Genkit to bridge this gap, transforming a simple age calculation into a narrative experience.
           </p>
 
           <h2 className="text-2xl md:text-3xl font-black text-foreground tracking-tight">2. The Intelligence of Context</h2>
@@ -130,13 +130,13 @@ export default function AIRevolutionArticle() {
               <Lightbulb className="w-5 h-5" /> SEO Insight: Personalization Drives Engagement
             </h3>
             <p className="text-xs leading-relaxed opacity-80">
-              Apps that provide personalized AI content see a 40% higher retention rate. Users aren't just looking for "age calculators"; they are looking for "personal chronological dashboards." By targeting long-tail keywords around AI-driven personal insights, ChronoFlow dominates the niche.
+              Apps that provide personalized AI content see a 40% higher retention rate. Users aren't just looking for "age calculators"; they are looking for "personal chronological dashboards." By targeting long-tail keywords around AI-driven personal insights, Camly dominates the niche.
             </p>
           </div>
 
           <h2 className="text-2xl md:text-3xl font-black text-foreground tracking-tight">4. From Tool to Companion: The UX of the Future</h2>
           <p>
-            The future of utility design is <strong>invisible</strong>. We are moving toward a world where you don't "open an app" but "summon an insight." The ChronoFlow interface is a precursor to this, offering a high-definition dashboard that feels more like a control center for your life than a simple web page.
+            The future of utility design is <strong>invisible</strong>. We are moving toward a world where you don't "open an app" but "summon an insight." The Camly interface is a precursor to this, offering a high-definition dashboard that feels more like a control center for your life than a simple web page.
           </p>
           <p>
             Key components of this new UX include:
@@ -149,7 +149,7 @@ export default function AIRevolutionArticle() {
 
           <h2 className="text-2xl md:text-3xl font-black text-foreground tracking-tight">5. Ethical AI and Data Sovereignty</h2>
           <p>
-            As utilities become smarter, they handle more sensitive personal data. The revolution must be built on a foundation of trust. ChronoFlow's architecture prioritizes client-side processing and secure Firebase integration, ensuring that while the AI gets smarter, your privacy remains absolute.
+            As utilities become smarter, they handle more sensitive personal data. The revolution must be built on a foundation of trust. Camly's architecture prioritizes client-side processing and secure Firebase integration, ensuring that while the AI gets smarter, your privacy remains absolute.
           </p>
 
           <Separator className="my-12 opacity-10" />
@@ -157,7 +157,7 @@ export default function AIRevolutionArticle() {
           <div className="space-y-6">
             <h3 className="text-xl font-black text-foreground">Final Thoughts</h3>
             <p>
-              The revolution of personal utilities is not just about adding a chatbot to a website. It's about a fundamental rethinking of how software serves humanity. By leveraging <strong>ChronoFlow's</strong> high-precision engine and the creative power of Generative AI, we are defining the next decade of digital utility.
+              The revolution of personal utilities is not just about adding a chatbot to a website. It's about a fundamental rethinking of how software serves humanity. By leveraging <strong>Camly's</strong> high-precision engine and the creative power of Generative AI, we are defining the next decade of digital utility.
             </p>
             <div className="pt-8">
               <Link href="/">

@@ -18,7 +18,7 @@ const articleSchema = {
   },
   "publisher": {
     "@type": "Organization",
-    "name": "ChronoFlow",
+    "name": "Camly",
     "logo": {
       "@type": "ImageObject",
       "url": "https://calculator.camly.org/logo.png"
@@ -106,7 +106,7 @@ export default function PregnancyDueDateMasterclass() {
 
         <footer className="mt-48 pt-24 border-t border-border">
           <p className="text-3xl font-black">Clinical Operations Group</p>
-          <p className="text-base text-muted-foreground">© 2024 Camly Inc • calculator.camly.org</p>
+          <p className="text-base text-muted-foreground">© 2024 Camly Inc • camly.org</p>
         </footer>
       </article>
     </div>

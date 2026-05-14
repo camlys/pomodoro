@@ -1,4 +1,3 @@
-
 "use client";
 
 import React, { useState, useEffect, Suspense } from 'react';
@@ -88,6 +87,8 @@ function FocusPageContent() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
       
+      <InstallPWA variant="banner" />
+
       <nav className="relative z-50 h-14 flex items-center px-4 md:px-6 justify-between transition-colors duration-700 bg-black/5 border-b border-white/10">
         <div className="flex items-center gap-3">
           <Link href="/" className="flex items-center gap-3 group">

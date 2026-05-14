@@ -18,7 +18,7 @@ const articleSchema = {
   },
   "publisher": {
     "@type": "Organization",
-    "name": "ChronoFlow",
+    "name": "Camly",
     "logo": {
       "@type": "ImageObject",
       "url": "https://calculator.camly.org/logo.png"
@@ -76,7 +76,7 @@ export default function ZodiacHistoryArticle() {
         </section>
 
         <footer className="mt-32 pt-16 border-t border-border">
-          <p className="text-lg font-bold">ChronoFlow Cultural Research Group</p>
+          <p className="text-lg font-bold">Camly Cultural Research Group</p>
         </footer>
       </article>
     </div>
