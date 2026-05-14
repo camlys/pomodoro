@@ -2,7 +2,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { Play, Pause, RotateCcw, Brain, Zap, Target, Plus, Check, X, Settings, BarChart3, UserCircle, Clock, Volume2, Palette, Bell, Share2, ExternalLink, Lock, Info as InfoIcon, MousePointer2, Hourglass as HourglassIcon } from 'lucide-react';
+import { Play, Pause, RotateCcw, Brain, Zap, Target, Plus, Check, X, Settings, BarChart3, UserCircle, Clock, Volume2, Palette, Bell, Share2, ExternalLink, Lock, Info as InfoIcon, MousePointer2, Hourglass as HourglassIcon, Droplets } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Switch } from "@/components/ui/switch";
@@ -50,6 +50,7 @@ export type PomodoroSettings = {
   reminderTime: number;
   themeColor: string; 
   visualMode: 'clock' | 'hourglass';
+  hourglassType: 'sand' | 'water';
 };
 
 const DEFAULT_SETTINGS: PomodoroSettings = {
@@ -73,6 +74,7 @@ const DEFAULT_SETTINGS: PomodoroSettings = {
   reminderTime: 0,
   themeColor: '#ba4949', 
   visualMode: 'clock',
+  hourglassType: 'sand',
 };
 
 const ALARM_SOUNDS: Record<string, string> = {
@@ -89,23 +91,25 @@ const FOCUS_SOUNDS: Record<string, string> = {
 
 const CLICK_SOUND_URL = 'https://actions.google.com/sounds/v1/ui/button_click.ogg';
 
-interface PomodoroProps {
-  onModeChange?: (mode: TimerMode) => void;
-  onSettingsChange?: (settings: PomodoroSettings) => void;
-  onTimerActiveChange?: (isActive: boolean) => void;
-  isExternalSettingsOpen?: boolean;
-  onExternalSettingsOpenChange?: (open: boolean) => void;
+interface HourglassVisualProps {
+  timeLeft: number;
+  totalTime: number;
+  isActive: boolean;
+  type: 'sand' | 'water';
 }
 
-function HourglassVisual({ timeLeft, totalTime, isActive }: { timeLeft: number; totalTime: number; isActive: boolean }) {
+function HourglassVisual({ timeLeft, totalTime, isActive, type }: HourglassVisualProps) {
   const ratio = timeLeft / totalTime;
-  const topSandHeight = 40 * ratio;
-  const bottomSandHeight = 40 * (1 - ratio);
+  const topHeight = 40 * ratio;
+  const bottomHeight = 40 * (1 - ratio);
+  
+  const elementColor = type === 'sand' ? 'white' : '#00b4d8';
 
   return (
     <div className="flex flex-row items-center justify-center gap-4 sm:gap-8 md:gap-12 animate-in fade-in zoom-in duration-500 w-full px-2">
       <div className="relative w-28 h-40 sm:w-40 sm:h-56 md:w-48 md:h-64 flex items-center justify-center shrink-0">
         <svg viewBox="0 0 100 150" className="w-full h-full drop-shadow-2xl">
+          {/* Glass Top */}
           <path 
             d="M20,10 L80,10 L80,20 Q80,75 50,75 Q20,75 20,20 Z" 
             fill="none" 
@@ -113,6 +117,7 @@ function HourglassVisual({ timeLeft, totalTime, isActive }: { timeLeft: number; 
             strokeWidth="3" 
             className="opacity-30"
           />
+          {/* Glass Bottom */}
           <path 
             d="M20,140 L80,140 L80,130 Q80,75 50,75 Q20,75 20,130 Z" 
             fill="none" 
@@ -121,34 +126,45 @@ function HourglassVisual({ timeLeft, totalTime, isActive }: { timeLeft: number; 
             className="opacity-30"
           />
           
-          <clipPath id="topSandClip">
-            <rect x="0" y={75 - topSandHeight} width="100" height={topSandHeight} />
+          {/* Top Element (Falling) */}
+          <clipPath id="topClip">
+            <rect x="0" y={75 - topHeight} width="100" height={topHeight} />
           </clipPath>
           <path 
             d="M20,10 L80,10 L80,20 Q80,75 50,75 Q20,75 20,20 Z" 
-            fill="white" 
-            clipPath="url(#topSandClip)"
+            fill={elementColor} 
+            clipPath="url(#topClip)"
             className="transition-all duration-1000 ease-linear"
           />
 
-          <clipPath id="bottomSandClip">
-            <rect x="0" y={140 - bottomSandHeight} width="100" height={bottomSandHeight} />
+          {/* Bottom Element (Filling) */}
+          <clipPath id="bottomClip">
+            <rect x="0" y={140 - bottomHeight} width="100" height={bottomHeight} />
           </clipPath>
           <path 
             d="M20,140 L80,140 L80,130 Q80,75 50,75 Q20,75 20,130 Z" 
-            fill="white" 
-            clipPath="url(#bottomSandClip)"
+            fill={elementColor} 
+            clipPath="url(#bottomClip)"
             className="transition-all duration-1000 ease-linear"
           />
 
+          {/* Flow Effect */}
           {isActive && timeLeft > 0 && (
-            <line 
-              x1="50" y1="75" x2="50" y2="140" 
-              stroke="white" 
-              strokeWidth="2" 
-              strokeDasharray="4 4" 
-              className="animate-[dash_0.5s_linear_infinite]"
-            />
+            type === 'sand' ? (
+              <line 
+                x1="50" y1="75" x2="50" y2="140" 
+                stroke={elementColor} 
+                strokeWidth="2" 
+                strokeDasharray="4 4" 
+                className="animate-[dash_0.5s_linear_infinite]"
+              />
+            ) : (
+              <g className="animate-[drip_1s_linear_infinite]">
+                <circle cx="50" cy="80" r="2" fill={elementColor} />
+                <circle cx="50" cy="110" r="2" fill={elementColor} className="animate-[drip_1s_linear_infinite_0.3s]" />
+                <circle cx="50" cy="130" r="2" fill={elementColor} className="animate-[drip_1s_linear_infinite_0.6s]" />
+              </g>
+            )
           )}
         </svg>
       </div>
@@ -159,9 +175,12 @@ function HourglassVisual({ timeLeft, totalTime, isActive }: { timeLeft: number; 
       </div>
       <style jsx>{`
         @keyframes dash {
-          to {
-            stroke-dashoffset: -8;
-          }
+          to { stroke-dashoffset: -8; }
+        }
+        @keyframes drip {
+          0% { transform: translateY(-10px); opacity: 0; }
+          30% { opacity: 1; }
+          100% { transform: translateY(40px); opacity: 0; }
         }
       `}</style>
     </div>
@@ -428,7 +447,7 @@ export function Pomodoro({ onModeChange, onSettingsChange, onTimerActiveChange, 
 
     if (!isActive) {
       const duration = mode === 'work' ? newSettings.workDuration : 
-                       mode === 'short-break' ? newSettings.shortBreakDuration : 
+                       newSettings.shortBreakDuration ? newSettings.shortBreakDuration : 
                        newSettings.longBreakDuration;
       setTimeLeft(duration * 60);
     }
@@ -503,7 +522,7 @@ export function Pomodoro({ onModeChange, onSettingsChange, onTimerActiveChange, 
                 {formatTime(timeLeft)}
               </div>
             ) : (
-              <HourglassVisual timeLeft={timeLeft} totalTime={totalSeconds} isActive={isActive} />
+              <HourglassVisual timeLeft={timeLeft} totalTime={totalSeconds} isActive={isActive} type={settings.hourglassType} />
             )}
           </div>
 
@@ -823,6 +842,29 @@ export function Pomodoro({ onModeChange, onSettingsChange, onTimerActiveChange, 
                       </SelectContent>
                     </Select>
                   </div>
+
+                  {settings.visualMode === 'hourglass' && (
+                    <div className="flex items-center justify-between">
+                      <Label className="text-xs font-bold text-muted-foreground/80">Flow Element</Label>
+                      <Select value={settings.hourglassType} onValueChange={(v: 'sand' | 'water') => updateSettings({...settings, hourglassType: v})}>
+                        <SelectTrigger className="w-[140px] bg-muted border-none text-xs font-bold">
+                          <SelectValue />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="sand">
+                            <div className="flex items-center gap-2">
+                              <HourglassIcon className="w-3.5 h-3.5" /> Sand
+                            </div>
+                          </SelectItem>
+                          <SelectItem value="water">
+                            <div className="flex items-center gap-2">
+                              <Droplets className="w-3.5 h-3.5" /> Water
+                            </div>
+                          </SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  )}
 
                   <div className="flex items-center justify-between">
                     <Label className="text-xs font-bold text-muted-foreground/80">Hour Format</Label>
