@@ -1,10 +1,11 @@
+
 import { MetadataRoute } from 'next';
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: 'Camly | High-Precision Chronological Engine',
+    name: 'Camly | High-Precision Tactical Tools',
     short_name: 'Camly',
-    description: 'Professional high-precision age calculator, scientific ALU, and clinical due date engine.',
+    description: 'Professional scientific ALU, clinical due date engine, and high-precision Pomodoro focus tool.',
     start_url: '/',
     display: 'standalone',
     background_color: '#ffffff',

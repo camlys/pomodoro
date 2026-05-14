@@ -1,3 +1,4 @@
+
 import type {Metadata, Viewport} from 'next';
 import './globals.css';
 
@@ -12,11 +13,11 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL('https://calculator.camly.org'),
   title: {
-    default: 'Camly | Premium Age Calculator & Chronology Engine',
+    default: 'Camly | High-Precision Tactical Tools',
     template: '%s | Camly'
   },
-  description: 'A high-precision age and date difference calculator. Features real-time tracking, zodiac mapping, and AI-driven chronological insights.',
-  keywords: ['age calculator', 'date difference', 'birthday countdown', 'chronological engine', 'time tracker', 'precision calculator', 'zodiac sign calculator', 'due date engine', 'pregnancy calculator'],
+  description: 'A suite of high-precision chronological and mathematical engines. Features professional scientific calculation, clinical due date planning, and Pomodoro focus synchronization.',
+  keywords: ['scientific calculator', 'due date engine', 'pomodoro timer', 'focus engine', 'precision calculator', 'chronological engine', 'tactical planning', 'productivity tools'],
   authors: [{ name: 'Camly Operations Team' }],
   creator: 'Camly Inc',
   publisher: 'Camly Inc',
@@ -31,8 +32,8 @@ export const metadata: Metadata = {
     title: 'Camly',
   },
   openGraph: {
-    title: 'Camly | Premium Age Calculator',
-    description: 'High-precision chronological computation engine for professional and tactical use.',
+    title: 'Camly | High-Precision Tactical Tools',
+    description: 'High-precision chronological and mathematical computation engines for professional use.',
     url: 'https://calculator.camly.org',
     siteName: 'Camly',
     locale: 'en_US',
@@ -40,8 +41,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Camly | Premium Age Calculator',
-    description: 'High-precision chronological computation engine with real-time tracking.',
+    title: 'Camly | High-Precision Tactical Tools',
+    description: 'Professional-grade utility engines with real-time synchronization.',
     creator: '@camly',
   },
   robots: {

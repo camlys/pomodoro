@@ -1,3 +1,4 @@
+
 "use client";
 
 import React, { useState } from 'react';
@@ -19,15 +20,6 @@ const BLOG_POSTS = [
     readTime: "180 min read",
     slug: "/blog/ultimate-pregnancy-due-date-masterclass",
     category: "Clinical Masterclass"
-  },
-  {
-    title: "The 9000-Word Masterclass on Age Calculation",
-    description: "The definitive enterprise-grade guide to high-precision chronology, algorithmic aging, and the future of temporal tracking.",
-    date: "August 01, 2024",
-    author: "Chronos Engineering",
-    readTime: "180 min read",
-    slug: "/blog/ultimate-age-calculator-masterclass",
-    category: "Masterclass"
   },
   {
     title: "The Enterprise Blueprint for Digital Asset Velocity",
@@ -70,7 +62,7 @@ const BLOG_POSTS = [
 const blogSchema = {
   "@context": "https://schema.org",
   "@type": "Blog",
-  "name": "ChronoFlow Insights Hub",
+  "name": "Camly Insights Hub",
   "description": "Expert insights on file optimization, chronological precision, and the evolution of digital utility tools.",
   "publisher": {
     "@type": "Organization",
@@ -135,7 +127,7 @@ export default function BlogHub() {
             CAMLY <span className="text-foreground/50 font-normal ml-2">INSIGHTS</span>
           </h1>
         </Link>
-        <Link href="/">
+        <Link href="/focus">
           <Button variant="ghost" size="sm" className="rounded-full text-xs gap-2">
             <ArrowLeft className="w-3 h-3" /> Back to App
           </Button>
@@ -251,10 +243,6 @@ export default function BlogHub() {
                 <li className="hover:text-primary transition-colors flex items-center gap-2">
                    <ChevronRight className="w-3 h-3 opacity-30" />
                    <Link href="/focus">Pomodoro Focus</Link>
-                </li>
-                <li className="hover:text-primary transition-colors flex items-center gap-2">
-                   <ChevronRight className="w-3 h-3 opacity-30" />
-                   <Link href="/">Age Calculator</Link>
                 </li>
               </ul>
             </div>

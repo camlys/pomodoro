@@ -1,3 +1,4 @@
+
 "use client";
 
 import React, { useState, useEffect, Suspense } from 'react';
@@ -57,8 +58,6 @@ function FocusPageContent() {
     const baseColor = pomodoroSettings?.themeColor || '#ba4949';
     return { backgroundColor: baseColor };
   };
-
-  const isFocusModeDark = (isTimerActive && pomodoroSettings?.darkModeWhenRunning) || theme === 'dark';
 
   return (
     <div 
@@ -172,13 +171,11 @@ function FocusPageContent() {
                 value="focus"
                 className="w-full" 
                 onValueChange={(v) => {
-                  if (v === 'age') router.push('/');
                   if (v === 'calculator') router.push('/calculator');
                   if (v === 'due-date') router.push('/due-date-calculator');
                 }}
               >
-                <TabsList className="grid w-full grid-cols-4 mb-6 rounded-xl h-10 bg-white/10">
-                  <TabsTrigger value="age" className="text-[9px] md:text-[10px] font-black uppercase tracking-widest">Age</TabsTrigger>
+                <TabsList className="grid w-full grid-cols-3 mb-6 rounded-xl h-10 bg-white/10">
                   <TabsTrigger value="focus" className="text-[9px] md:text-[10px] font-black uppercase tracking-widest">Focus</TabsTrigger>
                   <TabsTrigger value="calculator" className="text-[9px] md:text-[10px] font-black uppercase tracking-widest">Calc</TabsTrigger>
                   <TabsTrigger value="due-date" className="text-[9px] md:text-[10px] font-black uppercase tracking-widest">Due</TabsTrigger>
@@ -235,10 +232,6 @@ function FocusPageContent() {
                 <li className="hover:text-white transition-colors flex items-center gap-2">
                   <ChevronRight className="w-3 h-3 opacity-30" />
                   <Link href="/focus">Focus Mode</Link>
-                </li>
-                <li className="hover:text-white transition-colors flex items-center gap-2">
-                   <ChevronRight className="w-3 h-3 opacity-30" />
-                   <Link href="/">Age Calculator</Link>
                 </li>
               </ul>
             </div>

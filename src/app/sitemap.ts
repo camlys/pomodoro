@@ -1,3 +1,4 @@
+
 import { MetadataRoute } from 'next';
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -5,13 +6,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
   
   const blogPosts = [
     'ultimate-pregnancy-due-date-masterclass',
-    'ultimate-age-calculator-masterclass',
     'digital-asset-velocity-enterprise-guide',
     'global-time-synchronization-standards',
     'image-and-pdf-resizing-optimization',
-    'ai-revolution-personal-utilities',
-    'zodiac-symbols-history-of-time',
-    'ultimate-guide-to-age-calculation'
+    'ai-revolution-personal-utilities'
   ];
 
   const routes = [

@@ -1,3 +1,4 @@
+
 "use client";
 
 import React, { useState, useEffect, useRef } from 'react';
@@ -418,9 +419,9 @@ export default function DueDateCalculator() {
           <Badge variant="outline" className="hidden min-[480px]:flex border-accent/20 text-accent uppercase tracking-widest text-[8px] px-3 h-6 items-center gap-1.5 font-bold">
             <div className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" /> IST SYNCED
           </Badge>
-          <Link href="/">
+          <Link href="/focus">
             <Button variant="ghost" size="sm" className="rounded-full text-[8px] md:text-[10px] font-black uppercase tracking-widest gap-2">
-              <ArrowLeft className="w-3 h-3" /> Back
+              <ArrowLeft className="w-3 h-3" /> Hub
             </Button>
           </Link>
         </div>
@@ -847,10 +848,6 @@ export default function DueDateCalculator() {
                 <li className="hover:text-primary transition-colors flex items-center gap-2">
                    <ChevronRight className="w-3 h-3 opacity-30" />
                    <Link href="/focus">Pomodoro Focus</Link>
-                </li>
-                <li className="hover:text-primary transition-colors flex items-center gap-2">
-                   <ChevronRight className="w-3 h-3 opacity-30" />
-                   <Link href="/">Age Calculator</Link>
                 </li>
               </ul>
             </div>

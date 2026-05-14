@@ -1,3 +1,4 @@
+
 "use client";
 
 import React, { useState, useEffect } from 'react';
@@ -265,15 +266,16 @@ export default function PrecisionCalculator() {
               camly.org <ExternalLink className="w-3 h-3" />
             </Button>
           </Link>
-          <Link href="/">
+          <Link href="/focus">
             <Button variant="ghost" size="sm" className="rounded-full text-[8px] md:text-[10px] font-black uppercase tracking-widest gap-2 h-8 px-2 md:px-3">
-              <ArrowLeft className="w-3 h-3" /> <span className="inline">Back</span>
+              <ArrowLeft className="w-3 h-3" /> <span className="inline">Hub</span>
             </Button>
           </Link>
         </div>
       </nav>
 
       <main className="flex-grow container max-w-6xl mx-auto px-4 py-8 md:py-16">
+        {/* Main ALU content stays the same */}
         <div className="flex flex-col md:flex-row items-center md:items-start justify-center gap-8 lg:gap-20">
           
           <div className="flex-grow max-w-md text-center md:text-left space-y-6 pt-4 order-2 md:order-1">
@@ -438,7 +440,7 @@ export default function PrecisionCalculator() {
           </div>
         </div>
 
-        {/* Rich Content Sections */}
+        {/* Informational content sections remain consistent with operational tools */}
         <div className="mt-32 space-y-40">
           <section className="space-y-20">
             <div className="text-center space-y-4">
@@ -578,10 +580,6 @@ export default function PrecisionCalculator() {
                 <li className="hover:text-primary transition-colors flex items-center gap-2">
                    <ChevronRight className="w-3 h-3 opacity-30" />
                    <Link href="/focus">Pomodoro Focus</Link>
-                </li>
-                <li className="hover:text-primary transition-colors flex items-center gap-2">
-                   <ChevronRight className="w-3 h-3 opacity-30" />
-                   <Link href="/">Age Calculator</Link>
                 </li>
               </ul>
             </div>
