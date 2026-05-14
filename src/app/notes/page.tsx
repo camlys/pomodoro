@@ -8,7 +8,7 @@ import {
   ArrowLeft, Search, Plus, Trash2, 
   FileText, Clock, ShieldCheck, 
   Terminal, Database, Pin, PinOff,
-  Sparkles, Hash, Loader2, LayoutGrid, X,
+  Sparkles, Hash, Loader2, X,
   ChevronRight, Sun, Moon, Palette, Check
 } from 'lucide-react';
 import { Button } from "@/components/ui/button";
@@ -70,7 +70,7 @@ export default function NotesEngine() {
 
   useEffect(() => {
     const savedTheme = localStorage.getItem('camly_theme') as 'light' | 'dark' | null;
-    const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    const systemTheme = typeof window !== 'undefined' && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
     const initialTheme = savedTheme || systemTheme;
     setTheme(initialTheme);
     if (initialTheme === 'dark') {
@@ -240,16 +240,7 @@ export default function NotesEngine() {
       </nav>
 
       <main className="flex-grow container max-w-[1800px] mx-auto px-4 py-8 flex flex-col gap-6">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="space-y-1">
-             <h2 className="text-xl md:text-2xl font-black tracking-tighter flex items-center gap-3">
-               <LayoutGrid className="w-5 h-5 text-primary" /> Intelligence Dashboard
-             </h2>
-             <p className="text-[10px] text-muted-foreground font-medium uppercase tracking-widest">
-               Real-time editing across {notes.length} tactical logs
-             </p>
-          </div>
-          
+        <div className="flex flex-col md:flex-row items-center justify-end gap-6">
           <div className="flex items-center gap-3 w-full md:w-auto">
             <div className="relative flex-grow md:w-64">
               <Search className="absolute left-3 top-2.5 w-3.5 h-3.5 text-muted-foreground" />
