@@ -10,10 +10,10 @@ import {
   Database, Globe,
   ExternalLink, Workflow, 
   Briefcase, Baby, Microscope, Stethoscope,
-  Flag, LayoutGrid, Download,
+  Flag, Download,
   Timer,
   Clock, Dna, Activity, Scaling, HeartPulse, Sparkles,
-  FileType, Github, Twitter, ChevronRight
+  Github, Twitter, ChevronRight
 } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -30,14 +30,6 @@ import { cn } from '@/lib/utils';
 import { addDays, addWeeks, addMonths, format, differenceInDays, isWeekend, addBusinessDays, isValid, getQuarter, getDayOfYear, getISOWeek, differenceInHours, differenceInMinutes, differenceInSeconds } from 'date-fns';
 import { getZodiacSign } from '@/lib/date-utils';
 import { toPng } from 'html-to-image';
-import { 
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 
 const dueDateSchema = {
   "@context": "https://schema.org",
@@ -355,55 +347,6 @@ export default function DueDateCalculator() {
         </div>
 
         <div className="flex items-center gap-2">
-           <DropdownMenu>
-             <DropdownMenuTrigger asChild>
-               <Button 
-                 variant="ghost" 
-                 className="rounded-full text-[8px] md:text-[10px] font-black uppercase tracking-[0.1em] md:tracking-[0.2em] gap-1.5 md:gap-2.5 transition-all group hover:bg-primary/5 text-primary/60 hover:text-primary"
-               >
-                 <LayoutGrid className="w-3.5 h-3.5 group-hover:rotate-12 transition-transform" />
-                 <span className="hidden min-[480px]:inline">Operational Tools</span>
-               </Button>
-             </DropdownMenuTrigger>
-             <DropdownMenuContent align="end" className="w-56 glass border-border/40 backdrop-blur-xl">
-               <DropdownMenuItem asChild className="cursor-pointer focus:bg-primary/5 rounded-lg m-1 mb-0">
-                 <Link href="https://camly.org" target="_blank" className="flex items-center gap-3 w-full px-2 py-2">
-                    <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
-                      <FileType className="w-4 h-4 text-primary" />
-                    </div>
-                    <div className="flex flex-col">
-                      <span className="text-[10px] font-black uppercase tracking-widest text-primary">camly.org</span>
-                      <span className="text-[7px] font-bold text-muted-foreground uppercase">Image & PDF Resizer</span>
-                    </div>
-                    <ExternalLink className="w-2.5 h-2.5 ml-auto opacity-30" />
-                 </Link>
-               </DropdownMenuItem>
-               <DropdownMenuSeparator className="bg-border/10 mx-2" />
-               <DropdownMenuItem asChild className="cursor-pointer focus:bg-accent/10 rounded-lg m-1">
-                 <Link href="/due-date-calculator" className="flex items-center gap-3 w-full px-2 py-2">
-                   <div className="w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center">
-                     <CalendarDays className="w-4 h-4 text-accent" />
-                   </div>
-                   <div className="flex flex-col">
-                     <span className="text-[10px] font-black uppercase tracking-widest text-foreground">Due Date</span>
-                     <span className="text-[8px] font-bold text-muted-foreground uppercase">Tactical Planning</span>
-                   </div>
-                 </Link>
-               </DropdownMenuItem>
-               <DropdownMenuItem asChild className="cursor-pointer focus:bg-primary/10 rounded-lg m-1">
-                 <Link href="/focus" className="flex items-center gap-3 w-full px-2 py-2">
-                   <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
-                     <Timer className="w-4 h-4 text-primary" />
-                   </div>
-                   <div className="flex flex-col">
-                     <span className="text-[10px] font-black uppercase tracking-widest text-foreground">Focus Mode</span>
-                     <span className="text-[8px] font-bold text-muted-foreground uppercase">Pomodoro</span>
-                   </div>
-                 </Link>
-               </DropdownMenuItem>
-             </DropdownMenuContent>
-           </DropdownMenu>
-
           <Badge variant="outline" className="hidden min-[480px]:flex border-accent/20 text-accent uppercase tracking-widest text-[8px] px-3 h-6 items-center gap-1.5 font-bold">
             <div className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" /> IST SYNCED
           </Badge>

@@ -1,4 +1,3 @@
-
 "use client";
 
 import React, { useState, useEffect } from 'react';
@@ -11,21 +10,13 @@ import {
   Atom, Database, Layers, Globe, 
   Settings, Target, Network, Server,
   Compass, FlaskConical, BarChart3, ChevronRight, ExternalLink,
-  LayoutGrid, Calculator as CalcIcon, CalendarDays, FileType, Github, Twitter
+  Github, Twitter
 } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { InstallPWA } from '@/components/chrono/InstallPWA';
 import { cn } from '@/lib/utils';
-import { 
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 
 const calculatorSchema = {
   "@context": "https://schema.org",
@@ -201,66 +192,6 @@ export default function PrecisionCalculator() {
         </div>
 
         <div className="flex items-center gap-2">
-           <DropdownMenu>
-             <DropdownMenuTrigger asChild>
-               <Button 
-                 variant="ghost" 
-                 className="rounded-full text-[8px] md:text-[10px] font-black uppercase tracking-[0.1em] md:tracking-[0.2em] gap-1.5 md:gap-2.5 transition-all group hover:bg-primary/5 text-primary/60 hover:text-primary"
-               >
-                 <LayoutGrid className="w-3.5 h-3.5 group-hover:rotate-12 transition-transform" />
-                 <span className="hidden min-[480px]:inline">Operational Tools</span>
-               </Button>
-             </DropdownMenuTrigger>
-             <DropdownMenuContent align="end" className="w-56 glass border-border/40 backdrop-blur-xl">
-               <DropdownMenuItem asChild className="cursor-pointer focus:bg-primary/5 rounded-lg m-1 mb-0">
-                 <Link href="https://camly.org" target="_blank" className="flex items-center gap-3 w-full px-2 py-2">
-                    <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
-                      <FileType className="w-4 h-4 text-primary" />
-                    </div>
-                    <div className="flex flex-col">
-                      <span className="text-[10px] font-black uppercase tracking-widest text-primary">camly.org</span>
-                      <span className="text-[7px] font-bold text-muted-foreground uppercase">Image & PDF Resizer</span>
-                    </div>
-                    <ExternalLink className="w-2.5 h-2.5 ml-auto opacity-30" />
-                 </Link>
-               </DropdownMenuItem>
-               <DropdownMenuSeparator className="bg-border/10 mx-2" />
-               <DropdownMenuItem asChild className="cursor-pointer focus:bg-primary/10 rounded-lg m-1">
-                 <Link href="/calculator" className="flex items-center gap-3 w-full px-2 py-2">
-                   <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
-                     <CalcIcon className="w-4 h-4 text-primary" />
-                   </div>
-                   <div className="flex flex-col">
-                     <span className="text-[10px] font-black uppercase tracking-widest text-foreground">Calculator</span>
-                     <span className="text-[8px] font-bold text-muted-foreground uppercase">Precision ALU</span>
-                   </div>
-                 </Link>
-               </DropdownMenuItem>
-               <DropdownMenuItem asChild className="cursor-pointer focus:bg-accent/10 rounded-lg m-1">
-                 <Link href="/due-date-calculator" className="flex items-center gap-3 w-full px-2 py-2">
-                   <div className="w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center">
-                     <CalendarDays className="w-4 h-4 text-accent" />
-                   </div>
-                   <div className="flex flex-col">
-                     <span className="text-[10px] font-black uppercase tracking-widest text-foreground">Due Date</span>
-                     <span className="text-[8px] font-bold text-muted-foreground uppercase">Tactical Planning</span>
-                   </div>
-                 </Link>
-               </DropdownMenuItem>
-               <DropdownMenuItem asChild className="cursor-pointer focus:bg-primary/10 rounded-lg m-1">
-                 <Link href="/focus" className="flex items-center gap-3 w-full px-2 py-2">
-                   <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
-                     <Timer className="w-4 h-4 text-primary" />
-                   </div>
-                   <div className="flex flex-col">
-                     <span className="text-[10px] font-black uppercase tracking-widest text-foreground">Focus Mode</span>
-                     <span className="text-[8px] font-bold text-muted-foreground uppercase">Pomodoro</span>
-                   </div>
-                 </Link>
-               </DropdownMenuItem>
-             </DropdownMenuContent>
-           </DropdownMenu>
-
           <Link href="https://camly.org" target="_blank">
             <Button variant="ghost" size="sm" className="hidden lg:flex rounded-full text-[10px] font-black uppercase tracking-widest gap-2 h-8 px-4 border border-transparent hover:border-primary/20 transition-all">
               camly.org <ExternalLink className="w-3 h-3" />
@@ -275,7 +206,6 @@ export default function PrecisionCalculator() {
       </nav>
 
       <main className="flex-grow container max-w-6xl mx-auto px-4 py-8 md:py-16">
-        {/* Main ALU content stays the same */}
         <div className="flex flex-col md:flex-row items-center md:items-start justify-center gap-8 lg:gap-20">
           
           <div className="flex-grow max-w-md text-center md:text-left space-y-6 pt-4 order-2 md:order-1">
