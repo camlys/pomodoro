@@ -104,57 +104,64 @@ function HourglassVisual({ timeLeft, totalTime, isActive }: { timeLeft: number; 
   const bottomSandHeight = 40 * (1 - ratio);
 
   return (
-    <div className="relative w-48 h-64 flex items-center justify-center animate-in fade-in zoom-in duration-500">
-      <svg viewBox="0 0 100 150" className="w-full h-full drop-shadow-2xl">
-        {/* Hourglass Frame */}
-        <path 
-          d="M20,10 L80,10 L80,20 Q80,75 50,75 Q20,75 20,20 Z" 
-          fill="none" 
-          stroke="white" 
-          strokeWidth="3" 
-          className="opacity-30"
-        />
-        <path 
-          d="M20,140 L80,140 L80,130 Q80,75 50,75 Q20,75 20,130 Z" 
-          fill="none" 
-          stroke="white" 
-          strokeWidth="3" 
-          className="opacity-30"
-        />
-        
-        {/* Top Sand */}
-        <clipPath id="topSandClip">
-          <rect x="0" y={75 - topSandHeight} width="100" height={topSandHeight} />
-        </clipPath>
-        <path 
-          d="M20,10 L80,10 L80,20 Q80,75 50,75 Q20,75 20,20 Z" 
-          fill="white" 
-          clipPath="url(#topSandClip)"
-          className="transition-all duration-1000 ease-linear"
-        />
-
-        {/* Bottom Sand */}
-        <clipPath id="bottomSandClip">
-          <rect x="0" y={140 - bottomSandHeight} width="100" height={bottomSandHeight} />
-        </clipPath>
-        <path 
-          d="M20,140 L80,140 L80,130 Q80,75 50,75 Q20,75 20,130 Z" 
-          fill="white" 
-          clipPath="url(#bottomSandClip)"
-          className="transition-all duration-1000 ease-linear"
-        />
-
-        {/* Sand Stream */}
-        {isActive && timeLeft > 0 && (
-          <line 
-            x1="50" y1="75" x2="50" y2="140" 
+    <div className="flex flex-row items-center gap-12 animate-in fade-in zoom-in duration-500">
+      <div className="relative w-48 h-64 flex items-center justify-center">
+        <svg viewBox="0 0 100 150" className="w-full h-full drop-shadow-2xl">
+          {/* Hourglass Frame */}
+          <path 
+            d="M20,10 L80,10 L80,20 Q80,75 50,75 Q20,75 20,20 Z" 
+            fill="none" 
             stroke="white" 
-            strokeWidth="2" 
-            strokeDasharray="4 4" 
-            className="animate-[dash_0.5s_linear_infinite]"
+            strokeWidth="3" 
+            className="opacity-30"
           />
-        )}
-      </svg>
+          <path 
+            d="M20,140 L80,140 L80,130 Q80,75 50,75 Q20,75 20,130 Z" 
+            fill="none" 
+            stroke="white" 
+            strokeWidth="3" 
+            className="opacity-30"
+          />
+          
+          {/* Top Sand */}
+          <clipPath id="topSandClip">
+            <rect x="0" y={75 - topSandHeight} width="100" height={topSandHeight} />
+          </clipPath>
+          <path 
+            d="M20,10 L80,10 L80,20 Q80,75 50,75 Q20,75 20,20 Z" 
+            fill="white" 
+            clipPath="url(#topSandClip)"
+            className="transition-all duration-1000 ease-linear"
+          />
+
+          {/* Bottom Sand */}
+          <clipPath id="bottomSandClip">
+            <rect x="0" y={140 - bottomSandHeight} width="100" height={bottomSandHeight} />
+          </clipPath>
+          <path 
+            d="M20,140 L80,140 L80,130 Q80,75 50,75 Q20,75 20,130 Z" 
+            fill="white" 
+            clipPath="url(#bottomSandClip)"
+            className="transition-all duration-1000 ease-linear"
+          />
+
+          {/* Sand Stream */}
+          {isActive && timeLeft > 0 && (
+            <line 
+              x1="50" y1="75" x2="50" y2="140" 
+              stroke="white" 
+              strokeWidth="2" 
+              strokeDasharray="4 4" 
+              className="animate-[dash_0.5s_linear_infinite]"
+            />
+          )}
+        </svg>
+      </div>
+      <div className="flex flex-col items-start justify-center min-w-[200px]">
+        <span className="text-7xl md:text-9xl font-black text-white drop-shadow-2xl tabular-nums tracking-tighter">
+          {Math.floor(timeLeft / 60)}:{(timeLeft % 60).toString().padStart(2, '0')}
+        </span>
+      </div>
       <style jsx>{`
         @keyframes dash {
           to {
@@ -162,11 +169,6 @@ function HourglassVisual({ timeLeft, totalTime, isActive }: { timeLeft: number; 
           }
         }
       `}</style>
-      <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-        <span className="text-2xl font-black text-white/80 drop-shadow-md">
-          {Math.floor(timeLeft / 60)}:{(timeLeft % 60).toString().padStart(2, '0')}
-        </span>
-      </div>
     </div>
   );
 }
@@ -488,7 +490,7 @@ export function Pomodoro({ onModeChange, onSettingsChange, onTimerActiveChange, 
   return (
     <div className="w-full max-w-6xl mx-auto flex flex-col lg:flex-row gap-8 items-start justify-center py-4 animate-in fade-in duration-500">
       
-      <div className="w-full lg:w-[540px] space-y-6">
+      <div className="w-full lg:w-[700px] space-y-6">
         <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 md:p-10 flex flex-col items-center transition-all duration-500 shadow-2xl relative overflow-hidden">
           <div className="absolute top-0 left-0 w-full h-1.5 bg-black/10">
             <div 
@@ -503,7 +505,7 @@ export function Pomodoro({ onModeChange, onSettingsChange, onTimerActiveChange, 
             <button onClick={() => changeMode('long-break')} className={cn("px-3 py-1.5 rounded-md text-xs md:text-sm font-bold transition-all text-white", mode === 'long-break' ? "bg-black/15" : "hover:bg-black/5")}>Long Break</button>
           </div>
 
-          <div className="flex flex-col items-center min-h-[160px] md:min-h-[200px] justify-center">
+          <div className="flex flex-col items-center min-h-[160px] md:min-h-[200px] justify-center w-full">
             {settings.visualMode === 'clock' ? (
               <div className="text-[100px] sm:text-[130px] md:text-[160px] leading-none font-black text-white tabular-nums select-none tracking-tight animate-in fade-in zoom-in duration-500">
                 {formatTime(timeLeft)}
@@ -513,19 +515,21 @@ export function Pomodoro({ onModeChange, onSettingsChange, onTimerActiveChange, 
             )}
           </div>
 
-          <div className="w-full max-w-xs mb-10 px-4 mt-6">
-             <div className="flex justify-between text-[10px] font-black uppercase tracking-widest text-white/40 mb-2">
-                <span>Progress</span>
-                <span>{Math.round(progressPercent)}%</span>
-             </div>
-             <Progress 
-                value={progressPercent} 
-                className="h-2 bg-black/20"
-                style={{ "--progress-foreground": "white" } as any}
-             />
-          </div>
+          {settings.visualMode === 'clock' && (
+            <div className="w-full max-w-xs mb-10 px-4 mt-6">
+               <div className="flex justify-between text-[10px] font-black uppercase tracking-widest text-white/40 mb-2">
+                  <span>Progress</span>
+                  <span>{Math.round(progressPercent)}%</span>
+               </div>
+               <Progress 
+                  value={progressPercent} 
+                  className="h-2 bg-black/20"
+                  style={{ "--progress-foreground": "white" } as any}
+               />
+            </div>
+          )}
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4 mt-6">
             <button
               onClick={toggleTimer}
               style={{ color: settings.themeColor }}
