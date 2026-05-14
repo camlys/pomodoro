@@ -267,13 +267,15 @@ export default function NotesEngine() {
                    </div>
                 </div>
 
-                <div className="space-y-2 flex-grow flex flex-col">
-                   <Input 
-                      value={note.title}
-                      onChange={(e) => handleUpdateNote(note.id, { title: e.target.value })}
-                      className="text-sm font-black tracking-tight bg-transparent border-none p-0 h-auto focus:ring-0 placeholder:text-muted-foreground/20 leading-tight"
-                      placeholder="Mission Title"
-                   />
+                <div className="space-y-3 flex-grow flex flex-col">
+                   <div className="bg-black/5 dark:bg-white/5 rounded-lg px-2 py-1.5 border border-primary/10 focus-within:border-primary/30 transition-colors">
+                     <Input 
+                        value={note.title}
+                        onChange={(e) => handleUpdateNote(note.id, { title: e.target.value })}
+                        className="text-xs font-black tracking-tight bg-transparent border-none p-0 h-auto focus:ring-0 placeholder:text-muted-foreground/30 leading-tight"
+                        placeholder="Mission Title"
+                     />
+                   </div>
                    <div className="flex-grow flex flex-col bg-black/5 dark:bg-white/5 rounded-xl border border-primary/10 p-3 group-focus-within:border-primary/30 transition-colors">
                       <Textarea 
                           value={note.content}
