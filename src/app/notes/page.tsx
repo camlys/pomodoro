@@ -8,7 +8,8 @@ import {
   ArrowLeft, Search, Plus, Trash2, 
   FileText, Clock, ShieldCheck, 
   Terminal, Database, Pin, PinOff,
-  Sparkles, Hash, Loader2, LayoutGrid, X
+  Sparkles, Hash, Loader2, LayoutGrid, X,
+  ChevronRight
 } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
