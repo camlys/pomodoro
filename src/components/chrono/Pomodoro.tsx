@@ -104,8 +104,8 @@ function HourglassVisual({ timeLeft, totalTime, isActive }: { timeLeft: number; 
   const bottomSandHeight = 40 * (1 - ratio);
 
   return (
-    <div className="flex flex-row items-center gap-12 animate-in fade-in zoom-in duration-500">
-      <div className="relative w-48 h-64 flex items-center justify-center">
+    <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12 animate-in fade-in zoom-in duration-500">
+      <div className="relative w-40 h-56 md:w-48 md:h-64 flex items-center justify-center">
         <svg viewBox="0 0 100 150" className="w-full h-full drop-shadow-2xl">
           {/* Hourglass Frame */}
           <path 
@@ -157,8 +157,8 @@ function HourglassVisual({ timeLeft, totalTime, isActive }: { timeLeft: number; 
           )}
         </svg>
       </div>
-      <div className="flex flex-col items-start justify-center min-w-[200px]">
-        <span className="text-7xl md:text-9xl font-black text-white drop-shadow-2xl tabular-nums tracking-tighter">
+      <div className="flex flex-col items-center md:items-start justify-center min-w-[200px]">
+        <span className="text-8xl sm:text-9xl md:text-9xl font-black text-white drop-shadow-2xl tabular-nums tracking-tighter">
           {Math.floor(timeLeft / 60)}:{(timeLeft % 60).toString().padStart(2, '0')}
         </span>
       </div>
@@ -492,12 +492,14 @@ export function Pomodoro({ onModeChange, onSettingsChange, onTimerActiveChange, 
       
       <div className="w-full lg:w-[700px] space-y-6">
         <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 md:p-10 flex flex-col items-center transition-all duration-500 shadow-2xl relative overflow-hidden">
-          <div className="absolute top-0 left-0 w-full h-1.5 bg-black/10">
-            <div 
-              className="h-full bg-white transition-all duration-1000 ease-linear shadow-[0_0_15px_rgba(255,255,255,0.8)]" 
-              style={{ width: `${progressPercent}%` }} 
-            />
-          </div>
+          {settings.visualMode === 'clock' && (
+            <div className="absolute top-0 left-0 w-full h-1.5 bg-black/10">
+              <div 
+                className="h-full bg-white transition-all duration-1000 ease-linear shadow-[0_0_15px_rgba(255,255,255,0.8)]" 
+                style={{ width: `${progressPercent}%` }} 
+              />
+            </div>
+          )}
 
           <div className="flex gap-1 mb-8">
             <button onClick={() => changeMode('work')} className={cn("px-3 py-1.5 rounded-md text-xs md:text-sm font-bold transition-all text-white", mode === 'work' ? "bg-black/15" : "hover:bg-black/5")}>Pomodoro</button>
