@@ -518,8 +518,8 @@ export function Pomodoro({ onModeChange, onSettingsChange, onTimerActiveChange, 
       <div className="w-full lg:w-[700px] space-y-6">
         <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 md:p-10 flex flex-col items-center transition-all duration-500 shadow-2xl relative overflow-hidden">
           
-          {/* Side Progress Bar - Positioned 2mm (8px) from border */}
-          {settings.showProgressBar && settings.progressPosition === 'side' && (
+          {/* Side Progress Bar - Positioned 2mm (8px) from border, Hidden in Hourglass Mode */}
+          {settings.showProgressBar && settings.visualMode === 'clock' && settings.progressPosition === 'side' && (
             <div className="absolute top-1/2 -translate-y-1/2 right-2 h-2/3 w-1.5 sm:w-2 md:w-3 bg-black/20 rounded-full overflow-hidden z-10">
               <div 
                 className="absolute bottom-0 left-0 w-full transition-all duration-1000 ease-linear" 
@@ -532,8 +532,8 @@ export function Pomodoro({ onModeChange, onSettingsChange, onTimerActiveChange, 
             </div>
           )}
 
-          {/* Top Progress Bar - Alternative Position */}
-          {settings.showProgressBar && settings.progressPosition === 'top' && (
+          {/* Top Progress Bar - Alternative Position, Hidden in Hourglass Mode */}
+          {settings.showProgressBar && settings.visualMode === 'clock' && settings.progressPosition === 'top' && (
             <div className="w-full h-1.5 bg-black/20 rounded-full mb-6 relative overflow-hidden">
               <div 
                 className="absolute top-0 left-0 h-full transition-all duration-1000 ease-linear" 
@@ -915,7 +915,7 @@ export function Pomodoro({ onModeChange, onSettingsChange, onTimerActiveChange, 
                   {settings.visualMode === 'hourglass' && (
                     <div className="flex items-center justify-between">
                       <Label className="text-xs font-bold text-muted-foreground/80">Flow Element</Label>
-                      <Select value={settings.hourglassType} onValueChange={(v: 'sand' | 'water') => updateSettings({...settings, hourglassType: v})}>
+                      <Select value={settings.hourglassType} onValueChange={(v: 'water' | 'sand') => updateSettings({...settings, hourglassType: v})}>
                         <SelectTrigger className="w-[140px] bg-muted border-none text-xs font-bold">
                           <SelectValue />
                         </SelectTrigger>
