@@ -106,82 +106,104 @@ interface HourglassVisualProps {
 
 function HourglassVisual({ timeLeft, totalTime, isActive, type }: HourglassVisualProps) {
   const ratio = timeLeft / totalTime;
-  const topHeight = 40 * ratio;
-  const bottomHeight = 40 * (1 - ratio);
-  
-  const elementColor = type === 'sand' ? 'white' : '#00b4d8';
+  const elementColor = type === 'sand' ? '#E5E7EB' : '#00b4d8';
+  const glowColor = type === 'sand' ? 'rgba(255,255,255,0.4)' : 'rgba(0,180,216,0.4)';
 
   return (
-    <div className="flex flex-row items-center justify-center gap-2 sm:gap-8 md:gap-12 animate-in fade-in zoom-in duration-500 w-full px-6">
-      <div className="relative w-24 h-36 sm:w-40 sm:h-56 md:w-48 md:h-64 flex items-center justify-center shrink-0">
+    <div className="flex flex-row items-center justify-center gap-2 sm:gap-8 md:gap-12 animate-in fade-in zoom-in duration-700 w-full px-4 sm:px-6">
+      <div className="relative w-24 h-36 sm:w-44 sm:h-64 md:w-56 md:h-80 flex items-center justify-center shrink-0">
         <svg viewBox="0 0 100 150" className="w-full h-full drop-shadow-2xl">
+          <defs>
+            <linearGradient id="glassGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="rgba(255,255,255,0.2)" />
+              <stop offset="50%" stopColor="rgba(255,255,255,0.05)" />
+              <stop offset="100%" stopColor="rgba(255,255,255,0.2)" />
+            </linearGradient>
+            <clipPath id="topGlassClip">
+               <path d="M20,15 L80,15 L80,25 Q80,75 50,75 Q20,75 20,25 Z" />
+            </clipPath>
+            <clipPath id="bottomGlassClip">
+               <path d="M20,135 L80,135 L80,125 Q80,75 50,75 Q20,75 20,125 Z" />
+            </clipPath>
+          </defs>
+
+          {/* Glass Frame */}
           <path 
-            d="M20,10 L80,10 L80,20 Q80,75 50,75 Q20,75 20,20 Z" 
-            fill="none" 
+            d="M20,15 L80,15 L80,25 Q80,75 50,75 Q20,75 20,25 Z" 
+            fill="url(#glassGrad)" 
             stroke="white" 
-            strokeWidth="3" 
-            className="opacity-30"
+            strokeWidth="2" 
+            className="opacity-40"
           />
           <path 
-            d="M20,140 L80,140 L80,130 Q80,75 50,75 Q20,75 20,130 Z" 
-            fill="none" 
+            d="M20,135 L80,135 L80,125 Q80,75 50,75 Q20,75 20,125 Z" 
+            fill="url(#glassGrad)" 
             stroke="white" 
-            strokeWidth="3" 
-            className="opacity-30"
-          />
-          
-          <clipPath id="topClip">
-            <rect x="0" y={75 - topHeight} width="100" height={topHeight} />
-          </clipPath>
-          <path 
-            d="M20,10 L80,10 L80,20 Q80,75 50,75 Q20,75 20,20 Z" 
-            fill={elementColor} 
-            clipPath="url(#topClip)"
-            className="transition-all duration-1000 ease-linear"
+            strokeWidth="2" 
+            className="opacity-40"
           />
 
-          <clipPath id="bottomClip">
-            <rect x="0" y={140 - bottomHeight} width="100" height={bottomHeight} />
-          </clipPath>
-          <path 
-            d="M20,140 L80,140 L80,130 Q80,75 50,75 Q20,75 20,130 Z" 
-            fill={elementColor} 
-            clipPath="bottomClip"
-            className="transition-all duration-1000 ease-linear"
-          />
+          {/* Top Fill - Receding Pile */}
+          <g clipPath="url(#topGlassClip)">
+            <rect 
+              x="0" 
+              y={75 - (60 * ratio)} 
+              width="100" 
+              height="60" 
+              fill={elementColor} 
+              className="transition-all duration-1000 ease-linear"
+              style={{ filter: `drop-shadow(0 0 4px ${glowColor})` }}
+            />
+          </g>
 
+          {/* Bottom Fill - Growing Pile */}
+          <g clipPath="url(#bottomGlassClip)">
+             <path 
+               d={`M10,140 Q50,${135 - (60 * (1 - ratio))} 90,140 L90,150 L10,150 Z`}
+               fill={elementColor}
+               className="transition-all duration-1000 ease-linear"
+               style={{ filter: `drop-shadow(0 0 8px ${glowColor})` }}
+             />
+          </g>
+
+          {/* Center Flow Stream */}
           {isActive && timeLeft > 0 && (
-            type === 'sand' ? (
+            <g>
               <line 
-                x1="50" y1="75" x2="50" y2="140" 
+                x1="50" y1="75" x2="50" y2="135" 
                 stroke={elementColor} 
                 strokeWidth="2" 
-                strokeDasharray="4 4" 
-                className="animate-[dash_0.5s_linear_infinite]"
+                strokeDasharray="4 6" 
+                className="animate-[dash_0.8s_linear_infinite]"
               />
-            ) : (
-              <g className="animate-[drip_1s_linear_infinite]">
-                <circle cx="50" cy="80" r="2" fill={elementColor} />
-                <circle cx="50" cy="110" r="2" fill={elementColor} className="animate-[drip_1s_linear_infinite_0.3s]" />
-                <circle cx="50" cy="130" r="2" fill={elementColor} className="animate-[drip_1s_linear_infinite_0.6s]" />
-              </g>
-            )
+              {/* Falling Particles */}
+              <circle cx="50" cy="85" r="1.5" fill="white" className="animate-[fall_1.2s_linear_infinite]" />
+              <circle cx="50" cy="105" r="1.2" fill="white" className="animate-[fall_1.2s_linear_infinite_0.4s]" />
+              <circle cx="50" cy="125" r="1.8" fill="white" className="animate-[fall_1.2s_linear_infinite_0.8s]" />
+            </g>
           )}
+
+          {/* Bottom Base */}
+          <line x1="15" y1="135" x2="85" y2="135" stroke="white" strokeWidth="3" className="opacity-60" />
+          <line x1="15" y1="15" x2="85" y2="15" stroke="white" strokeWidth="3" className="opacity-60" />
         </svg>
       </div>
+
       <div className="flex flex-col items-start justify-center">
-        <span className="text-8xl sm:text-9xl md:text-[10rem] font-black text-white drop-shadow-2xl tabular-nums tracking-tighter">
+        <span className="text-7xl sm:text-9xl md:text-[10rem] font-black text-white drop-shadow-2xl tabular-nums tracking-tighter leading-none">
           {Math.floor(timeLeft / 60)}:{(timeLeft % 60).toString().padStart(2, '0')}
         </span>
       </div>
+
       <style jsx>{`
         @keyframes dash {
-          to { stroke-dashoffset: -8; }
+          to { stroke-dashoffset: -20; }
         }
-        @keyframes drip {
+        @keyframes fall {
           0% { transform: translateY(-10px); opacity: 0; }
-          30% { opacity: 1; }
-          100% { transform: translateY(40px); opacity: 0; }
+          20% { opacity: 1; }
+          80% { opacity: 1; }
+          100% { transform: translateY(50px); opacity: 0; }
         }
       `}</style>
     </div>
@@ -518,7 +540,7 @@ export function Pomodoro({ onModeChange, onSettingsChange, onTimerActiveChange, 
       <div className="w-full lg:w-[700px] space-y-6">
         <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 md:p-10 flex flex-col items-center transition-all duration-500 shadow-2xl relative overflow-hidden">
           
-          {/* Side Progress Bar - Positioned 2mm (8px) from border, Hidden in Hourglass Mode */}
+          {/* Side Progress Bar - Positioned precisely near border, Hidden in Hourglass Mode */}
           {settings.showProgressBar && settings.visualMode === 'clock' && settings.progressPosition === 'side' && (
             <div className="absolute top-1/2 -translate-y-1/2 right-2 h-2/3 w-1.5 sm:w-2 md:w-3 bg-black/20 rounded-full overflow-hidden z-10">
               <div 
@@ -554,8 +576,8 @@ export function Pomodoro({ onModeChange, onSettingsChange, onTimerActiveChange, 
 
           <div className="flex flex-col items-center min-h-[160px] md:min-h-[200px] justify-center w-full">
             {settings.visualMode === 'clock' ? (
-              <div className="flex items-center justify-center animate-in fade-in zoom-in duration-500 w-full px-6">
-                <div className="text-8xl sm:text-[150px] md:text-[200px] leading-none font-black text-white tabular-nums select-none tracking-tight">
+              <div className="flex items-center justify-center animate-in fade-in zoom-in duration-500 w-full px-4 sm:px-6">
+                <div className="text-7xl sm:text-[150px] md:text-[200px] leading-none font-black text-white tabular-nums select-none tracking-tight">
                   {formatTime(timeLeft)}
                 </div>
               </div>
