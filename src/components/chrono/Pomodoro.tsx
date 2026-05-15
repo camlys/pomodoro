@@ -109,7 +109,6 @@ function HourglassVisual({ timeLeft, totalTime, isActive, type }: HourglassVisua
     <div className="flex flex-row items-center justify-center gap-4 sm:gap-8 md:gap-12 animate-in fade-in zoom-in duration-500 w-full px-2">
       <div className="relative w-28 h-40 sm:w-40 sm:h-56 md:w-48 md:h-64 flex items-center justify-center shrink-0">
         <svg viewBox="0 0 100 150" className="w-full h-full drop-shadow-2xl">
-          {/* Glass Top */}
           <path 
             d="M20,10 L80,10 L80,20 Q80,75 50,75 Q20,75 20,20 Z" 
             fill="none" 
@@ -117,7 +116,6 @@ function HourglassVisual({ timeLeft, totalTime, isActive, type }: HourglassVisua
             strokeWidth="3" 
             className="opacity-30"
           />
-          {/* Glass Bottom */}
           <path 
             d="M20,140 L80,140 L80,130 Q80,75 50,75 Q20,75 20,130 Z" 
             fill="none" 
@@ -126,7 +124,6 @@ function HourglassVisual({ timeLeft, totalTime, isActive, type }: HourglassVisua
             className="opacity-30"
           />
           
-          {/* Top Element (Falling) */}
           <clipPath id="topClip">
             <rect x="0" y={75 - topHeight} width="100" height={topHeight} />
           </clipPath>
@@ -137,7 +134,6 @@ function HourglassVisual({ timeLeft, totalTime, isActive, type }: HourglassVisua
             className="transition-all duration-1000 ease-linear"
           />
 
-          {/* Bottom Element (Filling) */}
           <clipPath id="bottomClip">
             <rect x="0" y={140 - bottomHeight} width="100" height={bottomHeight} />
           </clipPath>
@@ -148,7 +144,6 @@ function HourglassVisual({ timeLeft, totalTime, isActive, type }: HourglassVisua
             className="transition-all duration-1000 ease-linear"
           />
 
-          {/* Flow Effect */}
           {isActive && timeLeft > 0 && (
             type === 'sand' ? (
               <line 
@@ -169,7 +164,7 @@ function HourglassVisual({ timeLeft, totalTime, isActive, type }: HourglassVisua
         </svg>
       </div>
       <div className="flex flex-col items-start justify-center">
-        <span className="text-8xl sm:text-9xl md:text-[10rem] font-black text-white drop-shadow-2xl tabular-nums tracking-tighter">
+        <span className="text-7xl sm:text-9xl md:text-[10rem] font-black text-white drop-shadow-2xl tabular-nums tracking-tighter">
           {Math.floor(timeLeft / 60)}:{(timeLeft % 60).toString().padStart(2, '0')}
         </span>
       </div>
@@ -187,7 +182,13 @@ function HourglassVisual({ timeLeft, totalTime, isActive, type }: HourglassVisua
   );
 }
 
-export function Pomodoro({ onModeChange, onSettingsChange, onTimerActiveChange, isExternalSettingsOpen, onExternalSettingsOpenChange }: PomodoroProps) {
+export function Pomodoro({ onModeChange, onSettingsChange, onTimerActiveChange, isExternalSettingsOpen, onExternalSettingsOpenChange }: {
+  onModeChange?: (mode: TimerMode) => void;
+  onSettingsChange?: (settings: PomodoroSettings) => void;
+  onTimerActiveChange?: (active: boolean) => void;
+  isExternalSettingsOpen?: boolean;
+  onExternalSettingsOpenChange?: (open: boolean) => void;
+}) {
   const [settings, setSettings] = useState<PomodoroSettings>(DEFAULT_SETTINGS);
   const [mode, setMode] = useState<TimerMode>('work');
   const [timeLeft, setTimeLeft] = useState(DEFAULT_SETTINGS.workDuration * 60);
@@ -447,7 +448,7 @@ export function Pomodoro({ onModeChange, onSettingsChange, onTimerActiveChange, 
 
     if (!isActive) {
       const duration = mode === 'work' ? newSettings.workDuration : 
-                       newSettings.shortBreakDuration ? newSettings.shortBreakDuration : 
+                       mode === 'short-break' ? newSettings.shortBreakDuration : 
                        newSettings.longBreakDuration;
       setTimeLeft(duration * 60);
     }
