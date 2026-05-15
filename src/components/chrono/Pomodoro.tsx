@@ -170,7 +170,7 @@ function HourglassVisual({ timeLeft, totalTime, isActive, type }: HourglassVisua
         </svg>
       </div>
       <div className="flex flex-col items-start justify-center">
-        <span className="text-7xl sm:text-9xl md:text-[10rem] font-black text-white drop-shadow-2xl tabular-nums tracking-tighter">
+        <span className="text-8xl sm:text-9xl md:text-[10rem] font-black text-white drop-shadow-2xl tabular-nums tracking-tighter">
           {Math.floor(timeLeft / 60)}:{(timeLeft % 60).toString().padStart(2, '0')}
         </span>
       </div>
@@ -555,7 +555,7 @@ export function Pomodoro({ onModeChange, onSettingsChange, onTimerActiveChange, 
           <div className="flex flex-col items-center min-h-[160px] md:min-h-[200px] justify-center w-full">
             {settings.visualMode === 'clock' ? (
               <div className="flex items-center justify-center animate-in fade-in zoom-in duration-500 w-full px-6">
-                <div className="text-7xl sm:text-[150px] md:text-[200px] leading-none font-black text-white tabular-nums select-none tracking-tight">
+                <div className="text-8xl sm:text-[150px] md:text-[200px] leading-none font-black text-white tabular-nums select-none tracking-tight">
                   {formatTime(timeLeft)}
                 </div>
               </div>
