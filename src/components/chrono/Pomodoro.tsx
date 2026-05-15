@@ -545,7 +545,7 @@ export function Pomodoro({ onModeChange, onSettingsChange, onTimerActiveChange, 
                   {formatTime(timeLeft)}
                 </div>
                 {settings.showProgressBar && settings.progressPosition === 'side' && (
-                  <div className="h-24 sm:h-32 md:h-48 w-1 sm:w-2 md:w-3 bg-black/20 rounded-full relative overflow-hidden ml-1 sm:ml-4">
+                  <div className="h-32 sm:h-48 md:h-64 w-1 sm:w-2 md:w-3 bg-black/20 rounded-full relative overflow-hidden ml-1 sm:ml-4">
                     <div 
                       className="absolute bottom-0 left-0 w-full transition-all duration-1000 ease-linear" 
                       style={{ 
