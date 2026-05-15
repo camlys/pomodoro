@@ -109,8 +109,8 @@ function HourglassVisual({ timeLeft, totalTime, isActive, type }: HourglassVisua
   const elementColor = type === 'sand' ? 'white' : '#00b4d8';
 
   return (
-    <div className="flex flex-row items-center justify-center gap-4 sm:gap-8 md:gap-12 animate-in fade-in zoom-in duration-500 w-full px-2">
-      <div className="relative w-28 h-40 sm:w-40 sm:h-56 md:w-48 md:h-64 flex items-center justify-center shrink-0">
+    <div className="flex flex-row items-center justify-center gap-2 sm:gap-8 md:gap-12 animate-in fade-in zoom-in duration-500 w-full px-6">
+      <div className="relative w-24 h-36 sm:w-40 sm:h-56 md:w-48 md:h-64 flex items-center justify-center shrink-0">
         <svg viewBox="0 0 100 150" className="w-full h-full drop-shadow-2xl">
           <path 
             d="M20,10 L80,10 L80,20 Q80,75 50,75 Q20,75 20,20 Z" 
@@ -523,12 +523,12 @@ export function Pomodoro({ onModeChange, onSettingsChange, onTimerActiveChange, 
 
           <div className="flex flex-col items-center min-h-[160px] md:min-h-[200px] justify-center w-full">
             {settings.visualMode === 'clock' ? (
-              <div className="flex items-center gap-8 sm:gap-14 md:gap-24 animate-in fade-in zoom-in duration-500">
-                <div className="text-[115px] sm:text-[150px] md:text-[200px] leading-none font-black text-white tabular-nums select-none tracking-tight">
+              <div className="flex items-center gap-4 sm:gap-14 md:gap-24 animate-in fade-in zoom-in duration-500 px-4">
+                <div className="text-[100px] sm:text-[150px] md:text-[200px] leading-none font-black text-white tabular-nums select-none tracking-tight">
                   {formatTime(timeLeft)}
                 </div>
                 {settings.showProgressBar && (
-                  <div className="h-24 sm:h-32 md:h-48 w-1.5 sm:w-2 md:w-3 bg-black/20 rounded-full relative overflow-hidden ml-4">
+                  <div className="h-24 sm:h-32 md:h-48 w-1.5 sm:w-2 md:w-3 bg-black/20 rounded-full relative overflow-hidden ml-2 sm:ml-4">
                     <div 
                       className="absolute bottom-0 left-0 w-full transition-all duration-1000 ease-linear" 
                       style={{ 
