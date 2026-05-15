@@ -49,6 +49,7 @@ export type PomodoroSettings = {
   reminderTime: number;
   themeColor: string; 
   progressColor: string;
+  showProgressBar: boolean;
   visualMode: 'clock' | 'hourglass';
   hourglassType: 'sand' | 'water';
 };
@@ -74,6 +75,7 @@ const DEFAULT_SETTINGS: PomodoroSettings = {
   reminderTime: 0,
   themeColor: '#ba4949', 
   progressColor: '#00FF00',
+  showProgressBar: true,
   visualMode: 'clock',
   hourglassType: 'sand',
 };
@@ -525,16 +527,18 @@ export function Pomodoro({ onModeChange, onSettingsChange, onTimerActiveChange, 
                 <div className="text-[115px] sm:text-[150px] md:text-[200px] leading-none font-black text-white tabular-nums select-none tracking-tight">
                   {formatTime(timeLeft)}
                 </div>
-                <div className="h-24 sm:h-32 md:h-48 w-1.5 sm:w-2 md:w-3 bg-black/20 rounded-full relative overflow-hidden ml-4">
-                  <div 
-                    className="absolute bottom-0 left-0 w-full transition-all duration-1000 ease-linear" 
-                    style={{ 
-                      height: `${progressPercent}%`, 
-                      backgroundColor: settings.progressColor,
-                      boxShadow: `0 0 15px ${settings.progressColor}`
-                    }} 
-                  />
-                </div>
+                {settings.showProgressBar && (
+                  <div className="h-24 sm:h-32 md:h-48 w-1.5 sm:w-2 md:w-3 bg-black/20 rounded-full relative overflow-hidden ml-4">
+                    <div 
+                      className="absolute bottom-0 left-0 w-full transition-all duration-1000 ease-linear" 
+                      style={{ 
+                        height: `${progressPercent}%`, 
+                        backgroundColor: settings.progressColor,
+                        boxShadow: `0 0 15px ${settings.progressColor}`
+                      }} 
+                    />
+                  </div>
+                )}
               </div>
             ) : (
               <HourglassVisual timeLeft={timeLeft} totalTime={totalSeconds} isActive={isActive} type={settings.hourglassType} />
@@ -849,6 +853,14 @@ export function Pomodoro({ onModeChange, onSettingsChange, onTimerActiveChange, 
                          </div>
                       </div>
                     </div>
+                  </div>
+
+                  <div className="flex items-center justify-between py-1">
+                    <Label className="text-xs font-bold text-muted-foreground/80">Display Progress Bar</Label>
+                    <Switch 
+                      checked={settings.showProgressBar} 
+                      onCheckedChange={(v) => updateSettings({...settings, showProgressBar: v})} 
+                    />
                   </div>
 
                   <div className="flex items-center justify-between">
