@@ -502,15 +502,7 @@ export function Pomodoro({ onModeChange, onSettingsChange, onTimerActiveChange, 
       
       <div className="w-full lg:w-[700px] space-y-6">
         <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 md:p-10 flex flex-col items-center transition-all duration-500 shadow-2xl relative overflow-hidden">
-          {settings.visualMode === 'clock' && (
-            <div className="absolute top-0 left-0 w-full h-1.5 bg-black/10">
-              <div 
-                className="h-full bg-white transition-all duration-1000 ease-linear shadow-[0_0_15px_rgba(255,255,255,0.8)]" 
-                style={{ width: `${progressPercent}%` }} 
-              />
-            </div>
-          )}
-
+          
           <div className="flex gap-1 mb-8">
             <button onClick={() => changeMode('work')} className={cn("px-3 py-1.5 rounded-md text-xs md:text-sm font-bold transition-all text-white", mode === 'work' ? "bg-black/15" : "hover:bg-black/5")}>Pomodoro</button>
             <button onClick={() => changeMode('short-break')} className={cn("px-3 py-1.5 rounded-md text-xs md:text-sm font-bold transition-all text-white", mode === 'short-break' ? "bg-black/15" : "hover:bg-black/5")}>Short Break</button>
@@ -519,27 +511,21 @@ export function Pomodoro({ onModeChange, onSettingsChange, onTimerActiveChange, 
 
           <div className="flex flex-col items-center min-h-[160px] md:min-h-[200px] justify-center w-full">
             {settings.visualMode === 'clock' ? (
-              <div className="text-[100px] sm:text-[130px] md:text-[160px] leading-none font-black text-white tabular-nums select-none tracking-tight animate-in fade-in zoom-in duration-500">
-                {formatTime(timeLeft)}
+              <div className="flex items-center gap-4 sm:gap-6 md:gap-8 animate-in fade-in zoom-in duration-500">
+                <div className="text-[100px] sm:text-[130px] md:text-[160px] leading-none font-black text-white tabular-nums select-none tracking-tight">
+                  {formatTime(timeLeft)}
+                </div>
+                <div className="h-24 sm:h-32 md:h-40 w-1.5 sm:w-2 bg-black/20 rounded-full relative overflow-hidden">
+                  <div 
+                    className="absolute bottom-0 left-0 w-full bg-white transition-all duration-1000 ease-linear shadow-[0_0_15px_rgba(255,255,255,0.8)]" 
+                    style={{ height: `${progressPercent}%` }} 
+                  />
+                </div>
               </div>
             ) : (
               <HourglassVisual timeLeft={timeLeft} totalTime={totalSeconds} isActive={isActive} type={settings.hourglassType} />
             )}
           </div>
-
-          {settings.visualMode === 'clock' && (
-            <div className="w-full max-w-xs mb-10 px-4 mt-6">
-               <div className="flex justify-between text-[10px] font-black uppercase tracking-widest text-white/40 mb-2">
-                  <span>Progress</span>
-                  <span>{Math.round(progressPercent)}%</span>
-               </div>
-               <Progress 
-                  value={progressPercent} 
-                  className="h-2 bg-black/20"
-                  style={{ "--progress-foreground": "white" } as any}
-               />
-            </div>
-          )}
 
           <div className="flex items-center gap-4 mt-6">
             <button
