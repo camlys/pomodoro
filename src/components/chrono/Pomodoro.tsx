@@ -1,3 +1,4 @@
+
 'use client';
 
 import React, { useState, useEffect, useRef, useCallback } from 'react';
@@ -50,6 +51,7 @@ export type PomodoroSettings = {
   themeColor: string; 
   progressColor: string;
   showProgressBar: boolean;
+  progressPosition: 'side' | 'top';
   visualMode: 'clock' | 'hourglass';
   hourglassType: 'sand' | 'water';
 };
@@ -76,6 +78,7 @@ const DEFAULT_SETTINGS: PomodoroSettings = {
   themeColor: '#ba4949', 
   progressColor: '#00FF00',
   showProgressBar: true,
+  progressPosition: 'side',
   visualMode: 'clock',
   hourglassType: 'sand',
 };
@@ -515,6 +518,20 @@ export function Pomodoro({ onModeChange, onSettingsChange, onTimerActiveChange, 
       <div className="w-full lg:w-[700px] space-y-6">
         <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 md:p-10 flex flex-col items-center transition-all duration-500 shadow-2xl relative overflow-hidden">
           
+          {/* Top Progress Bar - Alternative Position */}
+          {settings.showProgressBar && settings.progressPosition === 'top' && (
+            <div className="w-full h-1.5 bg-black/20 rounded-full mb-6 relative overflow-hidden">
+              <div 
+                className="absolute top-0 left-0 h-full transition-all duration-1000 ease-linear" 
+                style={{ 
+                  width: `${progressPercent}%`, 
+                  backgroundColor: settings.progressColor,
+                  boxShadow: `0 0 10px ${settings.progressColor}`
+                }} 
+              />
+            </div>
+          )}
+
           <div className="flex gap-1 mb-8">
             <button onClick={() => changeMode('work')} className={cn("px-3 py-1.5 rounded-md text-xs md:text-sm font-bold transition-all text-white", mode === 'work' ? "bg-black/15" : "hover:bg-black/5")}>Pomodoro</button>
             <button onClick={() => changeMode('short-break')} className={cn("px-3 py-1.5 rounded-md text-xs md:text-sm font-bold transition-all text-white", mode === 'short-break' ? "bg-black/15" : "hover:bg-black/5")}>Short Break</button>
@@ -523,12 +540,12 @@ export function Pomodoro({ onModeChange, onSettingsChange, onTimerActiveChange, 
 
           <div className="flex flex-col items-center min-h-[160px] md:min-h-[200px] justify-center w-full">
             {settings.visualMode === 'clock' ? (
-              <div className="flex items-center gap-4 sm:gap-14 md:gap-24 animate-in fade-in zoom-in duration-500 px-4">
-                <div className="text-[100px] sm:text-[150px] md:text-[200px] leading-none font-black text-white tabular-nums select-none tracking-tight">
+              <div className="flex items-center gap-2 sm:gap-14 md:gap-24 animate-in fade-in zoom-in duration-500 px-2 sm:px-4">
+                <div className="text-7xl sm:text-[150px] md:text-[200px] leading-none font-black text-white tabular-nums select-none tracking-tight">
                   {formatTime(timeLeft)}
                 </div>
-                {settings.showProgressBar && (
-                  <div className="h-24 sm:h-32 md:h-48 w-1.5 sm:w-2 md:w-3 bg-black/20 rounded-full relative overflow-hidden ml-2 sm:ml-4">
+                {settings.showProgressBar && settings.progressPosition === 'side' && (
+                  <div className="h-24 sm:h-32 md:h-48 w-1 sm:w-2 md:w-3 bg-black/20 rounded-full relative overflow-hidden ml-1 sm:ml-4">
                     <div 
                       className="absolute bottom-0 left-0 w-full transition-all duration-1000 ease-linear" 
                       style={{ 
@@ -861,6 +878,23 @@ export function Pomodoro({ onModeChange, onSettingsChange, onTimerActiveChange, 
                       checked={settings.showProgressBar} 
                       onCheckedChange={(v) => updateSettings({...settings, showProgressBar: v})} 
                     />
+                  </div>
+
+                  <div className="flex items-center justify-between py-1">
+                    <Label className="text-xs font-bold text-muted-foreground/80">Progress Position</Label>
+                    <Select 
+                      value={settings.progressPosition} 
+                      onValueChange={(v: 'side' | 'top') => updateSettings({...settings, progressPosition: v})}
+                      disabled={!settings.showProgressBar}
+                    >
+                      <SelectTrigger className="w-[140px] bg-muted border-none text-xs font-bold">
+                        <SelectValue />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="side">Side (Vertical)</SelectItem>
+                        <SelectItem value="top">Top (Horizontal)</SelectItem>
+                      </SelectContent>
+                    </Select>
                   </div>
 
                   <div className="flex items-center justify-between">
