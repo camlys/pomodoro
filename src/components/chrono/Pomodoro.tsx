@@ -540,7 +540,7 @@ export function Pomodoro({ onModeChange, onSettingsChange, onTimerActiveChange, 
 
           <div className="flex flex-col items-center min-h-[160px] md:min-h-[200px] justify-center w-full">
             {settings.visualMode === 'clock' ? (
-              <div className="flex items-center gap-2 sm:gap-14 md:gap-24 animate-in fade-in zoom-in duration-500 px-2 sm:px-4">
+              <div className="flex items-center gap-4 sm:gap-14 md:gap-24 animate-in fade-in zoom-in duration-500 px-6 sm:px-4">
                 <div className="text-7xl sm:text-[150px] md:text-[200px] leading-none font-black text-white tabular-nums select-none tracking-tight">
                   {formatTime(timeLeft)}
                 </div>
