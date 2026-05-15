@@ -105,7 +105,7 @@ interface HourglassVisualProps {
 }
 
 function HourglassVisual({ timeLeft, totalTime, isActive, type }: HourglassVisualProps) {
-  const ratio = timeLeft / totalTime;
+  const ratio = Math.max(0, Math.min(1, timeLeft / totalTime));
   const elementColor = type === 'sand' ? '#E5E7EB' : '#00b4d8';
   const glowColor = type === 'sand' ? 'rgba(255,255,255,0.4)' : 'rgba(0,180,216,0.4)';
 
@@ -115,9 +115,9 @@ function HourglassVisual({ timeLeft, totalTime, isActive, type }: HourglassVisua
         <svg viewBox="0 0 100 150" className="w-full h-full drop-shadow-2xl">
           <defs>
             <linearGradient id="glassGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="rgba(255,255,255,0.2)" />
-              <stop offset="50%" stopColor="rgba(255,255,255,0.05)" />
-              <stop offset="100%" stopColor="rgba(255,255,255,0.2)" />
+              <stop offset="0%" stopColor="rgba(255,255,255,0.3)" />
+              <stop offset="50%" stopColor="rgba(255,255,255,0.1)" />
+              <stop offset="100%" stopColor="rgba(255,255,255,0.3)" />
             </linearGradient>
             <clipPath id="topGlassClip">
                <path d="M20,15 L80,15 L80,25 Q80,75 50,75 Q20,75 20,25 Z" />
@@ -127,27 +127,15 @@ function HourglassVisual({ timeLeft, totalTime, isActive, type }: HourglassVisua
             </clipPath>
           </defs>
 
-          {/* Glass Frame */}
-          <path 
-            d="M20,15 L80,15 L80,25 Q80,75 50,75 Q20,75 20,25 Z" 
-            fill="url(#glassGrad)" 
-            stroke="white" 
-            strokeWidth="2" 
-            className="opacity-40"
-          />
-          <path 
-            d="M20,135 L80,135 L80,125 Q80,75 50,75 Q20,75 20,125 Z" 
-            fill="url(#glassGrad)" 
-            stroke="white" 
-            strokeWidth="2" 
-            className="opacity-40"
-          />
+          {/* Glass Shell Background (Inner Shadow) */}
+          <path d="M20,15 L80,15 L80,25 Q80,75 50,75 Q20,75 20,25 Z" fill="url(#glassGrad)" stroke="white" strokeWidth="1" className="opacity-20" />
+          <path d="M20,135 L80,135 L80,125 Q80,75 50,75 Q20,75 20,125 Z" fill="url(#glassGrad)" stroke="white" strokeWidth="1" className="opacity-20" />
 
-          {/* Top Fill - Receding Pile */}
+          {/* Top Fill - Constrained Volume */}
           <g clipPath="url(#topGlassClip)">
             <rect 
               x="0" 
-              y={75 - (60 * ratio)} 
+              y={15 + (60 * (1 - ratio))} 
               width="100" 
               height="60" 
               fill={elementColor} 
@@ -156,36 +144,40 @@ function HourglassVisual({ timeLeft, totalTime, isActive, type }: HourglassVisua
             />
           </g>
 
-          {/* Bottom Fill - Growing Pile */}
+          {/* Bottom Fill - Growing Mound mirroring Top volume loss */}
           <g clipPath="url(#bottomGlassClip)">
              <path 
-               d={`M10,140 Q50,${135 - (60 * (1 - ratio))} 90,140 L90,150 L10,150 Z`}
+               d={`M10,140 Q50,${135 - (58 * (1 - ratio))} 90,140 L90,150 L10,150 Z`}
                fill={elementColor}
                className="transition-all duration-1000 ease-linear"
                style={{ filter: `drop-shadow(0 0 8px ${glowColor})` }}
              />
           </g>
 
-          {/* Center Flow Stream */}
-          {isActive && timeLeft > 0 && (
+          {/* Center Flow Stream - Terminates at the mound surface */}
+          {isActive && timeLeft > 0 && ratio < 1 && (
             <g>
               <line 
-                x1="50" y1="75" x2="50" y2="135" 
+                x1="50" y1="75" x2="50" y2={135 - (50 * (1 - ratio))} 
                 stroke={elementColor} 
-                strokeWidth="2" 
+                strokeWidth="1.5" 
                 strokeDasharray="4 6" 
                 className="animate-[dash_0.8s_linear_infinite]"
               />
-              {/* Falling Particles */}
-              <circle cx="50" cy="85" r="1.5" fill="white" className="animate-[fall_1.2s_linear_infinite]" />
-              <circle cx="50" cy="105" r="1.2" fill="white" className="animate-[fall_1.2s_linear_infinite_0.4s]" />
-              <circle cx="50" cy="125" r="1.8" fill="white" className="animate-[fall_1.2s_linear_infinite_0.8s]" />
+              {/* Falling Velocity Particles */}
+              <circle cx="50" cy="78" r="1.2" fill="white" className="animate-[fall_0.8s_linear_infinite]" />
+              <circle cx="50" cy="85" r="1" fill="white" className="animate-[fall_0.8s_linear_infinite_0.2s]" />
+              <circle cx="50" cy="95" r="1.4" fill="white" className="animate-[fall_0.8s_linear_infinite_0.4s]" />
             </g>
           )}
 
-          {/* Bottom Base */}
-          <line x1="15" y1="135" x2="85" y2="135" stroke="white" strokeWidth="3" className="opacity-60" />
-          <line x1="15" y1="15" x2="85" y2="15" stroke="white" strokeWidth="3" className="opacity-60" />
+          {/* Glass Outer Contours */}
+          <path d="M20,15 L80,15 L80,25 Q80,75 50,75 Q20,75 20,25 Z" fill="none" stroke="white" strokeWidth="2" className="opacity-40" />
+          <path d="M20,135 L80,135 L80,125 Q80,75 50,75 Q20,75 20,125 Z" fill="none" stroke="white" strokeWidth="2" className="opacity-40" />
+          
+          {/* Heavy Duty Base and Top Caps */}
+          <line x1="15" y1="15" x2="85" y2="15" stroke="white" strokeWidth="4" className="opacity-80" strokeLinecap="round" />
+          <line x1="15" y1="135" x2="85" y2="135" stroke="white" strokeWidth="4" className="opacity-80" strokeLinecap="round" />
         </svg>
       </div>
 
@@ -200,10 +192,10 @@ function HourglassVisual({ timeLeft, totalTime, isActive, type }: HourglassVisua
           to { stroke-dashoffset: -20; }
         }
         @keyframes fall {
-          0% { transform: translateY(-10px); opacity: 0; }
-          20% { opacity: 1; }
-          80% { opacity: 1; }
-          100% { transform: translateY(50px); opacity: 0; }
+          0% { transform: translateY(0); opacity: 0; }
+          10% { opacity: 1; }
+          90% { opacity: 1; }
+          100% { transform: translateY(35px); opacity: 0; }
         }
       `}</style>
     </div>
@@ -540,7 +532,7 @@ export function Pomodoro({ onModeChange, onSettingsChange, onTimerActiveChange, 
       <div className="w-full lg:w-[700px] space-y-6">
         <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 md:p-10 flex flex-col items-center transition-all duration-500 shadow-2xl relative overflow-hidden">
           
-          {/* Side Progress Bar - Positioned precisely near border, Hidden in Hourglass Mode */}
+          {/* Side Progress Bar - High Fidelity Border Alignment, Hidden in Hourglass Mode */}
           {settings.showProgressBar && settings.visualMode === 'clock' && settings.progressPosition === 'side' && (
             <div className="absolute top-1/2 -translate-y-1/2 right-2 h-2/3 w-1.5 sm:w-2 md:w-3 bg-black/20 rounded-full overflow-hidden z-10">
               <div 
@@ -577,7 +569,7 @@ export function Pomodoro({ onModeChange, onSettingsChange, onTimerActiveChange, 
           <div className="flex flex-col items-center min-h-[160px] md:min-h-[200px] justify-center w-full">
             {settings.visualMode === 'clock' ? (
               <div className="flex items-center justify-center animate-in fade-in zoom-in duration-500 w-full px-4 sm:px-6">
-                <div className="text-7xl sm:text-[150px] md:text-[200px] leading-none font-black text-white tabular-nums select-none tracking-tight">
+                <div className="text-8xl sm:text-[150px] md:text-[200px] leading-none font-black text-white tabular-nums select-none tracking-tight">
                   {formatTime(timeLeft)}
                 </div>
               </div>
