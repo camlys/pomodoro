@@ -48,6 +48,7 @@ export type PomodoroSettings = {
   reminderMode: 'last' | 'first';
   reminderTime: number;
   themeColor: string; 
+  progressColor: string;
   visualMode: 'clock' | 'hourglass';
   hourglassType: 'sand' | 'water';
 };
@@ -72,6 +73,7 @@ const DEFAULT_SETTINGS: PomodoroSettings = {
   reminderMode: 'last',
   reminderTime: 0,
   themeColor: '#ba4949', 
+  progressColor: '#00FF00',
   visualMode: 'clock',
   hourglassType: 'sand',
 };
@@ -466,6 +468,15 @@ export function Pomodoro({ onModeChange, onSettingsChange, onTimerActiveChange, 
     { name: 'Green', hex: '#518a38' },
   ];
 
+  const PROGRESS_COLORS = [
+    { name: 'Lime', hex: '#00FF00' },
+    { name: 'Cyan', hex: '#00FFFF' },
+    { name: 'Yellow', hex: '#FFFF00' },
+    { name: 'Magenta', hex: '#FF00FF' },
+    { name: 'White', hex: '#FFFFFF' },
+    { name: 'Gold', hex: '#FFD700' },
+  ];
+
   const handleDurationChange = (type: 'work' | 'short' | 'long', unit: 'hr' | 'min', value: string) => {
     const numValue = parseInt(value, 10) || 0;
     const currentTotal = type === 'work' ? settings.workDuration : 
@@ -510,14 +521,18 @@ export function Pomodoro({ onModeChange, onSettingsChange, onTimerActiveChange, 
 
           <div className="flex flex-col items-center min-h-[160px] md:min-h-[200px] justify-center w-full">
             {settings.visualMode === 'clock' ? (
-              <div className="flex items-center gap-8 sm:gap-14 md:gap-20 animate-in fade-in zoom-in duration-500">
+              <div className="flex items-center gap-8 sm:gap-14 md:gap-24 animate-in fade-in zoom-in duration-500">
                 <div className="text-[115px] sm:text-[150px] md:text-[200px] leading-none font-black text-white tabular-nums select-none tracking-tight">
                   {formatTime(timeLeft)}
                 </div>
-                <div className="h-24 sm:h-32 md:h-48 w-1.5 sm:w-2 md:w-2.5 bg-black/20 rounded-full relative overflow-hidden">
+                <div className="h-24 sm:h-32 md:h-48 w-1.5 sm:w-2 md:w-3 bg-black/20 rounded-full relative overflow-hidden ml-4">
                   <div 
-                    className="absolute bottom-0 left-0 w-full bg-white transition-all duration-1000 ease-linear shadow-[0_0_15px_rgba(255,255,255,0.8)]" 
-                    style={{ height: `${progressPercent}%` }} 
+                    className="absolute bottom-0 left-0 w-full transition-all duration-1000 ease-linear" 
+                    style={{ 
+                      height: `${progressPercent}%`, 
+                      backgroundColor: settings.progressColor,
+                      boxShadow: `0 0 15px ${settings.progressColor}`
+                    }} 
                   />
                 </div>
               </div>
@@ -790,7 +805,7 @@ export function Pomodoro({ onModeChange, onSettingsChange, onTimerActiveChange, 
                   
                   <div className="space-y-4">
                     <div className="flex items-center justify-between">
-                      <Label className="text-xs font-bold text-muted-foreground/80">Color Palette</Label>
+                      <Label className="text-xs font-bold text-muted-foreground/80">Main Theme Color</Label>
                       <div className="flex flex-wrap gap-2 justify-end">
                          {PRESET_COLORS.map(color => (
                             <div 
@@ -804,11 +819,31 @@ export function Pomodoro({ onModeChange, onSettingsChange, onTimerActiveChange, 
                               title={color.name}
                             />
                          ))}
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="space-y-4">
+                    <div className="flex items-center justify-between">
+                      <Label className="text-xs font-bold text-muted-foreground/80">Progress Bar Color</Label>
+                      <div className="flex flex-wrap gap-2 justify-end">
+                         {PROGRESS_COLORS.map(color => (
+                            <div 
+                              key={color.hex}
+                              onClick={() => updateSettings({...settings, progressColor: color.hex})}
+                              style={{ backgroundColor: color.hex }}
+                              className={cn(
+                                "w-6 h-6 rounded-md cursor-pointer transition-all border border-black/5",
+                                settings.progressColor === color.hex && "ring-2 ring-primary ring-offset-2 scale-110"
+                              )} 
+                              title={color.name}
+                            />
+                         ))}
                          <div className="relative w-6 h-6 rounded-md overflow-hidden border border-black/10 group">
                             <input 
                               type="color"
-                              value={settings.themeColor}
-                              onChange={(e) => updateSettings({...settings, themeColor: e.target.value})}
+                              value={settings.progressColor}
+                              onChange={(e) => updateSettings({...settings, progressColor: e.target.value})}
                               className="absolute inset-0 w-[200%] h-[200%] -translate-x-1/4 -translate-y-1/4 cursor-pointer"
                             />
                          </div>
