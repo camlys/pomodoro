@@ -1,4 +1,3 @@
-
 "use client";
 
 import React from 'react';
@@ -22,7 +21,7 @@ const articleSchema = {
     "name": "Camly Inc",
     "logo": {
       "@type": "ImageObject",
-      "url": "https://calculator.camly.org/camly.png"
+      "url": "https://pomodoro-timer.camly.org/camly.png"
     }
   },
   "datePublished": "2024-08-10",
@@ -38,19 +37,19 @@ const breadcrumbSchema = {
       "@type": "ListItem",
       "position": 1,
       "name": "Home",
-      "item": "https://calculator.camly.org"
+      "item": "https://pomodoro-timer.camly.org"
     },
     {
       "@type": "ListItem",
       "position": 2,
       "name": "Knowledge Hub",
-      "item": "https://calculator.camly.org/blog"
+      "item": "https://pomodoro-timer.camly.org/blog"
     },
     {
       "@type": "ListItem",
       "position": 3,
       "name": "Deep Work Velocity",
-      "item": "https://calculator.camly.org/blog/deep-work-velocity-masterclass"
+      "item": "https://pomodoro-timer.camly.org/blog/deep-work-velocity-masterclass"
     }
   ]
 };

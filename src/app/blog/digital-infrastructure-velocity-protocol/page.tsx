@@ -1,4 +1,3 @@
-
 "use client";
 
 import React from 'react';
@@ -22,7 +21,7 @@ const articleSchema = {
     "name": "Camly Inc",
     "logo": {
       "@type": "ImageObject",
-      "url": "https://calculator.camly.org/camly.png"
+      "url": "https://pomodoro-timer.camly.org/camly.png"
     }
   },
   "datePublished": "2024-09-10",

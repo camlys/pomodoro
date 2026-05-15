@@ -7,7 +7,7 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: ['/_next/', '/api/', '/admin/'],
     },
-    sitemap: 'https://calculator.camly.org/sitemap.xml',
-    host: 'https://calculator.camly.org',
+    sitemap: 'https://pomodoro-timer.camly.org/sitemap.xml',
+    host: 'https://pomodoro-timer.camly.org',
   };
 }

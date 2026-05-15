@@ -1,4 +1,3 @@
-
 "use client";
 
 import React, { useState } from 'react';
@@ -104,7 +103,7 @@ const blogSchema = {
       "@type": "Person",
       "name": post.author
     },
-    "url": `https://calculator.camly.org${post.slug}`
+    "url": `https://pomodoro-timer.camly.org${post.slug}`
   }))
 };
 

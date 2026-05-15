@@ -10,7 +10,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://calculator.camly.org'),
+  metadataBase: new URL('https://pomodoro-timer.camly.org'),
   title: {
     default: 'Camly | High-Precision Pomodoro Timer & Productivity Tool',
     template: '%s | Camly'
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Camly | High-Precision Pomodoro Timer',
     description: 'High-precision Pomodoro Timer for professional use. Optimize your deep work velocity.',
-    url: 'https://calculator.camly.org',
+    url: 'https://pomodoro-timer.camly.org',
     siteName: 'Camly',
     locale: 'en_US',
     type: 'website',
@@ -65,7 +65,7 @@ export const metadata: Metadata = {
     },
   },
   alternates: {
-    canonical: 'https://calculator.camly.org',
+    canonical: 'https://pomodoro-timer.camly.org',
   }
 };
 
@@ -74,7 +74,7 @@ const organizationSchema = {
   "@type": "Organization",
   "name": "Camly Inc",
   "url": "https://camly.org",
-  "logo": "https://calculator.camly.org/camly.png",
+  "logo": "https://pomodoro-timer.camly.org/camly.png",
   "description": "Camly Inc is a leading provider of high-precision productivity and chronological tools designed for enterprise performance.",
   "sameAs": [
     "https://twitter.com/camly",
@@ -86,10 +86,10 @@ const websiteSchema = {
   "@context": "https://schema.org",
   "@type": "WebSite",
   "name": "Camly",
-  "url": "https://calculator.camly.org",
+  "url": "https://pomodoro-timer.camly.org",
   "potentialAction": {
     "@type": "SearchAction",
-    "target": "https://calculator.camly.org/blog?q={search_term_string}",
+    "target": "https://pomodoro-timer.camly.org/blog?q={search_term_string}",
     "query-input": "required name=search_term_string"
   }
 };

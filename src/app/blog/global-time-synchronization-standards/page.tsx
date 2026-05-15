@@ -26,7 +26,7 @@ const articleSchema = {
     "name": "Camly Inc",
     "logo": {
       "@type": "ImageObject",
-      "url": "https://camly.org/logo.png"
+      "url": "https://pomodoro-timer.camly.org/camly.png"
     }
   },
   "datePublished": "2024-07-10",
@@ -131,7 +131,7 @@ export default function TimeSyncArticle() {
             <div className="p-8 bg-muted/20 border-l-8 border-primary rounded-r-3xl my-10">
               <h4 className="text-foreground font-black mb-4 uppercase tracking-widest text-xs">Technical Insight</h4>
               <p className="text-sm italic leading-relaxed">
-                "Drift correction is not a linear process. It requires a Kalman filter approach to account for network jitter and server latency, ensuring a smooth, monotonic time-stream."
+                "Drift correction is not a linear process. It requires a Kalman filter approach to account for network jitter and server latency, ensuring a smooth, manual time-stream."
               </p>
             </div>
           </div>

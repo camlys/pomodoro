@@ -27,7 +27,7 @@ const articleSchema = {
     "name": "Camly Inc",
     "logo": {
       "@type": "ImageObject",
-      "url": "https://calculator.camly.org/logo.png"
+      "url": "https://pomodoro-timer.camly.org/logo.png"
     }
   },
   "datePublished": "2024-07-15",

@@ -1,8 +1,7 @@
-
 import { MetadataRoute } from 'next';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://calculator.camly.org';
+  const baseUrl = 'https://pomodoro-timer.camly.org';
   
   // Active high-authority masterclasses and whitepapers
   const blogPosts = [
