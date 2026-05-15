@@ -1,5 +1,4 @@
-
-"use client";
+'use client';
 
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Play, Pause, RotateCcw, Brain, Zap, Target, Plus, Check, X, Settings, BarChart3, UserCircle, Clock, Volume2, Palette, Bell, Share2, ExternalLink, Lock, Info as InfoIcon, MousePointer2, Hourglass as HourglassIcon, Droplets } from 'lucide-react';
@@ -511,11 +510,11 @@ export function Pomodoro({ onModeChange, onSettingsChange, onTimerActiveChange, 
 
           <div className="flex flex-col items-center min-h-[160px] md:min-h-[200px] justify-center w-full">
             {settings.visualMode === 'clock' ? (
-              <div className="flex items-center gap-4 sm:gap-6 md:gap-8 animate-in fade-in zoom-in duration-500">
-                <div className="text-[100px] sm:text-[130px] md:text-[160px] leading-none font-black text-white tabular-nums select-none tracking-tight">
+              <div className="flex items-center gap-8 sm:gap-14 md:gap-20 animate-in fade-in zoom-in duration-500">
+                <div className="text-[115px] sm:text-[150px] md:text-[200px] leading-none font-black text-white tabular-nums select-none tracking-tight">
                   {formatTime(timeLeft)}
                 </div>
-                <div className="h-24 sm:h-32 md:h-40 w-1.5 sm:w-2 bg-black/20 rounded-full relative overflow-hidden">
+                <div className="h-24 sm:h-32 md:h-48 w-1.5 sm:w-2 md:w-2.5 bg-black/20 rounded-full relative overflow-hidden">
                   <div 
                     className="absolute bottom-0 left-0 w-full bg-white transition-all duration-1000 ease-linear shadow-[0_0_15px_rgba(255,255,255,0.8)]" 
                     style={{ height: `${progressPercent}%` }} 
