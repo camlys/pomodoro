@@ -12,6 +12,15 @@ import { InstallPWA } from '@/components/chrono/InstallPWA';
 
 const BLOG_POSTS = [
   {
+    title: "Advanced Pomodoro Focus Architecture: The 8,000-Word Masterclass",
+    description: "An exhaustive technical deep-dive into the bio-mechanics of focus, chronological parity, and the high-precision engineering of the Camly Focus Engine.",
+    date: "November 20, 2024",
+    author: "Camly Engineering",
+    readTime: "120 min read",
+    slug: "/blog/advanced-pomodoro-focus-architecture",
+    category: "Advanced Architecture"
+  },
+  {
     title: "Mastering the Pomodoro Technique: The Ultimate Guide",
     description: "The definitive high-authority guide to optimizing your focus sessions, understanding ultradian rhythms, and achieving chronological sovereignty.",
     date: "October 15, 2024",
