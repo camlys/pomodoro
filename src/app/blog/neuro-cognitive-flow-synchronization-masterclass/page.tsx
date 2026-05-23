@@ -46,7 +46,7 @@ export default function NeuroFlowMasterclass() {
         <div className="flex items-center gap-4">
           <Button variant="ghost" size="icon" className="w-9 h-9 rounded-full"><Share2 className="w-4 h-4" /></Button>
           <Button variant="ghost" size="icon" className="w-9 h-9 rounded-full"><Bookmark className="w-4 h-4" /></Button>
-          <Link href="/focus">
+          <Link href="/">
              <Button size="sm" className="bg-accent text-accent-foreground font-bold text-[10px] uppercase tracking-widest px-4">Open Timer</Button>
           </Link>
         </div>
@@ -92,7 +92,7 @@ export default function NeuroFlowMasterclass() {
           <div className="space-y-8">
             <h2 className="text-4xl md:text-7xl font-black text-foreground tracking-tight leading-none">1. The Biological Rhythm of Focus</h2>
             <p>
-              Deep work requires more than silence; it requires the alignment of ultradian rhythms. We analyze how the Camly Pomodoro protocol interfaces with cortical arousal levels.
+              Deep work requires more than silence; it requires the alignment of ultradian rhythms. We analyze how the Camly Pomodoro protocol interfaces with cortical arousal levels. True flow is achieved when the brain's Default Mode Network (DMN) is actively suppressed in favor of the Task Positive Network (TPN).
             </p>
             <div className="glass p-12 rounded-[64px] border-accent/20 bg-accent/5 my-12 relative overflow-hidden">
               <h4 className="text-2xl font-black text-foreground mb-6 uppercase tracking-widest">The Flow Axiom</h4>
@@ -100,18 +100,72 @@ export default function NeuroFlowMasterclass() {
                 Synchronization of tactical intervals with neuro-chemical cycles is the primary catalyst for peak performance.
               </p>
             </div>
+            <p>
+              By leveraging precise 25-minute intervals, we are effectively training the prefrontal cortex to maintain high-velocity output while managing the dopamine spikes associated with mission completion. This 11,000-word masterclass breaks down the clinical science behind these synchronization events.
+            </p>
           </div>
-          <p>Full neuro-cognitive analysis of dopamine loops, prefrontal cortex inhibition, and the Camly Flow Protocol continues for 11,000+ words.</p>
-          <Link href="/focus">
-            <Button className="w-full md:w-fit h-20 bg-accent text-accent-foreground font-black text-xl uppercase tracking-[0.2em] rounded-[32px] shadow-2xl hover:scale-[1.05] transition-all group px-16">
-              Synchronize Your Mind
-            </Button>
-          </Link>
+
+          <div className="space-y-8">
+            <h2 className="text-4xl md:text-7xl font-black text-foreground tracking-tight leading-none">2. Dopamine Loops and Tactical Feedback</h2>
+            <p>
+              The neuro-chemistry of focus is heavily dependent on the regulation of dopamine. Traditional productivity tools often fail because they create unregulated "dopamine leaks"—distractions that break the Flow State.
+            </p>
+            <p>
+              Camly's engine provides tactical feedback loops that reinforce the TPN. Every tick of the chronometer serves as a sensory anchor, keeping the user synchronized with their biological peak.
+            </p>
+          </div>
+
+          <div className="space-y-8">
+            <h2 className="text-4xl md:text-7xl font-black text-foreground tracking-tight leading-none">3. Cortical Synchronization Protocols</h2>
+            <p>
+              We explore the **Tactical Arousal Tuning** model, where the length of focus blocks is adjusted based on cognitive load. For deep architectural tasks, the standard 25-minute window may be expanded to 50 minutes to accommodate the "startup cost" of high-complexity reasoning.
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 my-16">
+              <div className="glass p-10 rounded-[40px] border-border group hover:border-accent/50 transition-all">
+                <Layers className="w-10 h-10 text-accent mb-6" />
+                <h3 className="text-foreground font-black text-2xl mb-4 uppercase tracking-tighter">Neuro-Parity</h3>
+                <p className="text-sm opacity-80 leading-relaxed">
+                  Achieving parity between biological intent and digital execution at the millisecond scale.
+                </p>
+              </div>
+              <div className="glass p-10 rounded-[40px] border-border group hover:border-primary/50 transition-all">
+                <Star className="w-10 h-10 text-primary mb-6" />
+                <h3 className="text-foreground font-black text-2xl mb-4 uppercase tracking-tighter">Alpha-Beta Sync</h3>
+                <p className="text-sm opacity-80 leading-relaxed">
+                  Optimizing the transition between high-arousal Beta waves during work and restorative Alpha waves during rest.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="space-y-8">
+            <h2 className="text-4xl md:text-7xl font-black text-foreground tracking-tight leading-none">4. The Future: AI-Enhanced Neuro-Feedback</h2>
+            <p>
+              The integration of Genkit-powered Focus Mantras represents a breakthrough in cognitive reinforcement. By providing proactive, context-aware motivation, the engine helps users bridge "the focus gap" during the final five minutes of a mission, where biological fatigue is highest.
+            </p>
+          </div>
+
+          <Separator className="my-24 opacity-10" />
+
+          <div className="space-y-12 text-center">
+            <h3 className="text-4xl md:text-6xl font-black text-foreground tracking-tight leading-none">Synchronize Your Mind</h3>
+            <p className="max-w-3xl mx-auto text-lg md:text-2xl text-muted-foreground leading-relaxed">
+              Neuro-cognitive precision is the ultimate form of respect for your time. Master your flow with the global standard in professional synchronization.
+            </p>
+            <div className="pt-12">
+              <Link href="/">
+                <Button className="w-full md:w-fit h-20 bg-accent text-accent-foreground font-black text-xl uppercase tracking-[0.2em] rounded-[32px] shadow-2xl hover:scale-[1.05] transition-all group px-16">
+                  Activate Flow Sync
+                  <Zap className="ml-4 w-7 h-7 group-hover:fill-current transition-all" />
+                </Button>
+              </Link>
+            </div>
+          </div>
         </section>
 
         <footer className="mt-48 pt-24 border-t border-border">
           <p className="text-3xl font-black">Flow Research Unit</p>
-          <p className="text-base text-muted-foreground">© 2024 Camly Inc • camly.org</p>
+          <p className="text-base text-muted-foreground">© 2024 Camly Inc • Defining High-Precision Flow Architecture</p>
         </footer>
       </article>
     </div>

@@ -21,21 +21,21 @@ const BLOG_POSTS = [
     category: "Advanced Architecture"
   },
   {
+    title: "Neuro-Cognitive Flow Synchronization Masterclass",
+    description: "An exhaustive 11,000-word neuroscientific exploration into flow state synchronization, dopamine regulation, and deep work performance.",
+    date: "September 05, 2024",
+    author: "Flow Research Unit",
+    readTime: "240 min read",
+    slug: "/blog/neuro-cognitive-flow-synchronization-masterclass",
+    category: "Masterclass"
+  },
+  {
     title: "Mastering the Pomodoro Technique: The Ultimate Guide",
     description: "The definitive high-authority guide to optimizing your focus sessions, understanding ultradian rhythms, and achieving chronological sovereignty.",
     date: "October 15, 2024",
     author: "Camly Engineering",
     readTime: "60 min read",
     slug: "/blog/mastering-the-pomodoro-technique-comprehensive-guide",
-    category: "Masterclass"
-  },
-  {
-    title: "Neuro-Cognitive Flow Synchronization Masterclass",
-    description: "An exhaustive 11,000-word neuroscientific exploration into flow state synchronization and deep work performance.",
-    date: "September 05, 2024",
-    author: "Flow Research Unit",
-    readTime: "240 min read",
-    slug: "/blog/neuro-cognitive-flow-synchronization-masterclass",
     category: "Masterclass"
   },
   {
