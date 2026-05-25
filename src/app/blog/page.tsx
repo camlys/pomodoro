@@ -12,6 +12,15 @@ import { InstallPWA } from '@/components/chrono/InstallPWA';
 
 const BLOG_POSTS = [
   {
+    title: "The Enterprise Blueprint for Digital Asset Velocity",
+    description: "The definitive enterprise guide to maximizing digital asset velocity through high-precision optimization and edge-compute architectures.",
+    date: "July 15, 2024",
+    author: "Camly Ops Team",
+    readTime: "150 min read",
+    slug: "/blog/digital-asset-velocity-enterprise-guide",
+    category: "Enterprise Whitepaper"
+  },
+  {
     title: "Advanced Pomodoro Focus Architecture: The 8,000-Word Masterclass",
     description: "An exhaustive technical deep-dive into the bio-mechanics of focus, chronological parity, and the high-precision engineering of the Camly Focus Engine.",
     date: "November 20, 2024",
@@ -62,17 +71,8 @@ const BLOG_POSTS = [
     date: "August 10, 2024",
     author: "Camly Engineering",
     readTime: "120 min read",
-    slug: "/blog/mastering-the-pomodoro-technique-comprehensive-guide",
+    slug: "/blog/deep-work-velocity-masterclass",
     category: "Masterclass"
-  },
-  {
-    title: "The Enterprise Blueprint for Digital Asset Velocity",
-    description: "The definitive enterprise guide to maximizing digital asset velocity through high-precision optimization and edge-compute architectures.",
-    date: "July 15, 2024",
-    author: "Camly Ops Team",
-    readTime: "90 min read",
-    slug: "/blog/digital-asset-velocity-enterprise-guide",
-    category: "Enterprise Whitepaper"
   },
   {
     title: "The Master Guide to Global Time Synchronization",
