@@ -1,22 +1,18 @@
-# Camly | High-Precision Focus Engine
+# Camly | High-Precision Pomodoro Engine
 
-> Professional-grade tactical utility for deep work and high-performance productivity.
+Camly is a professional-grade tactical utility for deep work and high-performance productivity.
 
-## About
-Camly is an enterprise-level Pomodoro Engine designed for high-authority deep work. It features real-time synchronization, AI-driven focus mantras, and a professional-grade tactical documentation interface.
+## Core Capabilities
+- High-Precision Pomodoro Timer: Synchronized with atomic time standards.
+- Tactical Notes Engine: Capture insights with real-time AI synthesis.
+- Cinematic Visual Modalities: Switch between digital chronometers and SVG hourglass visualizations.
+- Enterprise-Grade Knowledge Hub: Exhaustive masterclasses on focus architecture and chronological science.
 
-## Core Services
-- **Pomodoro Engine**: High-precision focus timer with atmospheric soundscapes and cinematic visualization (Hourglass/Digital).
-- **Notes Engine**: Tactical intelligence capture with AI synthesis and real-time document synchronization.
-- **Insights Hub**: A deep-knowledge center exploring neuro-cognitive performance and chronological precision.
+## Technical Standards
+- Framework: Next.js 15 App Router
+- Logic: Genkit AI Integration
+- Synchronization: Real-time Firebase Firestore protocols
+- UI: ShadCN & Tailwind CSS optimized for performance
 
-## SEO & Architecture
-- **Topical Authority**: Neuro-cognitive flow, biological synchronization, and high-precision timekeeping.
-- **Technology Stack**: Next.js 15, Genkit AI, Firebase Firestore, Tailwind CSS.
-- **Compliance**: Enterprise Privacy Protocol v1.4.2, Service Level Agreement (Terms of Sync).
-
-## Links
-- [Main Engine](https://pomodoro-timer.camly.org)
-- [Tactical Logs](https://pomodoro-timer.camly.org/notes)
-- [Knowledge Center](https://pomodoro-timer.camly.org/blog)
-- [Privacy Protocol](https://pomodoro-timer.camly.org/privacy-protocol)
+## Strategic Vision
+Camly aims to establish chronological sovereignty for professional performers by providing high-parity focus tools and high-authority productivity intelligence.
