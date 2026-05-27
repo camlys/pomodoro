@@ -5,8 +5,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
   
   // Active high-authority masterclasses and whitepapers
   const blogPosts = [
-    'digital-asset-velocity-enterprise-guide',
     'advanced-pomodoro-focus-architecture',
+    'digital-asset-velocity-enterprise-guide',
     'mastering-the-pomodoro-technique-comprehensive-guide',
     'neuro-cognitive-flow-synchronization-masterclass',
     'digital-infrastructure-velocity-protocol',
