@@ -40,6 +40,12 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
+        url: '/camly.png',
+        width: 512,
+        height: 512,
+        alt: 'Camly Logo'
+      },
+      {
         url: '/og-image.png',
         width: 1200,
         height: 630,
@@ -52,7 +58,7 @@ export const metadata: Metadata = {
     title: 'Camly | High-Precision Pomodoro Timer',
     description: 'Professional-grade Pomodoro Timer with real-time synchronization. Master your flow.',
     creator: '@camly',
-    images: ['/og-image.png'],
+    images: ['/camly.png', '/og-image.png'],
   },
   robots: {
     index: true,
