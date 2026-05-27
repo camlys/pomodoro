@@ -43,7 +43,6 @@ export default function AssetVelocityArticle() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
       />
       
-      {/* Reading Progress Indicator */}
       <div className="fixed top-0 left-0 h-1.5 bg-primary w-full z-[60] origin-left animate-in fade-in" style={{ transform: 'scaleX(0.85)' }} />
 
       <nav className="relative z-50 glass border-b border-border h-14 flex items-center px-4 md:px-8 justify-between">
