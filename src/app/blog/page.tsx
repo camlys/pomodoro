@@ -12,6 +12,15 @@ import { InstallPWA } from '@/components/chrono/InstallPWA';
 
 const BLOG_POSTS = [
   {
+    title: "The Physics of Cognitive Endurance: A 9,800-Word Masterclass",
+    description: "An exhaustive technical whitepaper on mental stamina architecture, neuro-biological foundations of focus, and high-velocity cognitive output.",
+    date: "December 15, 2024",
+    author: "Camly Engineering",
+    readTime: "165 min read",
+    slug: "/blog/physics-of-cognitive-endurance",
+    category: "Enterprise Masterclass"
+  },
+  {
     title: "High-Precision Focus Engineering: The 9,000-Word Masterclass",
     description: "An exhaustive technical guide to cognitive synchronicity, temporal resolution, and the biological foundations of high-precision productivity.",
     date: "December 05, 2024",

@@ -5,6 +5,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   
   // Active high-authority masterclasses and whitepapers
   const blogPosts = [
+    'physics-of-cognitive-endurance',
     'high-precision-focus-engineering',
     'advanced-pomodoro-focus-architecture',
     'digital-asset-velocity-enterprise-guide',
